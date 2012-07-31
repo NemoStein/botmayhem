@@ -3,8 +3,8 @@ package nemostein.games.botmayhem
 	
 	public class Assets
 	{
-		//[Embed(source="assets/arenas/RedTiled.png")]
-		//public static const ImageArenasRedTiled:Class;
+		[Embed(source="assets/arenas/RedTiled.png")]
+		public static const ImageArenasRedTiled:Class;
 		
 		[Embed(source="assets/arenas/WhiteTiled.png")]
 		public static const ImageArenasWhiteTiled:Class;
@@ -69,7 +69,7 @@ package nemostein.games.botmayhem
 		[Embed(source="assets/menu/startShadow.png")]
 		public static const ImageMenuStartShadow:Class;
 		
-		//[Embed(source="assets/OverlayScreen.png")]
-		//public static const ImageOverlayScreen:Class;
+		[Embed(source="assets/OverlayScreen.png")]
+		public static const ImageOverlayScreen:Class;
 	}
 }
