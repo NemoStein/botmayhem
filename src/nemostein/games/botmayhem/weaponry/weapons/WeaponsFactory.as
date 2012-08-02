@@ -21,6 +21,11 @@ package nemostein.games.botmayhem.weaponry.weapons
 			target.hugeWeapon = new BulletCannon();
 		}
 		
+		public function putMenuCinematicCannon(target:LargeWeaponed):void
+		{
+			target.largeWeapon = new MenuCinematicCannon();
+		}
+		
 		public function removeSmallWeapon(target:SmallWeaponed):void
 		{
 			target.smallWeapon = null;

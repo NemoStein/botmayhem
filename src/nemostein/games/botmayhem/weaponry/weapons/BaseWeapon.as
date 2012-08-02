@@ -13,6 +13,8 @@ package nemostein.games.botmayhem.weaponry.weapons
 		private var _bulletsManager:BulletsManager;
 		private var _bulletsFactory:BulletsFactory;
 		
+		private var _bulletType:String;
+		
 		private var _ready:Boolean;
 		private var _timer:Timer;
 		
@@ -44,6 +46,7 @@ package nemostein.games.botmayhem.weaponry.weapons
 		
 		public function shoot(x:Number, y:Number, angle:Number):void
 		{
+			trace("Ready: " + _ready);
 			if (!_ready)
 			{
 				return;
@@ -53,6 +56,16 @@ package nemostein.games.botmayhem.weaponry.weapons
 			_timer.start();
 			
 			_bulletsManager.add(_bulletsFactory.getSimpleBullet(x, y, angle));
+		}
+		
+		public function set bulletType(value:String):void 
+		{
+			_bulletType = value;
+		}
+		
+		public function get bulletType():String 
+		{
+			return _bulletType;
 		}
 		
 		public function set cooldown(value:Number):void

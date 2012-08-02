@@ -23,11 +23,7 @@ package nemostein.games.botmayhem.decals
 		
 		public static function getData(settings:DecalSettings):BitmapData
 		{
-			var originalData:BitmapData = _data[settings.type];
-			if (!originalData)
-			{
-				originalData = findDecalData(settings.type);
-			}
+			var originalData:BitmapData = findDecalData(settings.type);
 			
 			if (settings.angle != 0 || settings.angleDeviation != 0 || settings.size != 0 || settings.sizeDeviation != 0)
 			{
@@ -73,54 +69,51 @@ package nemostein.games.botmayhem.decals
 		
 		private static function findDecalData(type:String):BitmapData
 		{
+			if (_data[type])
+			{
+				return _data[type];
+			}
+			
 			switch (type)
 			{
 				case SCORCH_A:
 				{
-					_data[type] = Bitmap(new Assets.ImageDecalsScorchA).bitmapData;
-					break;
+					return _data[type] = Bitmap(new Assets.ImageDecalsScorchA).bitmapData;
 				}
 				
 				case SCORCH_B:
 				{
-					_data[type] = Bitmap(new Assets.ImageDecalsScorchB).bitmapData;
-					break;
+					return _data[type] = Bitmap(new Assets.ImageDecalsScorchB).bitmapData;
 				}
 				
 				case SCORCH_C:
 				{
-					_data[type] = Bitmap(new Assets.ImageDecalsScorchC).bitmapData;
-					break;
+					return _data[type] = Bitmap(new Assets.ImageDecalsScorchC).bitmapData;
 				}
 				
 				case SCORCH_D:
 				{
-					_data[type] = Bitmap(new Assets.ImageDecalsScorchD).bitmapData;
-					break;
+					return _data[type] = Bitmap(new Assets.ImageDecalsScorchD).bitmapData;
 				}
 				
 				case SCORCH_E:
 				{
-					_data[type] = Bitmap(new Assets.ImageDecalsScorchE).bitmapData;
-					break;
+					return _data[type] = Bitmap(new Assets.ImageDecalsScorchE).bitmapData;
 				}
 				
 				case SCORCH_F:
 				{
-					_data[type] = Bitmap(new Assets.ImageDecalsScorchF).bitmapData;
-					break;
+					return _data[type] = Bitmap(new Assets.ImageDecalsScorchF).bitmapData;
 				}
 				
 				case SCORCH_G:
 				{
-					_data[type] = Bitmap(new Assets.ImageDecalsScorchG).bitmapData;
-					break;
+					return _data[type] = Bitmap(new Assets.ImageDecalsScorchG).bitmapData;
 				}
 				
 				case SCORCH_H:
 				{
-					_data[type] = Bitmap(new Assets.ImageDecalsScorchH).bitmapData;
-					break;
+					return _data[type] = Bitmap(new Assets.ImageDecalsScorchH).bitmapData;
 				}
 				
 				default:
@@ -128,8 +121,6 @@ package nemostein.games.botmayhem.decals
 					throw new ArgumentError("Decal '" + type + "' don't exists. Use the 'Decals' constants.");
 				}
 			}
-			
-			return _data[type];
 		}
 	}
 }

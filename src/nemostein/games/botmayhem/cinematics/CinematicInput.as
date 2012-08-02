@@ -44,11 +44,23 @@ package nemostein.games.botmayhem.cinematics
 			super.press(_controller.keyRight);
 		}
 		
-		public function releaseKeys():void
+		public function releaseUp():void
 		{
 			super.release(_controller.keyUp);
+		}
+		
+		public function releaseDown():void
+		{
 			super.release(_controller.keyDown);
+		}
+		
+		public function releaseLeft():void
+		{
 			super.release(_controller.keyLeft);
+		}
+		
+		public function releaseRight():void
+		{
 			super.release(_controller.keyRight);
 		}
 	}

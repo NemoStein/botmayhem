@@ -1,5 +1,6 @@
 package nemostein.games.botmayhem.cinematics
 {
+	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -46,7 +47,7 @@ package nemostein.games.botmayhem.cinematics
 			
 			if (_input.justPressed(UserInput.LEFT_MOUSE))
 			{
-				Hero(_target).hugeShoot();
+				Hero(_target).largeShoot();
 			}
 		}
 		
@@ -57,8 +58,6 @@ package nemostein.games.botmayhem.cinematics
 		
 		public function runMenuScript():void
 		{
-			_cinematicInput.releaseKeys();
-			
 			if (_horizontalFinished && _verticalFinished)
 			{
 				_horizontalFinished = false;
@@ -92,8 +91,8 @@ package nemostein.games.botmayhem.cinematics
 					
 					case 3: 
 					{
-						_targetX = int(Math.random() * 600 + 300);
-						_targetY = int(Math.random() * 350);
+						_targetX = int(Math.random() * 550 + 300);
+						_targetY = int(Math.random() * 300 + 50);
 						
 						_animate = false;
 						
@@ -127,6 +126,12 @@ package nemostein.games.botmayhem.cinematics
 						_cinematicInput.pressLeft();
 						_horizontalFinished = _toRight;
 					}
+					
+					if (_horizontalFinished)
+					{
+						_cinematicInput.releaseRight();
+						_cinematicInput.releaseLeft();
+					}
 				}
 				
 				if (!_verticalFinished)
@@ -140,6 +145,12 @@ package nemostein.games.botmayhem.cinematics
 					{
 						_cinematicInput.pressUp();
 						_verticalFinished = _toDown;
+					}
+					
+					if (_verticalFinished)
+					{
+						_cinematicInput.releaseDown();
+						_cinematicInput.releaseUp();
 					}
 				}
 			}

@@ -44,6 +44,8 @@ package nemostein.games.botmayhem
 		private var _bulletsLayer:Entity;
 		private var _botsLayer:Entity;
 		
+		private var _systemManager:SystemManager;
+		
 		public function BotMayhem()
 		{
 			initialize();
@@ -60,13 +62,15 @@ package nemostein.games.botmayhem
 			_hero.x = 830;
 			_hero.y = -25;
 			
+			_systemManager = new SystemManager();
+			
 			WeaponsService.factory = new WeaponsFactory();
 			BulletsService.factory = new BulletsFactory();
 			HeroService.manager = new HeroManager(_hero);
 			ArenaService.manager = new ArenaManager();
 			BulletsService.manager = new BulletsManager(_bulletsLayer);
 			BotsService.manager = new BotsManager(_botsLayer);
-			SystemService.manager = new SystemManager();
+			SystemService.manager = _systemManager;
 			
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -92,7 +96,7 @@ package nemostein.games.botmayhem
 			
 			var aimCursor:MouseCursorData = new MouseCursorData();
 			aimCursor.data = new <BitmapData>[Bitmap(new Assets.ImageCursorsAimB()).bitmapData];
-			aimCursor.hotSpot = new Point(15, 15);
+			aimCursor.hotSpot = new Point(16, 16);
 			
 			Mouse.registerCursor(CURSOR_AIM, aimCursor);
 			Mouse.cursor = CURSOR_AIM;
@@ -100,12 +104,12 @@ package nemostein.games.botmayhem
 			addChild(new Menu());
 			addChild(_bulletsLayer);
 			
-			stage.addEventListener(Event.ENTER_FRAME, onStageEnterFrame);
+			addEventListener(Event.ENTER_FRAME, onStageEnterFrame);
 		}
 		
 		private function onStageEnterFrame(event:Event):void
 		{
-			SystemService.manager.update();
+			_systemManager.update();
 		}
 	}
 }

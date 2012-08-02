@@ -6,6 +6,8 @@ package nemostein.games.botmayhem.core
 	public class SystemManager implements Updatable
 	{
 		private var _stack:Vector.<Updatable>;
+		private var _count:int;
+		private var i:int;
 		
 		public function SystemManager()
 		{
@@ -15,6 +17,7 @@ package nemostein.games.botmayhem.core
 		private function initialize():void
 		{
 			_stack = new Vector.<Updatable>();
+			_count = 0;
 		}
 		
 		public function addUpdatable(updatable:Updatable):void
@@ -25,7 +28,7 @@ package nemostein.games.botmayhem.core
 			}
 			
 			var inStack:Boolean = false;
-			for (var i:int = 0; i < _stack.length; ++i)
+			for (i = 0; i < _count; ++i)
 			{
 				if (_stack[i] == updatable)
 				{
@@ -37,16 +40,25 @@ package nemostein.games.botmayhem.core
 			if(!inStack)
 			{
 				_stack.push(updatable);
+				_count++;
 			}
+			
+			trace("=======================================");
+			for (i = 0; i < _count; ++i)
+			{
+				trace(_stack[i])
+			}
+			trace("");
 		}
 		
 		public function removeUpdatable(updatable:Updatable):void
 		{
-			for (var i:int = 0; i < _stack.length; ++i)
+			for (i = 0; i < _count; ++i)
 			{
 				if (_stack[i] == updatable)
 				{
 					_stack.splice(i, 1);
+					_count--;
 					break;
 				}
 			}
@@ -54,7 +66,7 @@ package nemostein.games.botmayhem.core
 		
 		public function update():void
 		{
-			for (var i:int = 0; i < _stack.length; ++i)
+			for (i = 0; i < _count; ++i)
 			{
 				_stack[i].update();
 			}
