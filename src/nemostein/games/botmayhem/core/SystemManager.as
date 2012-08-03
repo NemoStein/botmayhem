@@ -43,12 +43,12 @@ package nemostein.games.botmayhem.core
 				_count++;
 			}
 			
-			trace("=======================================");
-			for (i = 0; i < _count; ++i)
-			{
-				trace(_stack[i])
-			}
-			trace("");
+			//trace("=======================================");
+			//for (i = 0; i < _count; ++i)
+			//{
+				//trace(_stack[i])
+			//}
+			//trace("");
 		}
 		
 		public function removeUpdatable(updatable:Updatable):void

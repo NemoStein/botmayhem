@@ -1,7 +1,5 @@
-package nemostein.games.botmayhem.weaponry.weapons
+package nemostein.games.botmayhem.weaponry.weapon
 {
-	import nemostein.games.botmayhem.weaponry.weapons.WeaponsFactory;
-	
 	public class WeaponsService
 	{
 		private static var _factory:WeaponsFactory;

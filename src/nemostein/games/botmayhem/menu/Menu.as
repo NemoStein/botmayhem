@@ -19,8 +19,8 @@ package nemostein.games.botmayhem.menu
 	import nemostein.games.botmayhem.core.SystemService;
 	import nemostein.games.botmayhem.decals.Decals;
 	import nemostein.games.botmayhem.decals.DecalSettings;
-	import nemostein.games.botmayhem.weaponry.weapons.WeaponsFactory;
-	import nemostein.games.botmayhem.weaponry.weapons.WeaponsService;
+	import nemostein.games.botmayhem.weaponry.weapon.WeaponsFactory;
+	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;
 	import nemostein.ui.RandomClicker;
 	
 	public class Menu extends Sprite
@@ -42,9 +42,9 @@ package nemostein.games.botmayhem.menu
 			
 			var weaponsFactory:WeaponsFactory = WeaponsService.factory;
 			
-			weaponsFactory.removeSmallWeapon(_hero);
-			weaponsFactory.removeLargeWeapon(_hero);
-			weaponsFactory.removeHugeWeapon(_hero);
+			weaponsFactory.removeAreaWeapon(_hero);
+			weaponsFactory.removeDirectionWeapon(_hero);
+			weaponsFactory.removeTargetWeaponed(_hero);
 			
 			weaponsFactory.putMenuCinematicCannon(_hero);
 			

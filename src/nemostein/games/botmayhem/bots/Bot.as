@@ -4,7 +4,7 @@ package nemostein.games.botmayhem.bots
 	import nemostein.controllers.Controllable;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.core.Entity;
-	import nemostein.games.botmayhem.weaponry.bullets.Bullet;
+	import nemostein.games.botmayhem.weaponry.bullet.Bullet;
 	import nemostein.utils.MathUtils;
 	
 	public class Bot extends Entity implements Controllable, Collidable

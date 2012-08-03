@@ -1,12 +1,12 @@
-package nemostein.games.botmayhem.weaponry.weapons
+package nemostein.games.botmayhem.weaponry.weapon.weapons
 {
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
 	import flash.utils.Timer;
-	import nemostein.games.botmayhem.weaponry.bullets.Bullet;
-	import nemostein.games.botmayhem.weaponry.bullets.BulletsFactory;
-	import nemostein.games.botmayhem.weaponry.bullets.BulletsManager;
-	import nemostein.games.botmayhem.weaponry.bullets.BulletsService;
+	import nemostein.games.botmayhem.weaponry.bullet.BulletsFactory;
+	import nemostein.games.botmayhem.weaponry.bullet.BulletsManager;
+	import nemostein.games.botmayhem.weaponry.bullet.BulletsService;
+	import nemostein.games.botmayhem.weaponry.weapon.Weapon;
 	
 	public class BaseWeapon implements Weapon
 	{
@@ -39,24 +39,28 @@ package nemostein.games.botmayhem.weaponry.weapons
 			_ready = true;
 		}
 		
-		public function ready():Boolean
+		public function get ready():Boolean
 		{
 			return _ready;
 		}
 		
-		public function shoot(x:Number, y:Number, angle:Number):void
+		public function set ready(value:Boolean):void
 		{
-			trace("Ready: " + _ready);
-			if (!_ready)
-			{
-				return;
-			}
-			
-			_ready = false;
-			_timer.start();
-			
-			_bulletsManager.add(_bulletsFactory.getSimpleBullet(x, y, angle));
+			_ready = value;
 		}
+		
+		//public function shoot(x:Number, y:Number, angle:Number):void
+		//{
+			//if (!ready)
+			//{
+				//return;
+			//}
+			//
+			//ready = false;
+			//_timer.start();
+			//
+			//_bulletsManager.add(_bulletsFactory.getSimpleBullet(x, y, angle));
+		//}
 		
 		public function set bulletType(value:String):void 
 		{

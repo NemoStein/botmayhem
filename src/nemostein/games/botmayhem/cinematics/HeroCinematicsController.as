@@ -47,7 +47,7 @@ package nemostein.games.botmayhem.cinematics
 			
 			if (_input.justPressed(UserInput.LEFT_MOUSE))
 			{
-				Hero(_target).largeShoot();
+				CinematicsService.shotTarget(_input.leftMouseDown);
 			}
 		}
 		

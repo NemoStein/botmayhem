@@ -1,5 +1,7 @@
-package nemostein.games.botmayhem.weaponry.bullets
+package nemostein.games.botmayhem.weaponry.bullet.bullets
 {
+	import nemostein.games.botmayhem.weaponry.bullet.Bullet;
+	
 	public class SimpleBullet extends Bullet
 	{
 		public function SimpleBullet()
@@ -8,6 +10,6 @@ package nemostein.games.botmayhem.weaponry.bullets
 			graphics.drawCircle(0, 0, 2);
 			graphics.endFill();
 		}
-		
+	
 	}
 }

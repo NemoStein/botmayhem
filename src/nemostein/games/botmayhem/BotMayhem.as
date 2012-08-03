@@ -23,11 +23,11 @@ package nemostein.games.botmayhem
 	import nemostein.games.botmayhem.core.SystemService;
 	import nemostein.games.botmayhem.intros.SponsorIntro;
 	import nemostein.games.botmayhem.menu.Menu;
-	import nemostein.games.botmayhem.weaponry.bullets.BulletsFactory;
-	import nemostein.games.botmayhem.weaponry.bullets.BulletsManager;
-	import nemostein.games.botmayhem.weaponry.bullets.BulletsService;
-	import nemostein.games.botmayhem.weaponry.weapons.WeaponsFactory;
-	import nemostein.games.botmayhem.weaponry.weapons.WeaponsService;
+	import nemostein.games.botmayhem.weaponry.bullet.BulletsFactory;
+	import nemostein.games.botmayhem.weaponry.bullet.BulletsManager;
+	import nemostein.games.botmayhem.weaponry.bullet.BulletsService;
+	import nemostein.games.botmayhem.weaponry.weapon.WeaponsFactory;
+	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;
 	import nemostein.intro.IntroSequence;
 	
 	public class BotMayhem extends Sprite

@@ -1,6 +1,7 @@
-package nemostein.games.botmayhem.weaponry.bullets
+package nemostein.games.botmayhem.weaponry.bullet
 {
 	import flash.geom.Point;
+	import nemostein.games.botmayhem.weaponry.bullet.bullets.SimpleBullet;
 	
 	public class BulletsFactory
 	{

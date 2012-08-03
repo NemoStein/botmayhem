@@ -1,4 +1,4 @@
-package nemostein.games.botmayhem.weaponry.bullets
+package nemostein.games.botmayhem.weaponry.bullet
 {
 	import nemostein.controllers.Collidable;
 	import nemostein.controllers.Controllable;

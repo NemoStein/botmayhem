@@ -2,22 +2,46 @@ package nemostein.games.botmayhem.bots.hero
 {
 	import flash.geom.Point;
 	import nemostein.games.botmayhem.bots.Bot;
-	import nemostein.games.botmayhem.weaponry.HugeWeaponed;
-	import nemostein.games.botmayhem.weaponry.LargeWeaponed;
-	import nemostein.games.botmayhem.weaponry.SmallWeaponed;
-	import nemostein.games.botmayhem.weaponry.weapons.HugeWeapon;
-	import nemostein.games.botmayhem.weaponry.weapons.LargeWeapon;
-	import nemostein.games.botmayhem.weaponry.weapons.SmallWeapon;
+	import nemostein.games.botmayhem.weaponry.AreaWeaponed;
+	import nemostein.games.botmayhem.weaponry.DirectionWeaponed;
+	import nemostein.games.botmayhem.weaponry.TargetWeaponed;
+	import nemostein.games.botmayhem.weaponry.weapon.AreaWeapon;
+	import nemostein.games.botmayhem.weaponry.weapon.DirectionWeapon;
+	import nemostein.games.botmayhem.weaponry.weapon.TargetWeapon;
 	
-	public class Hero extends Bot implements SmallWeaponed, LargeWeaponed, HugeWeaponed
+	public class Hero extends Bot implements AreaWeaponed, DirectionWeaponed, TargetWeaponed
 	{
-		private var _smallWeapon:SmallWeapon;
-		private var _largeWeapon:LargeWeapon;
-		private var _hugeWeapon:HugeWeapon;
+		private var _areaWeapon:AreaWeapon;
+		private var _directionWeapon:DirectionWeapon;
+		private var _targetWeapon:TargetWeapon;
 		
 		public function Hero()
 		{
 			initialize();
+		}
+		
+		public function shootAreaWeapon():void
+		{
+			if (_areaWeapon)
+			{
+				_areaWeapon.shoot();
+			}
+		}
+		
+		public function shootDirectionWeapon():void
+		{
+			if (_directionWeapon)
+			{
+				_directionWeapon.shoot(angle);
+			}
+		}
+		
+		public function shootTargetWeapon(target:Point):void
+		{
+			if (_targetWeapon)
+			{
+				_targetWeapon.shoot(target);
+			}
 		}
 		
 		private function initialize():void
@@ -29,58 +53,34 @@ package nemostein.games.botmayhem.bots.hero
 			graphics.endFill();
 		}
 		
-		public function smallShoot():void
+		public function get areaWeapon():AreaWeapon
 		{
-			if (_smallWeapon)
-			{
-				_smallWeapon.shoot(x, y, angle);
-			}
+			return _areaWeapon;
 		}
 		
-		public function largeShoot():void
+		public function set areaWeapon(value:AreaWeapon):void
 		{
-			if (_largeWeapon)
-			{
-				_largeWeapon.shoot(x, y, angle);
-			}
+			_areaWeapon = value;
 		}
 		
-		public function hugeShoot():void
+		public function get directionWeapon():DirectionWeapon
 		{
-			if (_hugeWeapon)
-			{
-				_hugeWeapon.shoot(x, y, angle);
-			}
+			return _directionWeapon;
 		}
 		
-		public function get smallWeapon():SmallWeapon
+		public function set directionWeapon(value:DirectionWeapon):void
 		{
-			return _smallWeapon;
+			_directionWeapon = value;
 		}
 		
-		public function set smallWeapon(value:SmallWeapon):void
+		public function get targetWeapon():TargetWeapon
 		{
-			_smallWeapon = value;
+			return _targetWeapon;
 		}
 		
-		public function get largeWeapon():LargeWeapon
+		public function set targetWeapon(value:TargetWeapon):void
 		{
-			return _largeWeapon;
-		}
-		
-		public function set largeWeapon(value:LargeWeapon):void
-		{
-			_largeWeapon = value;
-		}
-		
-		public function get hugeWeapon():HugeWeapon
-		{
-			return _hugeWeapon;
-		}
-		
-		public function set hugeWeapon(value:HugeWeapon):void
-		{
-			_hugeWeapon = value;
+			_targetWeapon = value;
 		}
 	}
 }
