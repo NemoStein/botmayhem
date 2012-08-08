@@ -10,6 +10,5 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 			graphics.drawCircle(0, 0, 2);
 			graphics.endFill();
 		}
-	
 	}
 }

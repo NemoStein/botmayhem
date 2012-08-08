@@ -14,6 +14,7 @@ package nemostein.games.botmayhem.menu
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
 	import nemostein.games.botmayhem.bots.SimpleBot;
+	import nemostein.games.botmayhem.cinematics.CinematicsService;
 	import nemostein.games.botmayhem.cinematics.HeroCinematicsController;
 	import nemostein.games.botmayhem.core.Button;
 	import nemostein.games.botmayhem.core.SystemService;
@@ -37,8 +38,10 @@ package nemostein.games.botmayhem.menu
 		{
 			mouseEnabled = false;
 			
-			_arena = ArenaService.manager.whiteTiledArena;
+			_arena = ArenaService.factory.whiteTiledArena;
 			_hero = HeroService.manager.hero;
+			
+			ArenaService.manager.currentArena = _arena;
 			
 			var weaponsFactory:WeaponsFactory = WeaponsService.factory;
 			
@@ -130,33 +133,7 @@ package nemostein.games.botmayhem.menu
 			
 			if (target is Button)
 			{
-				var button:Button = Button(target);
-				
-				//button.hit(new Point(event.localX, event.localY));
-			}
-			else if (target is Arena)
-			{
-				var settings:DecalSettings = new DecalSettings(
-				[
-					Decals.SCORCH_A,
-					Decals.SCORCH_B,
-					Decals.SCORCH_C,
-					Decals.SCORCH_D,
-					Decals.SCORCH_E,
-					Decals.SCORCH_F,
-					Decals.SCORCH_G,
-					Decals.SCORCH_H
-				][int(Math.random() * 8)]);
-				
-				settings.erase = Math.random() < 0.5;
-				
-				settings.size = 0.75;
-				settings.sizeDeviation = 0.25;
-				
-				settings.angle = 0;
-				settings.angleDeviation = 1;
-				
-				_arena.mark(new Point(event.localX, event.localY), settings);
+				CinematicsService.manager.targetButton(Button(target));
 			}
 		}
 	}

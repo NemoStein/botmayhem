@@ -1,23 +1,15 @@
 package nemostein.games.botmayhem.arenas
 {
+	import nemostein.games.botmayhem.decals.DecalSettings;
+	import flash.geom.Point;
 	
 	public class ArenaManager
 	{
-		private var _whiteTiledArena:WhiteTiledArena;
+		public var currentArena:Arena;
 		
 		public function ArenaManager()
 		{
 		
-		}
-		
-		public function get whiteTiledArena():WhiteTiledArena
-		{
-			if (!_whiteTiledArena)
-			{
-				_whiteTiledArena = new WhiteTiledArena();
-			}
-			
-			return _whiteTiledArena;
 		}
 	}
 }

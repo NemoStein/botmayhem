@@ -10,7 +10,7 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		
 		public function TargetCannon()
 		{
-			cooldown = 150;
+			$cooldown = 150;
 		}
 		
 		public function shoot(location:Point):void 

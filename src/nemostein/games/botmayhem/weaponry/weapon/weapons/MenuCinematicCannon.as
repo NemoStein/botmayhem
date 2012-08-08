@@ -12,22 +12,17 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		
 		public function MenuCinematicCannon()
 		{
-		
+			
 		}
-		
-		//override public function get ready():Boolean
-		//{
-			//return CinematicsService.shotReady();
-		//}
-		//
-		//override public function set ready(value:Boolean):void
-		//{
-			//
-		//}
 		
 		public function shoot(location:Point):void 
 		{
-			
+			CinematicsService.manager.shootAt(new Point(_hero.x, _hero.y), location);
+		}
+		
+		override public function get ready():Boolean
+		{
+			return CinematicsService.manager.shotReady;
 		}
 		
 		public function get holder():TargetWeaponed 

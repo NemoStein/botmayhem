@@ -4,36 +4,45 @@ package nemostein.games.botmayhem.weaponry.bullet
 	import nemostein.controllers.Controllable;
 	import nemostein.games.botmayhem.core.Entity;
 	import nemostein.Updatable;
+	import nemostein.utils.MathUtils;
 	
 	public class Bullet extends Entity implements Controllable, Collidable, Updatable
 	{
-		private var _angle:Number;
-		private var _bulletSpeed:Number;
+		protected var $angle:Number;
+		protected var $bulletSpeed:Number;
 		
 		public function Bullet()
 		{
-			_bulletSpeed = 200;
+			$bulletSpeed = 200;
 		}
 		
 		public function update():void
 		{
-			x += Math.cos(_angle) * _bulletSpeed * 0.02;
-			y += Math.sin(_angle) * _bulletSpeed * 0.02;
+			x += Math.cos($angle) * $bulletSpeed * 0.02;
+			y += Math.sin($angle) * $bulletSpeed * 0.02;
+			
+			rotation = MathUtils.deg($angle);
 		}
 		
 		public function get angle():Number
 		{
-			return _angle;
+			return $angle;
 		}
 		
 		public function set angle(value:Number):void
 		{
-			_angle = value;
+			$angle = value;
+			rotation = MathUtils.deg($angle);
+		}
+		
+		public function die(outBounds:Boolean = false):void
+		{
+			
 		}
 		
 		public function collide(angle:Number, against:Collidable):void
 		{
-			BulletsService.manager.remove(this);
+			BulletsService.manager.kill(this);
 		}
 	}
 }

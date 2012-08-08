@@ -1,24 +1,23 @@
 package nemostein.games.botmayhem.cinematics 
 {
-	import flash.geom.Point;
-	import nemostein.games.botmayhem.bots.hero.HeroService;
 	
 	public class CinematicsService 
 	{
-		private static var _ready:Boolean = true;
+		private static var _manager:CinematicsManager
 		
-		public static function shotReady():Boolean 
+		public static function get manager():CinematicsManager
 		{
-			return _ready;
+			if (_manager == null)
+			{
+				throw new UninitializedError("No CinematicsManager available");
+			}
+			
+			return _manager;
 		}
 		
-		public static function shotTarget(location:Point):void 
+		public static function set manager(value:CinematicsManager):void
 		{
-			if(_ready)
-			{
-				HeroService.manager.hero.shootTargetWeapon(location);
-				_ready = false;
-			}
+			_manager = value;
 		}
 	}
 }

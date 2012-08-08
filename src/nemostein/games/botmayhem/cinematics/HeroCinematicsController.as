@@ -6,6 +6,7 @@ package nemostein.games.botmayhem.cinematics
 	import flash.utils.Timer;
 	import nemostein.controllers.SimpleHybridController;
 	import nemostein.games.botmayhem.bots.hero.Hero;
+	import nemostein.games.botmayhem.bots.hero.HeroService;
 	import nemostein.games.botmayhem.core.SystemService;
 	import nemostein.io.UserInput;
 	
@@ -47,7 +48,7 @@ package nemostein.games.botmayhem.cinematics
 			
 			if (_input.justPressed(UserInput.LEFT_MOUSE))
 			{
-				CinematicsService.shotTarget(_input.leftMouseDown);
+				HeroService.manager.hero.shootTargetWeapon(_input.leftMouseDown);
 			}
 		}
 		

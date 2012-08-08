@@ -11,6 +11,7 @@ package nemostein.games.botmayhem
 	import nemostein.controllers.Collider;
 	import nemostein.controllers.Controller;
 	import nemostein.controllers.Seeker;
+	import nemostein.games.botmayhem.arenas.ArenaFactory;
 	import nemostein.games.botmayhem.arenas.ArenaManager;
 	import nemostein.games.botmayhem.arenas.ArenaService;
 	import nemostein.games.botmayhem.bots.BotsManager;
@@ -18,6 +19,8 @@ package nemostein.games.botmayhem
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroManager;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
+	import nemostein.games.botmayhem.cinematics.CinematicsManager;
+	import nemostein.games.botmayhem.cinematics.CinematicsService;
 	import nemostein.games.botmayhem.core.Entity;
 	import nemostein.games.botmayhem.core.SystemManager;
 	import nemostein.games.botmayhem.core.SystemService;
@@ -66,8 +69,11 @@ package nemostein.games.botmayhem
 			
 			WeaponsService.factory = new WeaponsFactory();
 			BulletsService.factory = new BulletsFactory();
-			HeroService.manager = new HeroManager(_hero);
+			ArenaService.factory = new ArenaFactory();
+			
+			CinematicsService.manager = new CinematicsManager();
 			ArenaService.manager = new ArenaManager();
+			HeroService.manager = new HeroManager(_hero);
 			BulletsService.manager = new BulletsManager(_bulletsLayer);
 			BotsService.manager = new BotsManager(_botsLayer);
 			SystemService.manager = _systemManager;

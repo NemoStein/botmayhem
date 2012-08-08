@@ -12,37 +12,60 @@ package nemostein.games.botmayhem.weaponry.weapon
 	{
 		public function putAreaWeapon(target:AreaWeaponed):void
 		{
-			target.areaWeapon = new AreaCannon();
+			var areaCannon:AreaCannon = new AreaCannon();
+			target.areaWeapon = areaCannon;
+			areaCannon.holder = target;
 		}
 		
 		public function putDirectionWeapon(target:DirectionWeaponed):void
 		{
-			target.directionWeapon = new DirectionCannon();
+			var directionCannon:DirectionCannon = new DirectionCannon();
+			target.directionWeapon = directionCannon;
+			directionCannon.holder = target;
 		}
 		
 		public function putTargetWeapon(target:TargetWeaponed):void
 		{
-			target.targetWeapon = new TargetCannon();
+			var targetCannon:TargetCannon = new TargetCannon();
+			target.targetWeapon = targetCannon;
+			targetCannon.holder = target;
 		}
 		
 		public function putMenuCinematicCannon(target:TargetWeaponed):void
 		{
-			target.targetWeapon = new MenuCinematicCannon();
+			var menuCinematicCannon:MenuCinematicCannon = new MenuCinematicCannon();
+			target.targetWeapon = menuCinematicCannon;
+			menuCinematicCannon.holder = target;
 		}
 		
 		public function removeAreaWeapon(target:AreaWeaponed):void
 		{
-			target.areaWeapon = null;
+			var areaWeapon:AreaWeapon = target.areaWeapon;
+			if (areaWeapon)
+			{
+				areaWeapon.holder = null;
+				target.areaWeapon = null;
+			}
 		}
 		
 		public function removeDirectionWeapon(target:DirectionWeaponed):void
 		{
-			target.directionWeapon = null;
+			var directionWeapon:DirectionWeapon = target.directionWeapon;
+			if (directionWeapon)
+			{
+				directionWeapon.holder = null;
+				target.directionWeapon = null;
+			}
 		}
 		
 		public function removeTargetWeaponed(target:TargetWeaponed):void
 		{
-			target.targetWeapon = null;
+			var targetWeapon:TargetWeapon = target.targetWeapon;
+			if (targetWeapon)
+			{
+				targetWeapon.holder = null;
+				target.targetWeapon = null;
+			}
 		}
 	}
 }

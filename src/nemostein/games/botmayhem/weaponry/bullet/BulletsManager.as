@@ -2,6 +2,7 @@ package nemostein.games.botmayhem.weaponry.bullet
 {
 	import nemostein.controllers.Collidable;
 	import nemostein.games.botmayhem.core.Entity;
+	import nemostein.games.botmayhem.weaponry.bullet.bullets.Missile;
 	import nemostein.Updatable;
 	
 	public class BulletsManager implements Updatable
@@ -29,10 +30,11 @@ package nemostein.games.botmayhem.weaponry.bullet
 			++_bulletCount;
 		}
 		
-		public function remove(bullet:Bullet):void
+		public function kill(bullet:Bullet, outBounds:Boolean = false):void
 		{
 			if (bullet.parent == _layer)
 			{
+				bullet.die(outBounds);
 				_layer.removeChild(bullet);
 				
 				_i = _j = 0;
@@ -74,7 +76,7 @@ package nemostein.games.botmayhem.weaponry.bullet
 					
 					if (bulletX < 0 || bulletY < 0 || bulletX > 900 || bulletY > 600)
 					{
-						remove(_check);
+						kill(_check, true);
 						continue;
 					}
 					
@@ -103,7 +105,6 @@ package nemostein.games.botmayhem.weaponry.bullet
 				
 				++_j;
 			}
-			
 			
 			return collidable;
 		}

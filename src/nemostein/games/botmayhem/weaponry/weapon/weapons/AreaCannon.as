@@ -9,7 +9,7 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		
 		public function AreaCannon()
 		{
-			cooldown = 150;
+			$cooldown = 150;
 		}
 		
 		public function shoot():void 
