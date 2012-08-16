@@ -1,12 +1,12 @@
 package nemostein.games.botmayhem.weaponry.bullet.bullets
 {
+	import flash.display.BitmapData;
 	import flash.geom.Point;
+	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.games.botmayhem.arenas.ArenaService;
-	import nemostein.games.botmayhem.cinematics.CinematicsService;
 	import nemostein.games.botmayhem.decals.Decals;
 	import nemostein.games.botmayhem.decals.DecalSettings;
 	import nemostein.games.botmayhem.weaponry.bullet.Bullet;
-	import nemostein.games.botmayhem.weaponry.bullet.BulletsService;
 	import nemostein.utils.MathUtils;
 	
 	public class Missile extends Bullet
@@ -21,55 +21,55 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 			_target = target;
 			_source = source;
 			
-			initialize();
+			super();
 		}
 		
-		private function initialize():void
+		override protected function initialize():void
 		{
-			$bulletSpeed = 125;
+			super.initialize();
+			
+			bulletSpeed = 125;
 			_totalDistance = Point.distance(_source, _target);
 			
-			// placeholder graphics
-			graphics.beginFill(0xdf5f5b, 1);
-			graphics.moveTo(-14, -2.25);
-			graphics.lineTo(0, -0.5);
-			graphics.lineTo(0, 0.5);
-			graphics.lineTo(-14, 2.25);
-			graphics.endFill();
+			draw(new BitmapData(15, 5, true, 0xffdf5f5b), true);
+			
+			alignAnchor(AnchorAlign.CENTER, AnchorAlign.CENTER);
 		}
 		
-		override public function update():void
+		override protected function update():void
 		{
-			x += Math.cos($angle) * $bulletSpeed * 0.02;
-			y += Math.sin($angle) * $bulletSpeed * 0.02;
+			x += Math.cos(angle) * bulletSpeed * 0.02;
+			y += Math.sin(angle) * bulletSpeed * 0.02;
 			
 			_traveledDistance = Point.distance(_source, new Point(x, y));
 			
 			if (_traveledDistance >= _totalDistance)
 			{
-				BulletsService.manager.kill(this);
+				die();
 			}
 			
 			var percent:Number = _traveledDistance / _totalDistance * 2;
 			if (percent < 1)
 			{
-				scaleY += 0.025;
-				scaleX = percent * scaleY + 0.5;
+				//scaleY += 0.025;
+				//scaleX = percent * scaleY + 0.5;
 			}
 			else
 			{
-				scaleY -= 0.025;
-				scaleX = (1 - (percent - 1)) * scaleY + 0.5;
+				//scaleY -= 0.025;
+				//scaleX = (1 - (percent - 1)) * scaleY + 0.5;
 			}
 			
-			$bulletSpeed *= 1.015;
+			bulletSpeed *= 1.015;
 			
-			rotation = MathUtils.deg($angle);
+			super.update();
 		}
 		
 		override public function die(outBounds:Boolean = false):void
 		{
-			var silently:Boolean = CinematicsService.manager.hit();
+			// TODO: CinematicsManager needs a new home
+			//var silently:Boolean = CinematicsService.manager.hit();
+			var silently:Boolean = false;
 			
 			if (!outBounds && !silently)
 			{

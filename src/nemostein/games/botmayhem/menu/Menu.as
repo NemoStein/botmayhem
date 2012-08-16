@@ -1,110 +1,44 @@
 package nemostein.games.botmayhem.menu
 {
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import nemostein.controllers.SimpleCollider;
-	import nemostein.controllers.SimpleSeeker;
-	import nemostein.games.botmayhem.arenas.Arena;
+	import flash.display.Stage;
+	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.arenas.ArenaService;
 	import nemostein.games.botmayhem.arenas.WhiteTiledArena;
-	import nemostein.games.botmayhem.bots.BotsManager;
-	import nemostein.games.botmayhem.bots.BotsService;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
-	import nemostein.games.botmayhem.bots.SimpleBot;
-	import nemostein.games.botmayhem.cinematics.CinematicsService;
-	import nemostein.games.botmayhem.cinematics.HeroCinematicsController;
 	import nemostein.games.botmayhem.core.Button;
-	import nemostein.games.botmayhem.core.SystemService;
-	import nemostein.games.botmayhem.decals.Decals;
-	import nemostein.games.botmayhem.decals.DecalSettings;
-	import nemostein.games.botmayhem.weaponry.weapon.WeaponsFactory;
 	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;
-	import nemostein.ui.RandomClicker;
 	
-	public class Menu extends Sprite
+	public class Menu extends Core
 	{
 		private var _arena:WhiteTiledArena;
 		private var _hero:Hero;
+		private var _stage:Stage;
 		
-		public function Menu()
+		public function Menu() 
 		{
-			initialize();
+			super();
 		}
 		
-		private function initialize():void
+		override protected function initialize():void
 		{
-			mouseEnabled = false;
+			super.initialize();
 			
-			_arena = ArenaService.factory.whiteTiledArena;
-			_hero = HeroService.manager.hero;
+			_arena = ArenaService.whiteTiledArena;
+			_hero = HeroService.hero;
 			
-			ArenaService.manager.currentArena = _arena;
+			ArenaService.currentArena = _arena;
 			
-			var weaponsFactory:WeaponsFactory = WeaponsService.factory;
+			WeaponsService.removeAreaWeapon(_hero);
+			WeaponsService.removeDirectionWeapon(_hero);
+			WeaponsService.removeTargetWeaponed(_hero);
 			
-			weaponsFactory.removeAreaWeapon(_hero);
-			weaponsFactory.removeDirectionWeapon(_hero);
-			weaponsFactory.removeTargetWeaponed(_hero);
+			WeaponsService.putMenuCinematicCannon(_hero);
 			
-			weaponsFactory.putMenuCinematicCannon(_hero);
+			add(_arena);
+			add(_hero);
 			
-			addChild(_arena);
-			addChild(_hero);
-			
-			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-		}
-		
-		private function onAddedToStage(event:Event):void
-		{
-			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			
-			createButtons();
-			startCinematics();
-			
-			addEventListener(MouseEvent.CLICK, onClick);
-			
-			/**
-			// ============================================================
-			// === STRESS TEST ============================================
-			var seeker:SimpleSeeker = new SimpleSeeker(_hero);
-			var collider:StressCollider = new StressCollider(_hero);
-			
-			var botsManager:BotsManager = BotsService.manager;
-			for (var i:int = 0; i < 25; i++) 
-			{
-				var bot:SimpleBot = new SimpleBot();
-				botsManager.add(bot);
-				seeker.addSource(bot);
-				addChild(bot);
-			}
-			
-			collider.bots = botsManager.botsAsCollidable();
-			
-			SystemService.manager.addUpdatable(seeker);
-			SystemService.manager.addUpdatable(collider);
-			
-			var randomClicker:RandomClicker = new RandomClicker(_arena);
-			randomClicker.start(5000);
-			// === STRESS TEST ============================================
-			// ============================================================
-			/**/
-		}
-		
-		private function startCinematics():void
-		{
-			var heroCinematicsController:HeroCinematicsController = new HeroCinematicsController(_hero, stage);
-			
-			SystemService.manager.addUpdatable(heroCinematicsController);
-			
-			heroCinematicsController.runMenuScript();
-		}
-		
-		private function createButtons():void
-		{
-			var startButton:Button = new StartButton();
+ 			var startButton:Button = new StartButton();
 			var sponsorButton:Button = new SponsorButton();
 			var developerButton:Button = new DeveloperButton();
 			var creditsButton:Button = new CreditsButton();
@@ -121,20 +55,10 @@ package nemostein.games.botmayhem.menu
 			creditsButton.x = 670;
 			creditsButton.y = 380;
 			
-			addChild(startButton);
-			addChild(sponsorButton);
-			addChild(developerButton);
-			addChild(creditsButton);
-		}
-		
-		private function onClick(event:MouseEvent):void
-		{
-			var target:Object = event.target;
-			
-			if (target is Button)
-			{
-				CinematicsService.manager.targetButton(Button(target));
-			}
+			add(startButton);
+			add(sponsorButton);
+			add(developerButton);
+			add(creditsButton);
 		}
 	}
 }

@@ -2,6 +2,7 @@ package nemostein.games.botmayhem.menu
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
+	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.Assets;
 	import nemostein.games.botmayhem.core.Button;
 	
@@ -10,33 +11,34 @@ package nemostein.games.botmayhem.menu
 		
 		public function CreditsButton()
 		{
-			initialize();
+			
 		}
 		
-		private function initialize():void
+		override protected function initialize():void
 		{
-			var area:Sprite = new Sprite();
+			super.initialize();
 			
-			area.graphics.beginFill(0, 0);
-			area.graphics.moveTo(0, 136);
-			area.graphics.lineTo(36, 0);
-			area.graphics.lineTo(171, 36);
-			area.graphics.lineTo(136, 172);
-			area.graphics.endFill();
+			//var area:Core = new Core();
 			
-			var imageMenuCreditsShadow:Bitmap = new Assets.ImageMenuCreditsShadow();
-			var imageMenuCreditsButton:Bitmap = new Assets.ImageMenuCreditsButton();
+			//area.graphics.beginFill(0, 0);
+			//area.graphics.moveTo(0, 136);
+			//area.graphics.lineTo(36, 0);
+			//area.graphics.lineTo(171, 36);
+			//area.graphics.lineTo(136, 172);
+			//area.graphics.endFill();
 			
-			imageMenuCreditsButton.x = 5;
-			imageMenuCreditsShadow.y = 2;
-			area.x = 5;
+			var shadow:Core = new Core(Bitmap(new Assets.ImageMenuCreditsShadow()).bitmapData);
+			var button:Core = new Core(Bitmap(new Assets.ImageMenuCreditsButton()).bitmapData);
 			
-			mouseChildren = false;
-			hitArea = area;
+			shadow.y = 2;
+			button.x = 5;
 			
-			addChild(imageMenuCreditsShadow);
-			addChild(imageMenuCreditsButton);
-			addChild(area);
+			//area.x = 5;
+			//hitArea = area;
+			
+			add(shadow);
+			add(button);
+			//add(area);
 		}
 	}
 }

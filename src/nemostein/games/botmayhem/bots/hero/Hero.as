@@ -1,6 +1,9 @@
 package nemostein.games.botmayhem.bots.hero
 {
+	import flash.display.BitmapData;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
+	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.games.botmayhem.bots.Bot;
 	import nemostein.games.botmayhem.weaponry.AreaWeaponed;
 	import nemostein.games.botmayhem.weaponry.DirectionWeaponed;
@@ -17,7 +20,21 @@ package nemostein.games.botmayhem.bots.hero
 		
 		public function Hero()
 		{
-			initialize();
+			
+		}
+		
+		override protected function initialize():void
+		{
+			super.initialize();
+			
+			frame.width = 35;
+			frame.height = 30;
+			
+			alignAnchor(AnchorAlign.CENTER, AnchorAlign.CENTER);
+			
+			sprite = new BitmapData(frame.width, frame.height, true, 0);
+			sprite.fillRect(new Rectangle(0, 0, 30, 30), 0xffbbbfdf);
+			sprite.fillRect(new Rectangle(20, 10, 15, 10), 0xff9b9fbf);
 		}
 		
 		public function shootAreaWeapon():void
@@ -34,7 +51,7 @@ package nemostein.games.botmayhem.bots.hero
 			{
 				_directionWeapon.shoot(angle);
 			}
-		}
+		}	
 		
 		public function shootTargetWeapon(target:Point):void
 		{
@@ -42,15 +59,6 @@ package nemostein.games.botmayhem.bots.hero
 			{
 				_targetWeapon.shoot(target);
 			}
-		}
-		
-		private function initialize():void
-		{
-			graphics.beginFill(0xbbbfdf, 1);
-			graphics.drawCircle(0, 0, 15);
-			graphics.beginFill(0x888fdf, 1);
-			graphics.drawCircle(12.5, 0, 7.5);
-			graphics.endFill();
 		}
 		
 		public function get areaWeapon():AreaWeapon

@@ -5,8 +5,8 @@
     <movie outputType="Application" />
     <movie input="" />
     <movie path="bin\BotMayhem.swf" />
-    <movie fps="30" />
-    <movie width="800" />
+    <movie fps="50" />
+    <movie width="900" />
     <movie height="600" />
     <movie version="11" />
     <movie minorVersion="2" />
@@ -74,7 +74,8 @@
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <!-- example: <hidden path="..." /> -->
+    <hidden path="src.bkp.displaylist" />
+    <hidden path="src.bkp.dragonfly" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand>$(ProjectDir)\..\KillFlashPlayer.bat</preBuildCommand>

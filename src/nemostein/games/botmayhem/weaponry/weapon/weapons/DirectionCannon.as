@@ -9,7 +9,7 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		
 		public function DirectionCannon()
 		{
-			$cooldown = 150;
+			_cooldown = 150;
 		}
 		
 		public function shoot(angle:Number):void 

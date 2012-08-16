@@ -2,6 +2,7 @@ package nemostein.games.botmayhem.menu
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
+	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.Assets;
 	import nemostein.games.botmayhem.core.Button;
 	
@@ -10,33 +11,34 @@ package nemostein.games.botmayhem.menu
 		
 		public function SponsorButton()
 		{
-			initialize();
+			
 		}
 		
-		private function initialize():void
+		override protected function initialize():void
 		{
-			var area:Sprite = new Sprite();
+			super.initialize();
 			
-			area.graphics.beginFill(0, 0);
-			area.graphics.moveTo(0, 24);
-			area.graphics.lineTo(116, 0);
-			area.graphics.lineTo(139, 118);
-			area.graphics.lineTo(22, 142);
-			area.graphics.endFill();
+			//var area:Core = new Core();
 			
-			var imageMenuSponsorShadow:Bitmap = new Assets.ImageMenuSponsorShadow();
-			var imageMenuSponsorButton:Bitmap = new Assets.ImageMenuSponsorButton();
+			//area.graphics.beginFill(0, 0);
+			//area.graphics.moveTo(0, 24);
+			//area.graphics.lineTo(116, 0);
+			//area.graphics.lineTo(139, 118);
+			//area.graphics.lineTo(22, 142);
+			//area.graphics.endFill();
 			
-			imageMenuSponsorButton.x = 21;
-			imageMenuSponsorShadow.y = 3;
-			area.x = 21;
+			var shadow:Core = new Core(Bitmap(new Assets.ImageMenuSponsorShadow()).bitmapData);
+			var button:Core = new Core(Bitmap(new Assets.ImageMenuSponsorButton()).bitmapData);
 			
-			mouseChildren = false;
-			hitArea = area;
+			shadow.y = 3;
+			button.x = 21;
 			
-			addChild(imageMenuSponsorShadow);
-			addChild(imageMenuSponsorButton);
-			addChild(area);
+			//area.x = 21;
+			//hitArea = area;
+			
+			add(shadow);
+			add(button);
+			//add(area);
 		}
 	}
 }

@@ -3,37 +3,17 @@ package nemostein.games.botmayhem.arenas
 	
 	public class ArenaService
 	{
-		private static var _factory:ArenaFactory
-		private static var _manager:ArenaManager
+		static private var _whiteTiledArena:WhiteTiledArena;
+		static public var currentArena:Arena;
 		
-		public static function get factory():ArenaFactory
+		static public function get whiteTiledArena():WhiteTiledArena
 		{
-			if (_factory == null)
+			if (!_whiteTiledArena)
 			{
-				throw new UninitializedError("No ArenaFactory available");
+				_whiteTiledArena = new WhiteTiledArena();
 			}
 			
-			return _factory;
-		}
-		
-		public static function set factory(value:ArenaFactory):void
-		{
-			_factory = value;
-		}
-		
-		public static function get manager():ArenaManager
-		{
-			if (_manager == null)
-			{
-				throw new UninitializedError("No ArenaManager available");
-			}
-			
-			return _manager;
-		}
-		
-		public static function set manager(value:ArenaManager):void
-		{
-			_manager = value;
+			return _whiteTiledArena;
 		}
 	}
 }

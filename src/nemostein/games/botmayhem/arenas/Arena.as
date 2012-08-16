@@ -5,11 +5,11 @@ package nemostein.games.botmayhem.arenas
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import nemostein.color.Color;
-	import nemostein.games.botmayhem.core.Entity;
+	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.decals.Decals;
 	import nemostein.games.botmayhem.decals.DecalSettings;
 	
-	public class Arena extends Entity
+	public class Arena extends Core
 	{
 		public static const TOP_LAYER:int = -1;
 		public static const BOTTOM_LAYER:int = 0;
@@ -18,11 +18,13 @@ package nemostein.games.botmayhem.arenas
 		
 		public function Arena()
 		{
-			initialize();
+			
 		}
 		
-		private function initialize():void
+		override protected function initialize():void
 		{
+			super.initialize();
+			
 			_layers = new Vector.<BitmapData>();
 		}
 		
@@ -78,7 +80,11 @@ package nemostein.games.botmayhem.arenas
 		protected function addLayer(data:BitmapData):void
 		{
 			_layers.push(data);
-			addChild(new Bitmap(data));
+			
+			var core:Core = new Core();
+			core.draw(data, true);
+			
+			add(core);
 		}
 		
 		protected function getLayer(layer:int):BitmapData

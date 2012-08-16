@@ -6,9 +6,17 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 	{
 		public function SimpleBullet()
 		{
-			graphics.beginFill(0xdf5f5b, 1);
-			graphics.drawCircle(0, 0, 2);
-			graphics.endFill();
+			
+		}
+		
+		override protected function initialize():void
+		{
+			super.initialize();
+			
+			frame.width = 4;
+			frame.height = 4;
+			
+			sprite.fillRect(frame, 0xdf5f5b);
 		}
 	}
 }

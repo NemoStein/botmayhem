@@ -10,13 +10,15 @@ package nemostein.games.botmayhem.arenas
 		
 		public function WhiteTiledArena()
 		{
-			initialize();
+			
 		}
 		
-		private function initialize():void
+		override protected function initialize():void
 		{
+			super.initialize();
+			
 			addLayer(Bitmap(new Assets.ImageArenasWhiteTiled()).bitmapData);
-			addLayer(new BitmapData(width, height, true, 0x25000000));
+			addLayer(new BitmapData(900, 600, true, 0x25808080));
 		}
 	}
 }

@@ -1,121 +1,34 @@
-package nemostein.games.botmayhem
+package nemostein.games.botmayhem 
 {
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.geom.Point;
-	import flash.ui.Mouse;
-	import flash.ui.MouseCursorData;
-	import nemostein.controllers.Collidable;
-	import nemostein.controllers.Collider;
-	import nemostein.controllers.Controller;
-	import nemostein.controllers.Seeker;
-	import nemostein.games.botmayhem.arenas.ArenaFactory;
-	import nemostein.games.botmayhem.arenas.ArenaManager;
-	import nemostein.games.botmayhem.arenas.ArenaService;
-	import nemostein.games.botmayhem.bots.BotsManager;
-	import nemostein.games.botmayhem.bots.BotsService;
+	import flash.display.DisplayObjectContainer;
+	import flash.display.Stage;
+	import nemostein.framework.dragonfly.Game;
 	import nemostein.games.botmayhem.bots.hero.Hero;
-	import nemostein.games.botmayhem.bots.hero.HeroManager;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
-	import nemostein.games.botmayhem.cinematics.CinematicsManager;
-	import nemostein.games.botmayhem.cinematics.CinematicsService;
-	import nemostein.games.botmayhem.core.Entity;
-	import nemostein.games.botmayhem.core.SystemManager;
-	import nemostein.games.botmayhem.core.SystemService;
-	import nemostein.games.botmayhem.intros.SponsorIntro;
 	import nemostein.games.botmayhem.menu.Menu;
-	import nemostein.games.botmayhem.weaponry.bullet.BulletsFactory;
-	import nemostein.games.botmayhem.weaponry.bullet.BulletsManager;
-	import nemostein.games.botmayhem.weaponry.bullet.BulletsService;
-	import nemostein.games.botmayhem.weaponry.weapon.WeaponsFactory;
-	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;
-	import nemostein.intro.IntroSequence;
 	
-	public class BotMayhem extends Sprite
+	public class BotMayhem extends Game 
 	{
-		public static const CURSOR_AIM:String = "aim";
 		
-		private var _heroController:Controller;
-		private var _heroSeeker:Seeker;
-		private var _collider:Collider;
-		
-		private var _hero:Hero;
-		private var _bots:Vector.<Collidable>;
-		
-		private var _bulletsLayer:Entity;
-		private var _botsLayer:Entity;
-		
-		private var _systemManager:SystemManager;
-		
-		public function BotMayhem()
+		public function BotMayhem() 
 		{
-			initialize();
+			super(900, 600);
 		}
 		
-		private function initialize():void
+		override protected function initialize():void 
 		{
-			_bots = new <Collidable>[];
+			super.initialize();
 			
-			_bulletsLayer = new Entity();
-			_botsLayer = new Entity();
+			var hero:Hero = new Hero();
 			
-			_hero = new Hero();
-			_hero.x = 830;
-			_hero.y = -25;
+			hero.x = 830;
+			hero.y = -25;
+			hero.angle = Math.PI / 2;
 			
-			_systemManager = new SystemManager();
+			HeroService.hero = hero;
 			
-			WeaponsService.factory = new WeaponsFactory();
-			BulletsService.factory = new BulletsFactory();
-			ArenaService.factory = new ArenaFactory();
-			
-			CinematicsService.manager = new CinematicsManager();
-			ArenaService.manager = new ArenaManager();
-			HeroService.manager = new HeroManager(_hero);
-			BulletsService.manager = new BulletsManager(_bulletsLayer);
-			BotsService.manager = new BotsManager(_botsLayer);
-			SystemService.manager = _systemManager;
-			
-			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-		}
-		
-		private function onAddedToStage(event:Event):void
-		{
-			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			
-			var introSequence:IntroSequence = new IntroSequence(onIntroSequenceComplete);
-			
-			//introSequence.addIntro(new SponsorIntro());
-			//introSequence.addIntro(new DeveloperIntro());
-			//introSequence.addIntro(new GameIntro());
-			
-			addChild(introSequence);
-			
-			introSequence.start();
-		}
-		
-		private function onIntroSequenceComplete():void
-		{
-			SystemService.manager.addUpdatable(BulletsService.manager);
-			
-			var aimCursor:MouseCursorData = new MouseCursorData();
-			aimCursor.data = new <BitmapData>[Bitmap(new Assets.ImageCursorsAimB()).bitmapData];
-			aimCursor.hotSpot = new Point(16, 16);
-			
-			Mouse.registerCursor(CURSOR_AIM, aimCursor);
-			Mouse.cursor = CURSOR_AIM;
-			
-			addChild(new Menu());
-			addChild(_bulletsLayer);
-			
-			addEventListener(Event.ENTER_FRAME, onStageEnterFrame);
-		}
-		
-		private function onStageEnterFrame(event:Event):void
-		{
-			_systemManager.update();
+			var menu:Menu = new Menu();
+			add(menu);
 		}
 	}
 }

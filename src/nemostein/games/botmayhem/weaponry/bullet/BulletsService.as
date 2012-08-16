@@ -1,39 +1,31 @@
 package nemostein.games.botmayhem.weaponry.bullet
 {
+	import flash.geom.Point;
+	import nemostein.games.botmayhem.weaponry.bullet.bullets.Missile;
+	import nemostein.games.botmayhem.weaponry.bullet.bullets.SimpleBullet;
 	
 	public class BulletsService
 	{
-		private static var _factory:BulletsFactory
-		private static var _manager:BulletsManager
-		
-		public static function get factory():BulletsFactory
+		static public function getSimpleBullet(source:Point, angle:Number):SimpleBullet
 		{
-			if (_factory == null)
-			{
-				throw new UninitializedError("No BulletsFactory available");
-			}
+			var simpleBullet:SimpleBullet = new SimpleBullet();
 			
-			return _factory;
-		}
-		
-		public static function set factory(value:BulletsFactory):void
-		{
-			_factory = value;
-		}
-		
-		public static function get manager():BulletsManager
-		{
-			if (_manager == null)
-			{
-				throw new UninitializedError("No BulletsManager available");
-			}
+			simpleBullet.x = source.x;
+			simpleBullet.y = source.y;
+			simpleBullet.angle = angle;
 			
-			return _manager;
+			return simpleBullet;
 		}
 		
-		public static function set manager(value:BulletsManager):void
+		static public function getMissile(source:Point, target:Point, angle:Number):Missile 
 		{
-			_manager = value;
+			var missile:Missile = new Missile(source, target);
+			
+			missile.x = source.x;
+			missile.y = source.y;
+			missile.angle = angle;
+			
+			return missile;
 		}
 	}
 }

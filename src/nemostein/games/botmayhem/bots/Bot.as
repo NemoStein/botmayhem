@@ -1,33 +1,27 @@
 package nemostein.games.botmayhem.bots
 {
-	import nemostein.controllers.Collidable;
-	import nemostein.controllers.Controllable;
+	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.bots.hero.Hero;
-	import nemostein.games.botmayhem.core.Entity;
 	import nemostein.games.botmayhem.weaponry.bullet.Bullet;
-	import nemostein.utils.MathUtils;
 	
-	public class Bot extends Entity implements Controllable, Collidable
+	public class Bot extends Core
 	{
-		protected var _hull:Number = 1;
+		protected var hull:Number = 1;
 		
-		public function get angle():Number
+		override protected function initialize():void
 		{
-			return MathUtils.rad(rotation);
+			super.initialize();
+			
+			//alignAnchor(AnchorAlign.RIGHT, AnchorAlign.BOTTOM);
 		}
 		
-		public function set angle(value:Number):void
-		{
-			rotation = MathUtils.deg(value);
-		}
-		
-		public function collide(angle:Number, against:Collidable):void
+		public function collide(angle:Number, against:Core):void
 		{
 			var knockback:Number = 1;
 			
 			if (against is Bullet)
 			{
-				BotsService.manager.kill(this);
+				die();
 			}
 			else if (against is Hero)
 			{

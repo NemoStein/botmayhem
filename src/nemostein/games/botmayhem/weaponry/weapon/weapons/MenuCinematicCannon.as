@@ -2,7 +2,6 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 {
 	import flash.geom.Point;
 	import nemostein.games.botmayhem.bots.hero.Hero;
-	import nemostein.games.botmayhem.cinematics.CinematicsService;
 	import nemostein.games.botmayhem.weaponry.TargetWeaponed;
 	import nemostein.games.botmayhem.weaponry.weapon.TargetWeapon;
 	
@@ -17,12 +16,14 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		
 		public function shoot(location:Point):void 
 		{
-			CinematicsService.manager.shootAt(new Point(_hero.x, _hero.y), location);
+			// TODO: CinematicsManager need a new home
+			//CinematicsService.manager.shootAt(new Point(_hero.x, _hero.y), location);
 		}
 		
 		override public function get ready():Boolean
 		{
-			return CinematicsService.manager.shotReady;
+			// TODO: CinematicsManager need a new home
+			return false;// CinematicsService.manager.shotReady;
 		}
 		
 		public function get holder():TargetWeaponed 

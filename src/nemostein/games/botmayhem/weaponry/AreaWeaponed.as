@@ -1,9 +1,8 @@
 package nemostein.games.botmayhem.weaponry
 {
-	import nemostein.controllers.Controllable;
 	import nemostein.games.botmayhem.weaponry.weapon.AreaWeapon;
 	
-	public interface AreaWeaponed extends Controllable
+	public interface AreaWeaponed
 	{
 		function shootAreaWeapon():void;
 		function get areaWeapon():AreaWeapon;

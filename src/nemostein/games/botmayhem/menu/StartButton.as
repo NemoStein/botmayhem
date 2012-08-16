@@ -2,6 +2,7 @@ package nemostein.games.botmayhem.menu
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
+	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.Assets;
 	import nemostein.games.botmayhem.core.Button;
 	
@@ -10,34 +11,35 @@ package nemostein.games.botmayhem.menu
 		
 		public function StartButton()
 		{
-			initialize();
+			
 		}
 		
-		private function initialize():void
+		override protected function initialize():void
 		{
-			var area:Sprite = new Sprite();
+			super.initialize();
 			
-			area.graphics.beginFill(0, 0);
-			area.graphics.moveTo(0, 48);
-			area.graphics.lineTo(179, 0);
-			area.graphics.lineTo(227, 178);
-			area.graphics.lineTo(47, 227);
-			area.graphics.endFill();
+			//var area:Core = new Core();
 			
-			var imageMenuStartShadow:Bitmap = new Assets.ImageMenuStartShadow();
-			var imageMenuStartButton:Bitmap = new Assets.ImageMenuStartButton();
+			//area.graphics.beginFill(0, 0);
+			//area.graphics.moveTo(0, 48);
+			//area.graphics.lineTo(179, 0);
+			//area.graphics.lineTo(227, 178);
+			//area.graphics.lineTo(47, 227);
+			//area.graphics.endFill();
 			
-			imageMenuStartButton.x = 30;
-			imageMenuStartButton.y = 18;
-			area.x = 30;
-			area.y = 18;
+			var shadow:Core = new Core(Bitmap(new Assets.ImageMenuStartShadow()).bitmapData);
+			var button:Core = new Core(Bitmap(new Assets.ImageMenuStartButton()).bitmapData);
 			
-			mouseChildren = false;
-			hitArea = area;
+			button.x = 30;
+			button.y = 18;
 			
-			addChild(imageMenuStartShadow);
-			addChild(imageMenuStartButton);
-			addChild(area);
+			//area.x = 30;
+			//area.y = 18;
+			//hitArea = area;
+			
+			add(shadow);
+			add(button);
+			//add(area);
 		}
 	}
 }
