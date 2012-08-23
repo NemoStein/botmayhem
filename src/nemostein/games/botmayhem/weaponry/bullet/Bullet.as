@@ -10,7 +10,7 @@ package nemostein.games.botmayhem.weaponry.bullet
 		
 		public function Bullet()
 		{
-			super(new BitmapData(15, 15, true, 0xffdf482f));
+			super();
 		}
 		
 		override protected function initialize():void
@@ -22,15 +22,16 @@ package nemostein.games.botmayhem.weaponry.bullet
 		
 		override protected function update():void
 		{
-			x += Math.cos(angle) * bulletSpeed * 0.02;
-			y += Math.sin(angle) * bulletSpeed * 0.02;
+			x += Math.cos(angle) * bulletSpeed * time;
+			y += Math.sin(angle) * bulletSpeed * time;
 			
 			super.update();
 		}
 		
 		public function die(outBounds:Boolean = false):void
 		{
-		
+			active  = false;
+			visible = false;
 		}
 		
 		public function collide(angle:Number, against:Core):void

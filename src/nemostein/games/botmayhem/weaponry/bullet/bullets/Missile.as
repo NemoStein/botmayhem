@@ -15,49 +15,61 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 		private var _target:Point;
 		private var _totalDistance:Number;
 		private var _traveledDistance:Number;
+		private var _maxTurnSpeed:Number;
 		
-		public function Missile(source:Point, target:Point)
+		public function Missile(source:Point, target:Point, angle:Number)
 		{
 			_target = target;
 			_source = source;
 			
 			super();
+			
+			this.angle = angle;
 		}
 		
 		override protected function initialize():void
 		{
 			super.initialize();
 			
+			x = _source.x;
+			y = _source.y;
+			
 			bulletSpeed = 125;
 			_totalDistance = Point.distance(_source, _target);
 			
-			draw(new BitmapData(15, 5, true, 0xffdf5f5b), true);
+			_maxTurnSpeed = 2;
+			
+			draw(new BitmapData(15, 5, true, 0xff5f5bdf), true);
 			
 			alignAnchor(AnchorAlign.CENTER, AnchorAlign.CENTER);
 		}
 		
 		override protected function update():void
 		{
-			x += Math.cos(angle) * bulletSpeed * time;
-			y += Math.sin(angle) * bulletSpeed * time;
+			var desiredTurn:Number = MathUtils.piWrap(Math.atan2(_target.y - y, _target.x - x) - angle);
+			var turn:Number = desiredTurn;
+			
+			var turnSpeed:Number = _maxTurnSpeed * time;
+			
+			if (desiredTurn > turnSpeed)
+			{
+				turn = turnSpeed;
+			}
+			else if (desiredTurn < -turnSpeed)
+			{
+				turn = -turnSpeed;
+			}
+			
+			angle += turn;
+			
+			//x += Math.cos(angle) * bulletSpeed * time;
+			//y += Math.sin(angle) * bulletSpeed * time;
 			
 			_traveledDistance = Point.distance(_source, new Point(x, y));
 			
 			if (_traveledDistance >= _totalDistance)
 			{
 				die();
-			}
-			
-			var percent:Number = _traveledDistance / _totalDistance * 2;
-			if (percent < 1)
-			{
-				//scaleY += 0.025;
-				//scaleX = percent * scaleY + 0.5;
-			}
-			else
-			{
-				//scaleY -= 0.025;
-				//scaleX = (1 - (percent - 1)) * scaleY + 0.5;
 			}
 			
 			bulletSpeed *= 1.015;
@@ -68,7 +80,7 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 		override public function die(outBounds:Boolean = false):void
 		{
 			// TODO: CinematicsManager needs a new home
-			//var silently:Boolean = CinematicsService.manager.hit();
+			//var silently:Boolean = CinematicService.manager.hit();
 			var silently:Boolean = false;
 			
 			if (!outBounds && !silently)
@@ -81,7 +93,7 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 				settings.angle = 0;
 				settings.angleDeviation = 1;
 				
-				ArenaService.manager.currentArena.mark(new Point(x, y), settings);
+				ArenaService.currentArena.mark(new Point(x, y), settings);
 			}
 			
 			super.die(outBounds);

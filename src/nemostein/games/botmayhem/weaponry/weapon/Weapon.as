@@ -4,7 +4,7 @@ package nemostein.games.botmayhem.weaponry.weapon
 	
 	public interface Weapon
 	{
-		function get ready():Boolean
-		function get cooldown():Number
+		//function get ready():Boolean
+		//function get cooldown():Number
 	}
 }

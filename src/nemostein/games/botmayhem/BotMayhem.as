@@ -21,7 +21,7 @@ package nemostein.games.botmayhem
 			var hero:Hero = new Hero();
 			
 			hero.x = 830;
-			hero.y = -25;
+			hero.y = 225;
 			hero.angle = Math.PI / 2;
 			
 			HeroService.hero = hero;

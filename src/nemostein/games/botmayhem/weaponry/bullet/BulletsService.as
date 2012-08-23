@@ -19,13 +19,7 @@ package nemostein.games.botmayhem.weaponry.bullet
 		
 		static public function getMissile(source:Point, target:Point, angle:Number):Missile 
 		{
-			var missile:Missile = new Missile(source, target);
-			
-			missile.x = source.x;
-			missile.y = source.y;
-			missile.angle = angle;
-			
-			return missile;
+			return new Missile(source, target, angle);
 		}
 	}
 }

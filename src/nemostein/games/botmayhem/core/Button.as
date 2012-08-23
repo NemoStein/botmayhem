@@ -24,11 +24,6 @@ package nemostein.games.botmayhem.core
 		 */
 		protected var hitAreaRect:Rectangle;
 		
-		public function Button()
-		{
-		
-		}
-		
 		/**
 		 * A reference to a list of vertices (Points) that draws the hit area.
 		 * MUST be ordered clockwise or counter-clockwise (not shuffled) AND convex

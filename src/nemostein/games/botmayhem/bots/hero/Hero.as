@@ -113,8 +113,8 @@ package nemostein.games.botmayhem.bots.hero
 					moveY = Math.sin(moveAngle) * moveSpeed;
 				}
 				
-				x += moveX
-				y += moveY
+				x += moveX;
+				y += moveY;
 			}
 			
 			super.update();

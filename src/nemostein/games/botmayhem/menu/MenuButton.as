@@ -21,7 +21,7 @@ package nemostein.games.botmayhem.menu
 			// User has clicked
 			if (point)
 			{
-				
+				CinematicService.shootMenuMissile(point);
 			}
 			
 			// Missile has touched the button

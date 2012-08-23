@@ -6,8 +6,8 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 	
 	public class BaseWeapon implements Weapon
 	{
-		protected var _ready:Boolean;
-		protected var _cooldown:Number = 0;
+		protected var ready:Boolean;
+		protected var cooldown:Number = 0;
 		
 		private var _timer:Timer;
 		
@@ -18,7 +18,7 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		
 		private function initialize():void
 		{
-			_ready = true;
+			ready = true;
 			_timer = new Timer(cooldown, 1);
 			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
 		}
@@ -27,17 +27,17 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		{
 			_timer.delay = cooldown;
 			_timer.reset();
-			_ready = true;
+			ready = true;
 		}
 		
-		public function get ready():Boolean 
-		{
-			return _ready;
-		}
-		
-		public function get cooldown():Number 
-		{
-			return _cooldown;
-		}
+		//public function get ready():Boolean 
+		//{
+			//return ready;
+		//}
+		//
+		//public function get cooldown():Number 
+		//{
+			//return cooldown;
+		//}
 	}
 }
