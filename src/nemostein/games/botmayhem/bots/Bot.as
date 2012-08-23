@@ -1,5 +1,6 @@
 package nemostein.games.botmayhem.bots
 {
+	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.weaponry.bullet.Bullet;
@@ -8,14 +9,12 @@ package nemostein.games.botmayhem.bots
 	{
 		protected var hull:Number = 1;
 		
-		protected var maxMoveSpeed:Number = 100;
-		protected var maxTurnSpeed:Number = 100;
+		protected var maxMoveSpeed:Number = 50;
+		protected var maxTurnSpeed:Number = 2;
 		
 		override protected function initialize():void
 		{
-			super.initialize();
-			
-			//alignAnchor(AnchorAlign.RIGHT, AnchorAlign.BOTTOM);
+			alignAnchor(AnchorAlign.CENTER, AnchorAlign.CENTER);
 		}
 		
 		public function collide(angle:Number, against:Core):void

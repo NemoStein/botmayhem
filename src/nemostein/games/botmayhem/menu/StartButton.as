@@ -4,6 +4,8 @@ package nemostein.games.botmayhem.menu
 	import flash.geom.Point;
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.Assets;
+	import nemostein.games.botmayhem.core.Levels;
+	import nemostein.games.botmayhem.core.SystemService;
 	
 	internal class StartButton extends MenuButton
 	{
@@ -23,6 +25,11 @@ package nemostein.games.botmayhem.menu
 			
 			add(shadow);
 			add(button);
+		}
+		
+		override protected function action():void 
+		{
+			SystemService.changeLevel(Levels.RED_A);
 		}
 	}
 }

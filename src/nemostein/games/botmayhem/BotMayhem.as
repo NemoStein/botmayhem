@@ -3,6 +3,8 @@ package nemostein.games.botmayhem
 	import nemostein.framework.dragonfly.Game;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
+	import nemostein.games.botmayhem.core.Levels;
+	import nemostein.games.botmayhem.core.SystemService;
 	import nemostein.games.botmayhem.menu.Menu;
 	
 	public class BotMayhem extends Game
@@ -24,8 +26,8 @@ package nemostein.games.botmayhem
 			
 			HeroService.hero = hero;
 			
-			var menu:Menu = new Menu();
-			add(menu);
+			SystemService.registerGame(this);
+			SystemService.changeLevel(Levels.MENU);
 		}
 	}
 }

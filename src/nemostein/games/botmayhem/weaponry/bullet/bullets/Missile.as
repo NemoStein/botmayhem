@@ -38,8 +38,8 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 		
 		override protected function update():void
 		{
-			x += Math.cos(angle) * bulletSpeed * 0.02;
-			y += Math.sin(angle) * bulletSpeed * 0.02;
+			x += Math.cos(angle) * bulletSpeed * time;
+			y += Math.sin(angle) * bulletSpeed * time;
 			
 			_traveledDistance = Point.distance(_source, new Point(x, y));
 			
