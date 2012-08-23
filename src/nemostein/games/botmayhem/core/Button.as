@@ -1,83 +1,140 @@
 package nemostein.games.botmayhem.core
 {
-	import flash.display.Sprite;
+	import flash.display.BitmapData;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import nemostein.framework.dragonfly.Core;
+	import nemostein.framework.dragonfly.Game;
+	import nemostein.games.botmayhem.arenas.Arena;
 	import nemostein.games.botmayhem.arenas.ArenaService;
 	import nemostein.games.botmayhem.decals.Decals;
 	import nemostein.games.botmayhem.decals.DecalSettings;
+	import nemostein.io.Keys;
+	import nemostein.utils.MathUtils;
 	
 	public class Button extends Core
 	{
-		// TODO: Hit area?
-		protected var hitArea:Core;
+		private var _hitArea:Vector.<Point>;
+		private var _relativeHitArea:Vector.<Point>;
+		
+		public var hovered:Boolean;
+		
+		/**
+		 * The position, width and height of the bounding box representing the hit area
+		 */
+		protected var hitAreaRect:Rectangle;
 		
 		public function Button()
 		{
 		
 		}
 		
+		/**
+		 * A reference to a list of vertices (Points) that draws the hit area.
+		 * MUST be ordered clockwise or counter-clockwise (not shuffled) AND convex
+		 */
 		override protected function initialize():void
 		{
 			super.initialize();
 			
+			_hitArea = new Vector.<Point>();
+			_relativeHitArea = new Vector.<Point>();
+			
 			relativeChildren = true;
+		}
+		
+		protected function drawHitArea(... vertices:Array):void
+		{
+			var count:int = vertices.length;
+			
+			var areaTop:Number = Infinity;
+			var areaBottom:Number = -Infinity;
+			var areaLeft:Number = Infinity;
+			var areaRight:Number = -Infinity;
+			
+			for (var i:int = 0; i < count; i++)
+			{
+				var vertex:Point = vertices[i];
+				
+				_hitArea.push(vertex.clone());
+				_relativeHitArea.push(vertex.clone());
+				
+				if (vertex.y < areaTop)
+				{
+					areaTop = vertex.y;
+				}
+				
+				if (vertex.y > areaBottom)
+				{
+					areaBottom = vertex.y;
+				}
+				
+				if (vertex.x < areaLeft)
+				{
+					areaLeft = vertex.x;
+				}
+				
+				if (vertex.x > areaRight)
+				{
+					areaRight = vertex.x;
+				}
+			}
+			
+			hitAreaRect = new Rectangle(areaLeft, areaTop, areaRight - areaLeft, areaBottom - areaTop);
 		}
 		
 		public function hit(point:Point = null):void
 		{
-			visible = false;
 			
-			var settings:DecalSettings = new DecalSettings(Decals.SCORCH_G);
-			
-			var areaWidth:Number = hitArea.width;
-			var areaHeight:Number = hitArea.height;
-			
-			settings.size = (areaWidth + areaHeight) / 200;
-			settings.sizeDeviation = 0.5;
-			
-			settings.angle = 0;
-			settings.angleDeviation = 1;
-			
-			var scorchX:Number = x + hitArea.x + hitArea.width / 2;
-			var scorchY:Number = y + hitArea.y + hitArea.height / 2;
-			
-			ArenaService.currentArena.mark(new Point(scorchX, scorchY), settings);
-			
-			var count:int = int(Math.random() * 5) + 1;
-			settings.size *= 1 / count;
-			settings.sizeDeviation /= count;
-			
-			for (var i:int = 0; i < count; i++)
-			{
-				var positionX:Number = Math.random() * areaWidth + scorchX - areaWidth / 2;
-				var positionY:Number = Math.random() * areaHeight + scorchY - areaHeight / 2;
-				
-				ArenaService.currentArena.mark(new Point(positionX, positionY), settings);
-			}
 		}
 		
 		public function enter(point:Point = null):void
 		{
-		
+			hovered = true;
 		}
 		
 		public function leave(point:Point = null):void
 		{
-		
+			hovered = false;
 		}
 		
-		private function isInsideTriangle(a:Point, b:Point, c:Point, p:Point):Boolean
+		override protected function update():void
 		{
-			var planeAB:Number = (a.x - p.x) * (b.y - p.y) - (b.x - p.x) * (a.y - p.y);
-			var planeBC:Number = (b.x - p.x) * (c.y - p.y) - (c.x - p.x) * (b.y - p.y);
-			var planeCA:Number = (c.x - p.x) * (a.y - p.y) - (a.x - p.x) * (c.y - p.y);
+			var count:int = _hitArea.length;
+			for (var i:int = 0; i < count; i++) 
+			{
+				var vertex:Point = _hitArea[i];
+				var relative:Point = _relativeHitArea[i];
+				
+				if (relative || relativeChildren)
+				{
+					relative.x = vertex.x + x;
+					relative.y = vertex.y + y;
+				}
+				else
+				{
+					relative.x = vertex.x;
+					relative.y = vertex.y;
+				}
+			}
 			
-			var signAB:int = planeAB > 0 ? 1 : planeAB < 0 ? -1 : 0;
-			var signBC:int = planeBC > 0 ? 1 : planeBC < 0 ? -1 : 0;
-			var signCA:int = planeCA > 0 ? 1 : planeCA < 0 ? -1 : 0;
+			if (!hovered && MathUtils.isInsidePolygon(_relativeHitArea, input.mouse))
+			{
+				enter(input.mouse);
+			}
+			else if (hovered)
+			{
+				if (!MathUtils.isInsidePolygon(_relativeHitArea, input.mouse))
+				{
+					leave(input.mouse);
+				}
+				else if (input.justPressed(Keys.LEFT_MOUSE))
+				{
+					hit(input.mouse);
+				}
+			}
 			
-			return signAB == signBC && signBC == signCA;
+			super.update();
 		}
 	}
 }

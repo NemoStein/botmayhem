@@ -1,6 +1,5 @@
 package nemostein.games.botmayhem.arenas
 {
-	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -14,7 +13,7 @@ package nemostein.games.botmayhem.arenas
 		public static const TOP_LAYER:int = -1;
 		public static const BOTTOM_LAYER:int = 0;
 		
-		protected var _layers:Vector.<BitmapData>;
+		protected var _layers:Vector.<ArenaLayer>;
 		
 		public function Arena()
 		{
@@ -25,12 +24,12 @@ package nemostein.games.botmayhem.arenas
 		{
 			super.initialize();
 			
-			_layers = new Vector.<BitmapData>();
+			_layers = new Vector.<ArenaLayer>();
 		}
 		
 		public function mark(location:Point, settings:DecalSettings, layer:int = TOP_LAYER):void
 		{
-			var layerData:BitmapData = getLayer(layer);
+			var layerData:BitmapData = getLayer(layer).data;
 			var brushData:BitmapData = Decals.getData(settings);
 			
 			if (layerData && brushData)
@@ -69,7 +68,9 @@ package nemostein.games.botmayhem.arenas
 				}
 				else
 				{
-					var destination:Point = location.clone();
+					var destination:Point = new Point();
+					destination.x = location.x;
+					destination.y = location.y;
 					destination.offset(-brushHalfWidth, -brushHalfHeight);
 					
 					layerData.copyPixels(brushData, new Rectangle(0, 0, brushWidth, brushHeight), destination, null, null, true);
@@ -77,17 +78,14 @@ package nemostein.games.botmayhem.arenas
 			}
 		}
 		
-		protected function addLayer(data:BitmapData):void
+		protected function addLayer(data:ArenaLayer):void
 		{
 			_layers.push(data);
 			
-			var core:Core = new Core();
-			core.draw(data, true);
-			
-			add(core);
+			add(data);
 		}
 		
-		protected function getLayer(layer:int):BitmapData
+		protected function getLayer(layer:int):ArenaLayer
 		{
 			var layerCount:int = _layers.length;
 			if (layerCount)

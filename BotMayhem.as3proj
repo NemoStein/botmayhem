@@ -5,7 +5,7 @@
     <movie outputType="Application" />
     <movie input="" />
     <movie path="bin\BotMayhem.swf" />
-    <movie fps="50" />
+    <movie fps="60" />
     <movie width="900" />
     <movie height="600" />
     <movie version="11" />

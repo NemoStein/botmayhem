@@ -9,6 +9,9 @@ package nemostein.games.botmayhem
 		[Embed(source="assets/arenas/WhiteTiled.png")]
 		public static const ImageArenasWhiteTiled:Class;
 		
+		[Embed(source="assets/arenas/WhiteTiledDirt.png")]
+		public static const ImageArenasWhiteTiledDirt:Class;
+		
 		[Embed(source="assets/cursors/aim.png")]
 		public static const ImageCursorsAim:Class;
 		

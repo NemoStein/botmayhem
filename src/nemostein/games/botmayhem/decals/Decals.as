@@ -29,8 +29,8 @@ package nemostein.games.botmayhem.decals
 			{
 				var matrix:Matrix = new Matrix();
 				
-				var halfWidth:Number = originalData.width / 2;
-				var halfHeight:Number = originalData.height / 2;
+				var halfWidth:Number = originalData.width >> 1;
+				var halfHeight:Number = originalData.height >> 1;
 				
 				matrix.translate(-halfWidth, -halfHeight);
 				matrix.rotate(settings.angle + (Math.random() * settings.angleDeviation * 2 - settings.angleDeviation));

@@ -8,6 +8,9 @@ package nemostein.games.botmayhem.bots
 	{
 		protected var hull:Number = 1;
 		
+		protected var maxMoveSpeed:Number = 100;
+		protected var maxTurnSpeed:Number = 100;
+		
 		override protected function initialize():void
 		{
 			super.initialize();

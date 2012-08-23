@@ -1,31 +1,19 @@
 package nemostein.games.botmayhem.menu
 {
 	import flash.display.Bitmap;
-	import flash.display.Sprite;
+	import flash.geom.Point;
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.Assets;
-	import nemostein.games.botmayhem.core.Button;
 	
-	public class SponsorButton extends Button
+	internal class SponsorButton extends MenuButton
 	{
-		
-		public function SponsorButton()
-		{
-			
-		}
-		
 		override protected function initialize():void
 		{
 			super.initialize();
 			
-			//var area:Core = new Core();
+			scorchRadius = 2.25;
 			
-			//area.graphics.beginFill(0, 0);
-			//area.graphics.moveTo(0, 24);
-			//area.graphics.lineTo(116, 0);
-			//area.graphics.lineTo(139, 118);
-			//area.graphics.lineTo(22, 142);
-			//area.graphics.endFill();
+			drawHitArea(new Point(20, 23), new Point(137, 0), new Point(160, 118), new Point(43, 141));
 			
 			var shadow:Core = new Core(Bitmap(new Assets.ImageMenuSponsorShadow()).bitmapData);
 			var button:Core = new Core(Bitmap(new Assets.ImageMenuSponsorButton()).bitmapData);
@@ -33,12 +21,8 @@ package nemostein.games.botmayhem.menu
 			shadow.y = 3;
 			button.x = 21;
 			
-			//area.x = 21;
-			//hitArea = area;
-			
 			add(shadow);
 			add(button);
-			//add(area);
 		}
 	}
 }

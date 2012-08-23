@@ -2,12 +2,14 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.system.System;
 	import flash.text.TextField;
 	import nemostein.games.botmayhem.BotMayhem;
 	import nemostein.intro.IntroSequence;
 	
-	[SWF(width=900,height=600,backgroundColor="#000000",frameRate="50")]
+	[SWF(width=900,height=600,backgroundColor="#000000",frameRate="60")]
 	[Frame(factoryClass="Preloader")]
 	
 	public class Main extends Sprite
