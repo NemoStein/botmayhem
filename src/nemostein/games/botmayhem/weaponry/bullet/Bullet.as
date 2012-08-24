@@ -22,8 +22,10 @@ package nemostein.games.botmayhem.weaponry.bullet
 		
 		override protected function update():void
 		{
-			x += Math.cos(angle) * bulletSpeed * time;
-			y += Math.sin(angle) * bulletSpeed * time;
+			if (x < 0 || y < 0 || x > 900 || y > 600)
+			{
+				die(true);
+			}
 			
 			super.update();
 		}

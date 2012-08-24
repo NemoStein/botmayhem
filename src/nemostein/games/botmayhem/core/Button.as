@@ -35,7 +35,7 @@ package nemostein.games.botmayhem.core
 			_hitArea = new Vector.<Point>();
 			_relativeHitArea = new Vector.<Point>();
 			
-			relativeChildren = true;
+			setCurrentDescendentsAsRelative();
 		}
 		
 		protected function drawHitArea(... vertices:Array):void
@@ -80,7 +80,7 @@ package nemostein.games.botmayhem.core
 		
 		public function hit(point:Point = null):void
 		{
-			
+		
 		}
 		
 		public function enter(point:Point = null):void
@@ -96,36 +96,36 @@ package nemostein.games.botmayhem.core
 		override protected function update():void
 		{
 			var count:int = _hitArea.length;
-			for (var i:int = 0; i < count; i++) 
+			for (var i:int = 0; i < count; i++)
 			{
-				var vertex:Point = _hitArea[i];
-				var relative:Point = _relativeHitArea[i];
+				var areaVertex:Point = _hitArea[i];
+				var relativeVertex:Point = _relativeHitArea[i];
 				
-				if (relative || relativeChildren)
+				if (relativeVertex)
 				{
-					relative.x = vertex.x + x;
-					relative.y = vertex.y + y;
+					relativeVertex.x = areaVertex.x + x;
+					relativeVertex.y = areaVertex.y + y;
 				}
 				else
 				{
-					relative.x = vertex.x;
-					relative.y = vertex.y;
+					relativeVertex.x = areaVertex.x;
+					relativeVertex.y = areaVertex.y;
 				}
 			}
 			
 			if (!hovered && MathUtils.isInsidePolygon(_relativeHitArea, input.mouse))
 			{
-				enter(input.mouse);
+				enter(input.mouse.clone());
 			}
 			else if (hovered)
 			{
 				if (!MathUtils.isInsidePolygon(_relativeHitArea, input.mouse))
 				{
-					leave(input.mouse);
+					leave(input.mouse.clone());
 				}
 				else if (input.justPressed(Keys.LEFT_MOUSE))
 				{
-					hit(input.mouse);
+					hit(input.mouse.clone());
 				}
 			}
 			

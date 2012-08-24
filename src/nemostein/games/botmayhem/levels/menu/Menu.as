@@ -1,4 +1,4 @@
-package nemostein.games.botmayhem.menu
+package nemostein.games.botmayhem.levels.menu
 {
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -8,10 +8,11 @@ package nemostein.games.botmayhem.menu
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
 	import nemostein.games.botmayhem.core.Button;
+	import nemostein.games.botmayhem.levels.Level;
 	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;
 	import nemostein.io.Keys;
 	
-	public class Menu extends Core
+	public class Menu extends Level
 	{
 		private var _arena:WhiteTiledArena;
 		private var _hero:Hero;
@@ -41,7 +42,6 @@ package nemostein.games.botmayhem.menu
 			WeaponsService.putMenuCinematicCannon(_hero);
 			
 			add(_arena);
-			add(_hero);
 			
 			var startButton:Button = new StartButton();
 			var developerButton:Button = new DeveloperButton();

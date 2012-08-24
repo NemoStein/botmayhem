@@ -1,11 +1,13 @@
-package nemostein.games.botmayhem.menu
+package nemostein.games.botmayhem.levels.menu
 {
 	import flash.display.Bitmap;
+	import flash.events.TimerEvent;
 	import flash.geom.Point;
+	import flash.utils.Timer;
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.Assets;
-	import nemostein.games.botmayhem.core.Levels;
 	import nemostein.games.botmayhem.core.SystemService;
+	import nemostein.games.botmayhem.levels.Level;
 	
 	internal class StartButton extends MenuButton
 	{
@@ -27,9 +29,14 @@ package nemostein.games.botmayhem.menu
 			add(button);
 		}
 		
-		override protected function action():void 
+		override protected function action():void
 		{
-			SystemService.changeLevel(Levels.RED_A);
+			var timer:Timer = new Timer(500, 1);
+			timer.addEventListener(TimerEvent.TIMER_COMPLETE, function():void
+			{
+				SystemService.changeLevel(Level.RED_A);
+			});
+			timer.start();
 		}
 	}
 }

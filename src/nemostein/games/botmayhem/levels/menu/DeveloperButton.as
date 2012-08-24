@@ -1,4 +1,4 @@
-package nemostein.games.botmayhem.menu
+package nemostein.games.botmayhem.levels.menu
 {
 	import flash.display.Bitmap;
 	import flash.geom.Point;

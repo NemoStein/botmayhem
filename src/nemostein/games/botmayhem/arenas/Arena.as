@@ -15,11 +15,6 @@ package nemostein.games.botmayhem.arenas
 		
 		protected var _layers:Vector.<ArenaLayer>;
 		
-		public function Arena()
-		{
-			
-		}
-		
 		override protected function initialize():void
 		{
 			super.initialize();

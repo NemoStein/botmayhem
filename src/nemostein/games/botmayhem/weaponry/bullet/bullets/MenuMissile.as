@@ -6,10 +6,11 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 	import nemostein.games.botmayhem.arenas.ArenaService;
 	import nemostein.games.botmayhem.decals.Decals;
 	import nemostein.games.botmayhem.decals.DecalSettings;
+	import nemostein.games.botmayhem.levels.menu.CinematicService;
 	import nemostein.games.botmayhem.weaponry.bullet.Bullet;
 	import nemostein.utils.MathUtils;
 	
-	public class Missile extends Bullet
+	public class MenuMissile extends Bullet
 	{
 		private var _source:Point;
 		private var _target:Point;
@@ -17,7 +18,7 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 		private var _traveledDistance:Number;
 		private var _maxTurnSpeed:Number;
 		
-		public function Missile(source:Point, target:Point, angle:Number)
+		public function MenuMissile(source:Point, target:Point, angle:Number)
 		{
 			_target = target;
 			_source = source;
@@ -34,7 +35,7 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 			x = _source.x;
 			y = _source.y;
 			
-			bulletSpeed = 125;
+			bulletSpeed = 25;
 			_totalDistance = Point.distance(_source, _target);
 			
 			_maxTurnSpeed = 2;
@@ -46,54 +47,48 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 		
 		override protected function update():void
 		{
-			var desiredTurn:Number = MathUtils.piWrap(Math.atan2(_target.y - y, _target.x - x) - angle);
-			var turn:Number = desiredTurn;
+			var distanceX:Number = _target.x - x;
+			var distanceY:Number = _target.y - y;
 			
-			var turnSpeed:Number = _maxTurnSpeed * time;
-			
-			if (desiredTurn > turnSpeed)
+			if (distanceX || distanceY)
 			{
-				turn = turnSpeed;
+				var moveSpeed:Number = bulletSpeed * time;
+				var turnSpeed:Number = _maxTurnSpeed * time + moveSpeed * time;
+				
+				angle = MathUtils.piWrap(angle);
+				
+				var targetAngle:Number = Math.atan2(distanceY, distanceX);
+				var angleDifference:Number = MathUtils.piWrap(targetAngle - angle);
+				
+				angle += angleDifference * turnSpeed;
+				
+				var moveX:Number = distanceX;
+				var moveY:Number = distanceY;
+				
+				if (distanceX > moveSpeed || distanceX < -moveSpeed || distanceY > moveSpeed || distanceY < -moveSpeed)
+				{
+					moveX = Math.cos(angle) * moveSpeed;
+					moveY = Math.sin(angle) * moveSpeed;
+				}
+				
+				x += moveX;
+				y += moveY;
+				
+				bulletSpeed *= 1.0333;
 			}
-			else if (desiredTurn < -turnSpeed)
-			{
-				turn = -turnSpeed;
-			}
-			
-			angle += turn;
-			
-			//x += Math.cos(angle) * bulletSpeed * time;
-			//y += Math.sin(angle) * bulletSpeed * time;
-			
-			_traveledDistance = Point.distance(_source, new Point(x, y));
-			
-			if (_traveledDistance >= _totalDistance)
+			else
 			{
 				die();
 			}
-			
-			bulletSpeed *= 1.015;
 			
 			super.update();
 		}
 		
 		override public function die(outBounds:Boolean = false):void
 		{
-			// TODO: CinematicsManager needs a new home
-			//var silently:Boolean = CinematicService.manager.hit();
-			var silently:Boolean = false;
-			
-			if (!outBounds && !silently)
+			if (!outBounds)
 			{
-				var settings:DecalSettings = new DecalSettings(Decals.SCORCH_B);
-				
-				settings.size = 0.5;
-				settings.sizeDeviation = 0.1;
-				
-				settings.angle = 0;
-				settings.angleDeviation = 1;
-				
-				ArenaService.currentArena.mark(new Point(x, y), settings);
+				CinematicService.executeButtonAction();
 			}
 			
 			super.die(outBounds);

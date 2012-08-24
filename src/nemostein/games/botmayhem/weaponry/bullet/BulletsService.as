@@ -1,7 +1,7 @@
 package nemostein.games.botmayhem.weaponry.bullet
 {
 	import flash.geom.Point;
-	import nemostein.games.botmayhem.weaponry.bullet.bullets.Missile;
+	import nemostein.games.botmayhem.weaponry.bullet.bullets.MenuMissile;
 	import nemostein.games.botmayhem.weaponry.bullet.bullets.SimpleBullet;
 	
 	public class BulletsService
@@ -17,9 +17,9 @@ package nemostein.games.botmayhem.weaponry.bullet
 			return simpleBullet;
 		}
 		
-		static public function getMissile(source:Point, target:Point, angle:Number):Missile 
+		static public function getMenuMissile(source:Point, target:Point, angle:Number):MenuMissile 
 		{
-			return new Missile(source, target, angle);
+			return new MenuMissile(source, target, angle);
 		}
 	}
 }

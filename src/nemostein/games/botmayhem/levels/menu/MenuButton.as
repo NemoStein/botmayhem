@@ -1,4 +1,4 @@
-package nemostein.games.botmayhem.menu
+package nemostein.games.botmayhem.levels.menu
 {
 	import flash.geom.Point;
 	import nemostein.games.botmayhem.arenas.Arena;
@@ -11,17 +11,16 @@ package nemostein.games.botmayhem.menu
 	{
 		protected var scorchRadius:Number;
 		
-		override protected function initialize():void
-		{
-			super.initialize();
-		}
-		
 		override public function hit(point:Point = null):void
 		{
 			// User has clicked
 			if (point)
 			{
-				CinematicService.shootMenuMissile(point);
+				var target:Point = new Point(x, y);
+				target.x += hitAreaRect.width / 2;
+				target.y += hitAreaRect.height / 2;
+				
+				CinematicService.shootMenuMissile(target, this);
 			}
 			
 			// Missile has touched the button
