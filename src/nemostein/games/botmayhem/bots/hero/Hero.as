@@ -20,14 +20,16 @@ package nemostein.games.botmayhem.bots.hero
 		private var _directionWeapon:DirectionWeapon;
 		private var _targetWeapon:TargetWeapon;
 		
-		public var target:Point;
 		public var lookAtCursor:Boolean;
 		public var moveWithKeys:Boolean;
 		public var followTarget:Boolean;
+		public var target:Point;
 		
 		override protected function initialize():void
 		{
 			target = new Point();
+			
+			super.initialize();
 			
 			frame.width = 35;
 			frame.height = 30;
@@ -37,8 +39,9 @@ package nemostein.games.botmayhem.bots.hero
 			sprite.fillRect(new Rectangle(2, 2, 26, 26), 0xffbbbfdf);
 			sprite.fillRect(new Rectangle(30, 8, 15, 14), 0xff3b3f4f);
 			sprite.fillRect(new Rectangle(22, 10, 11, 10), 0xff9b9fbf);
+			sprite.fillRect(new Rectangle(14, 14, 2, 2), 0xffef4b4f);
 			
-			super.initialize();
+			alignAnchor(AnchorAlign.CUSTOM, AnchorAlign.CUSTOM, new Point(15, 15));
 		}
 		
 		override protected function update():void
@@ -61,8 +64,6 @@ package nemostein.games.botmayhem.bots.hero
 				
 				angle += turn;
 			}
-			
-			var moveSpeed:Number = maxMoveSpeed * time;
 			
 			if (moveWithKeys)
 			{
@@ -98,23 +99,28 @@ package nemostein.games.botmayhem.bots.hero
 				var distanceX:Number = target.x - x;
 				var distanceY:Number = target.y - y;
 				
-				var moveX:Number = distanceX;
-				var moveY:Number = distanceY;
-				
-				var moveAngle:Number = Math.atan2(distanceY, distanceX);
-				
-				if (distanceX > moveSpeed || distanceX < -moveSpeed)
+				if (distanceX || distanceY)
 				{
-					moveX = Math.cos(moveAngle) * moveSpeed;
+					var moveSpeed:Number = maxMoveSpeed * time;
+					
+					var moveAngle:Number = Math.atan2(distanceY, distanceX);
+					
+					var moveX:Number = Math.cos(moveAngle) * moveSpeed;
+					var moveY:Number = Math.sin(moveAngle) * moveSpeed;
+					
+					if (distanceX > 0 && distanceX < moveX || distanceX < 0 && distanceX > moveX)
+					{
+						moveX = distanceX;
+					}
+					
+					if (distanceY > 0 && distanceY < moveY || distanceY < 0 && distanceY > moveY)
+					{
+						moveY = distanceY;
+					}
+					
+					x += moveX;
+					y += moveY;
 				}
-				
-				if (distanceY > moveSpeed || distanceY < -moveSpeed)
-				{
-					moveY = Math.sin(moveAngle) * moveSpeed;
-				}
-				
-				x += moveX;
-				y += moveY;
 			}
 			
 			super.update();

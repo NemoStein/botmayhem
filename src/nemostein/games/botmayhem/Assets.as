@@ -74,5 +74,14 @@ package nemostein.games.botmayhem
 		
 		[Embed(source="assets/OverlayScreen.png")]
 		public static const ImageOverlayScreen:Class;
+		
+		[Embed(source="assets/particles/roundDegradeGray.png")]
+		public static const ImageParticlesRoundDegradeGray:Class;
+		
+		[Embed(source="assets/particles/smoke1.png")]
+		public static const ImageParticlesSmoke1:Class;
+		
+		[Embed(source="assets/waves/testLevel.txt",mimeType="application/octet-stream")]
+		public static const TextWavesTestLevel:Class;
 	}
 }

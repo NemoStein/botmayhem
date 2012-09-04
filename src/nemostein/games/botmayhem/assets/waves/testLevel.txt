@@ -1,0 +1,13 @@
+#ID		Type				Enemy		Count
+
+# WaveA
+WaveA1	Time(1)				Suicider	10
+		Alive(WaveA1, 3)	Suicider	5
+#		HeroLife(0.1)		Suicider	3
+#		Delay(WaveA1, 5)	Suicider	3
+
+# WaveB
+WaveB1	Time(8)				Suicider	5
+WaveB2	Alive(WaveB1, 2)	Suicider	1
+WaveB3	Alive(WaveB2, 0)	Suicider	1
+		Alive(WaveB3, 0)	Suicider	1

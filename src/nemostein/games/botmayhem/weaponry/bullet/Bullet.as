@@ -24,16 +24,10 @@ package nemostein.games.botmayhem.weaponry.bullet
 		{
 			if (x < 0 || y < 0 || x > 900 || y > 600)
 			{
-				die(true);
+				die();
 			}
 			
 			super.update();
-		}
-		
-		public function die(outBounds:Boolean = false):void
-		{
-			active  = false;
-			visible = false;
 		}
 		
 		public function collide(angle:Number, against:Core):void

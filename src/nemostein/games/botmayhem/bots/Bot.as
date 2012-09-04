@@ -1,5 +1,8 @@
 package nemostein.games.botmayhem.bots
 {
+	import flash.display.BitmapData;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.bots.hero.Hero;
@@ -11,11 +14,6 @@ package nemostein.games.botmayhem.bots
 		
 		protected var maxMoveSpeed:Number = 50;
 		protected var maxTurnSpeed:Number = 2;
-		
-		override protected function initialize():void
-		{
-			alignAnchor(AnchorAlign.CENTER, AnchorAlign.CENTER);
-		}
 		
 		public function collide(angle:Number, against:Core):void
 		{
@@ -32,11 +30,6 @@ package nemostein.games.botmayhem.bots
 			
 			x += Math.cos(angle) * knockback;
 			y += Math.sin(angle) * knockback;
-		}
-		
-		public function die():void
-		{
-			
 		}
 	}
 }

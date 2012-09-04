@@ -40,7 +40,7 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 			
 			_maxTurnSpeed = 2;
 			
-			draw(new BitmapData(15, 5, true, 0xff5f5bdf), true);
+			draw(new BitmapData(15, 5, true, 0xff5f5bdf));
 			
 			alignAnchor(AnchorAlign.CENTER, AnchorAlign.CENTER);
 		}
@@ -84,14 +84,11 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 			super.update();
 		}
 		
-		override public function die(outBounds:Boolean = false):void
+		override public function die():void
 		{
-			if (!outBounds)
-			{
-				CinematicService.executeButtonAction();
-			}
+			CinematicService.executeButtonAction();
 			
-			super.die(outBounds);
+			super.die();
 		}
 	}
 }

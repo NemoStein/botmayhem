@@ -2,14 +2,13 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.system.System;
-	import flash.text.TextField;
+	import nemostein.framework.dragonfly.Game;
 	import nemostein.games.botmayhem.BotMayhem;
+	import nemostein.games.botmayhem.ClassRegistry;
+	import nemostein.games.botmayhem.waves.Wave;
 	import nemostein.intro.IntroSequence;
 	
-	[SWF(width=900,height=600,backgroundColor="#000000",frameRate="60")]
+	[SWF(width=900,height=600,backgroundColor="#000000",frameRate="50")]
 	[Frame(factoryClass="Preloader")]
 	
 	public class Main extends Sprite
@@ -17,7 +16,7 @@ package
 		private var _introSequence:IntroSequence;
 		
 		public function Main():void
-		{	
+		{
 			if (stage)
 			{
 				onAddedToStage();
@@ -46,6 +45,8 @@ package
 		private function onIntroSequenceComplete():void
 		{
 			removeChild(_introSequence);
+			
+			ClassRegistry.register();
 			
 			var game:BotMayhem = new BotMayhem();
 			game.start(stage);

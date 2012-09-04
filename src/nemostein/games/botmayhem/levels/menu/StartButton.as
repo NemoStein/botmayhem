@@ -27,6 +27,9 @@ package nemostein.games.botmayhem.levels.menu
 			
 			add(shadow);
 			add(button);
+			
+			// DELETE: jumping the menu
+			//action();
 		}
 		
 		override protected function action():void
