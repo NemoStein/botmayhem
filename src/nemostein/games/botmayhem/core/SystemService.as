@@ -4,6 +4,7 @@ package nemostein.games.botmayhem.core
 	import nemostein.framework.dragonfly.Game;
 	import nemostein.games.botmayhem.BotMayhem;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
+	import nemostein.games.botmayhem.hud.HUD;
 	import nemostein.games.botmayhem.levels.Level;
 	import nemostein.games.botmayhem.levels.menu.Menu;
 	import nemostein.games.botmayhem.levels.red.LevelRedA;
@@ -19,6 +20,8 @@ package nemostein.games.botmayhem.core
 		static private var _nextLevelSwipeFinished:Boolean;
 		static private var _currentLevelSwipeFinished:Boolean;
 		
+		static private var _hud:HUD;
+		
 		static public function registerGame(game:Game):void
 		{
 			if (!_game)
@@ -28,8 +31,12 @@ package nemostein.games.botmayhem.core
 				_levels = {};
 				_levelLayer = new Core();
 				
-				_game.add(_levelLayer);
-				_game.add(HeroService.hero);
+				_hud = new HUD();
+				_hud.die();
+				
+				game.add(_levelLayer);
+				game.add(HeroService.hero);
+				game.add(_hud);
 				
 				//_nextLevelSwipeFinished = true;
 				//_currentLevelSwipeFinished = true;
@@ -78,6 +85,15 @@ package nemostein.games.botmayhem.core
 			{
 				_currentLevel = _nextLevel;
 			}
+			
+			if (_nextLevel is Menu)
+			{
+				hideHud();
+			}
+			else
+			{
+				showHud();
+			}
 		}
 		
 		static public function swipeFinished(level:Level):void 
@@ -100,6 +116,16 @@ package nemostein.games.botmayhem.core
 				_currentLevel = _nextLevel;
 				_nextLevel = null;
 			}
+		}
+		
+		static public function showHud():void 
+		{
+			_hud.revive();
+		}
+		
+		static public function hideHud():void 
+		{
+			_hud.die();
 		}
 		
 		static private function getLevel(level:String):Level

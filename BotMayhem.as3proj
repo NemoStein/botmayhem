@@ -12,6 +12,7 @@
     <movie minorVersion="4" />
     <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
+    <movie preferredSDK="C:\Program Files (x86)\FlashDevelop\Tools\airsdkpreview" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -40,7 +41,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="" />
+    <option additional="-advanced-telemetry=true&#xA;-inline=true&#xA;-remove-dead-code=true" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>

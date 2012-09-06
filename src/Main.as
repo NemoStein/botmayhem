@@ -8,7 +8,7 @@ package
 	import nemostein.games.botmayhem.waves.Wave;
 	import nemostein.intro.IntroSequence;
 	
-	[SWF(width=900,height=600,backgroundColor="#000000",frameRate="50")]
+	[SWF(width=900,height=600,backgroundColor="#000000",frameRate="60")]
 	[Frame(factoryClass="Preloader")]
 	
 	public class Main extends Sprite

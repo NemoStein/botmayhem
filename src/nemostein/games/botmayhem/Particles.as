@@ -4,6 +4,8 @@ package nemostein.games.botmayhem
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.framework.dragonfly.plugins.particles.Emitter;
 	import nemostein.framework.dragonfly.plugins.particles.helpers.forces.AccelerationForce;
+	import nemostein.framework.dragonfly.plugins.particles.helpers.forces.FadeForce;
+	import nemostein.framework.dragonfly.plugins.particles.helpers.forces.GrowthForce;
 	import nemostein.framework.dragonfly.plugins.particles.helpers.forces.StirForce;
 	import nemostein.framework.dragonfly.plugins.particles.helpers.graphics.SpriteGraphic;
 	import nemostein.framework.dragonfly.plugins.particles.helpers.locations.TargetLocation;
@@ -32,7 +34,7 @@ package nemostein.games.botmayhem
 			
 			//emitter.emissionLocation = new FixedLocation(300, 500);
 			emitter.emissionLocation = new TargetLocation(HeroService.hero);
-			emitter.emissionCount = new NumericValue(1000);
+			emitter.emissionCount = new NumericValue(100);
 			emitter.emissionDuration = new NumericValue(1);
 			
 			emitter.particleGraphic = new SpriteGraphic(Bitmap(new Assets.ImageParticlesRoundDegradeGray()).bitmapData);
@@ -47,6 +49,8 @@ package nemostein.games.botmayhem
 			
 			emitter.addForce(new AccelerationForce(-0.5));
 			emitter.addForce(new StirForce(0.4));
+			emitter.addForce(new GrowthForce(0.125));
+			emitter.addForce(new FadeForce(-0.175));
 			
 			emitter.addTest(new AgeTest(ifAgeGreaterThanHalfSecond).greaterThan(0.5));
 			

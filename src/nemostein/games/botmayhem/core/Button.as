@@ -1,18 +1,12 @@
 package nemostein.games.botmayhem.core
 {
-	import flash.display.BitmapData;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import nemostein.framework.dragonfly.Core;
-	import nemostein.framework.dragonfly.Game;
-	import nemostein.games.botmayhem.arenas.Arena;
-	import nemostein.games.botmayhem.arenas.ArenaService;
-	import nemostein.games.botmayhem.decals.Decals;
-	import nemostein.games.botmayhem.decals.DecalSettings;
+	import nemostein.framework.dragonfly.Entity;
 	import nemostein.io.Keys;
 	import nemostein.utils.MathUtils;
 	
-	public class Button extends Core
+	public class Button extends Entity
 	{
 		private var _hitArea:Vector.<Point>;
 		private var _relativeHitArea:Vector.<Point>;

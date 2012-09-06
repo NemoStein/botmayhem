@@ -7,12 +7,10 @@ package nemostein.games.botmayhem.bots.enemies
 	
 	public class Suicider extends Enemy
 	{
-		private var moveAngle:Number;
-		
 		override protected function initialize():void
 		{
 			super.initialize();
-		
+			
 			frame.width = 35;
 			frame.height = 30;
 			
@@ -25,7 +23,8 @@ package nemostein.games.botmayhem.bots.enemies
 			
 			alignAnchor(AnchorAlign.CENTER, AnchorAlign.CENTER);
 			
-			moveAngle = 0;
+			maxMoveSpeed *= Math.random() * 0.25 + 0.875;
+			maxTurnSpeed *= Math.random() * 0.25 + 0.875;
 		}
 		
 		override protected function update():void
@@ -34,56 +33,17 @@ package nemostein.games.botmayhem.bots.enemies
 			var distanceY:Number = hero.y - y;
 			
 			if (distanceX || distanceY)
-			
-			//{
-				//var moveSpeed:Number = maxMoveSpeed * time;
-				//
-				//var desiredMoveAngle:Number = Math.atan2(distanceY, distanceX);
-				//var moveAngleDifference:Number = MathUtils.piWrap(desiredMoveAngle - moveAngle);
-				//
-				//_motionAngle += _angleDifference * _turnSpeed * _frameTime;
-				//
-				//var moveX:Number = Math.cos(moveAngle) * moveSpeed;
-				//var moveY:Number = Math.sin(moveAngle) * moveSpeed;
-				//
-				//if (distanceX > 0 && distanceX < moveX || distanceX < 0 && distanceX > moveX)
-				//{
-					//moveX = distanceX;
-				//}
-				//
-				//if (distanceY > 0 && distanceY < moveY || distanceY < 0 && distanceY > moveY)
-				//{
-					//moveY = distanceY;
-				//}
-				//
-				//x += moveX;
-				//y += moveY;
-				//
-				//angle = Math.atan2(moveY, moveX);
-			//}
-			
 			{
+				var turnSpeed:Number = maxTurnSpeed * time;
 				var moveSpeed:Number = maxMoveSpeed * time;
 				
-				var moveAngle:Number = Math.atan2(distanceY, distanceX);
+				var desiredAngle:Number = Math.atan2(distanceY, distanceX);
+				var angleDifference:Number = MathUtils.piWrap(desiredAngle - angle);
 				
-				var moveX:Number = Math.cos(moveAngle) * moveSpeed;
-				var moveY:Number = Math.sin(moveAngle) * moveSpeed;
+				angle += angleDifference * turnSpeed;
 				
-				if (distanceX > 0 && distanceX < moveX || distanceX < 0 && distanceX > moveX)
-				{
-					moveX = distanceX;
-				}
-				
-				if (distanceY > 0 && distanceY < moveY || distanceY < 0 && distanceY > moveY)
-				{
-					moveY = distanceY;
-				}
-				
-				x += moveX;
-				y += moveY;
-				
-				angle = Math.atan2(moveY, moveX);
+				x += Math.cos(angle) * moveSpeed;
+				y += Math.sin(angle) * moveSpeed;
 			}
 			
 			super.update();

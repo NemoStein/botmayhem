@@ -42,6 +42,8 @@ package nemostein.games.botmayhem.bots.hero
 			sprite.fillRect(new Rectangle(14, 14, 2, 2), 0xffef4b4f);
 			
 			alignAnchor(AnchorAlign.CUSTOM, AnchorAlign.CUSTOM, new Point(15, 15));
+			
+			maxMoveSpeed *= 2;
 		}
 		
 		override protected function update():void

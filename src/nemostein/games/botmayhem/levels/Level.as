@@ -1,10 +1,10 @@
 package nemostein.games.botmayhem.levels
 {
 	import flash.geom.Point;
-	import nemostein.framework.dragonfly.Core;
+	import nemostein.framework.dragonfly.Entity;
 	import nemostein.games.botmayhem.core.SystemService;
 	
-	public class Level extends Core
+	public class Level extends Entity
 	{
 		static public const MENU:String = "menu";
 		static public const RED_A:String = "redA";

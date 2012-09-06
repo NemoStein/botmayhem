@@ -1,9 +1,9 @@
 package nemostein.games.botmayhem.arenas 
 {
 	import flash.display.BitmapData;
-	import nemostein.framework.dragonfly.Core;
+	import nemostein.framework.dragonfly.Entity;
 	
-	public class ArenaLayer extends Core 
+	public class ArenaLayer extends Entity
 	{
 		
 		public function ArenaLayer(contents:BitmapData) 

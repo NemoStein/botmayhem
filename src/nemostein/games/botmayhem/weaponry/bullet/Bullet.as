@@ -1,10 +1,9 @@
 package nemostein.games.botmayhem.weaponry.bullet
 {
-	import flash.display.BitmapData;
 	import nemostein.framework.dragonfly.Core;
-	import nemostein.utils.MathUtils;
+	import nemostein.framework.dragonfly.Entity;
 	
-	public class Bullet extends Core
+	public class Bullet extends Entity
 	{	
 		protected var bulletSpeed:Number;
 		

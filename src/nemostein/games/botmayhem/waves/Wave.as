@@ -56,9 +56,6 @@ package nemostein.games.botmayhem.waves
 		{
 			--alive;
 			
-			// DELETE: wave sequence test
-			trace("Killing a bot from wave " + id + " (" + alive + " alive now)");
-			
 			for (var i:int = 0; i < _enemyDestructionCallbacks.length; i++)
 			{
 				var callback:Function = _enemyDestructionCallbacks[i];
@@ -91,8 +88,6 @@ package nemostein.games.botmayhem.waves
 					level.add(enemy);
 				}
 				
-				// DELETE: wave sequence test
-				trace("Dispatching " + count + " bots from wave " + id);
 				for (var j:int = 0; j < _enemyDispatchCallbacks.length; ++j)
 				{
 					var callback:Function = _enemyDispatchCallbacks[j];
@@ -108,13 +103,8 @@ package nemostein.games.botmayhem.waves
 		{
 			if (dispatched)
 			{
-				// DELETE: wave sequence test
-				destroyEnemy(null);
-				
 				if (alive == 0)
 				{
-					// DELETE: wave sequence test
-					trace("All bots are dead in wave " + id);
 					return true;
 				}
 			}

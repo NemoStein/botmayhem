@@ -1,6 +1,6 @@
 package nemostein.games.botmayhem
 {
-	
+
 	public class Assets
 	{
 		[Embed(source="assets/arenas/RedTiled.png")]
@@ -42,8 +42,41 @@ package nemostein.games.botmayhem
 		[Embed(source="assets/decals/scorchH.png")]
 		public static const ImageDecalsScorchH:Class;
 		
+		[Embed(source="assets/hud/bars.png")]
+		public static const ImageHudBars:Class;
+		
+		[Embed(source="assets/hud/blueBarEnd.png")]
+		public static const ImageHudBlueBarEnd:Class;
+		
+		[Embed(source="assets/hud/blueBarMiddle.png")]
+		public static const ImageHudBlueBarMiddle:Class;
+		
+		[Embed(source="assets/hud/blueBarStart.png")]
+		public static const ImageHudBlueBarStart:Class;
+		
+		[Embed(source="assets/hud/cash.png")]
+		public static const ImageHudCash:Class;
+		
 		[Embed(source="assets/hud/mock.png")]
 		public static const ImageHudMock:Class;
+		
+		[Embed(source="assets/hud/options.png")]
+		public static const ImageHudOptions:Class;
+		
+		[Embed(source="assets/hud/panel.png")]
+		public static const ImageHudPanel:Class;
+		
+		[Embed(source="assets/hud/redBarEnd.png")]
+		public static const ImageHudRedBarEnd:Class;
+		
+		[Embed(source="assets/hud/redBarMiddle.png")]
+		public static const ImageHudRedBarMiddle:Class;
+		
+		[Embed(source="assets/hud/redBarStart.png")]
+		public static const ImageHudRedBarStart:Class;
+		
+		[Embed(source="assets/hud/shop.png")]
+		public static const ImageHudShop:Class;
 		
 		[Embed(source="assets/intro/sponsor.swf")]
 		public static const SwfIntroSponsor:Class;

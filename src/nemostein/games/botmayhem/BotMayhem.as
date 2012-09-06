@@ -26,14 +26,14 @@ package nemostein.games.botmayhem
 		}
 		
 		// DELETE: Particle test
-		override protected function update():void
-		{
-			if (input.justPressed(Keys.LEFT_MOUSE))
-			{
-				var particleTest:Particles = new Particles(this);
-			}
-			
-			super.update();
-		}
+		//override protected function update():void
+		//{
+			//if (input.justPressed(Keys.LEFT_MOUSE))
+			//{
+				//var particleTest:Particles = new Particles(this);
+			//}
+			//
+			//super.update();
+		//}
 	}
 }

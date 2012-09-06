@@ -1,19 +1,16 @@
 package nemostein.games.botmayhem.bots
 {
-	import flash.display.BitmapData;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.framework.dragonfly.Core;
+	import nemostein.framework.dragonfly.Entity;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.weaponry.bullet.Bullet;
 	
-	public class Bot extends Core
+	public class Bot extends Entity
 	{
 		protected var hull:Number = 1;
 		
 		protected var maxMoveSpeed:Number = 50;
-		protected var maxTurnSpeed:Number = 2;
+		protected var maxTurnSpeed:Number = 1.5;
 		
 		public function collide(angle:Number, against:Core):void
 		{

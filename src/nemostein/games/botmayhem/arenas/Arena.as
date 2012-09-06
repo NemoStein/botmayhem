@@ -4,11 +4,11 @@ package nemostein.games.botmayhem.arenas
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import nemostein.color.Color;
-	import nemostein.framework.dragonfly.Core;
+	import nemostein.framework.dragonfly.Entity;
 	import nemostein.games.botmayhem.decals.Decals;
 	import nemostein.games.botmayhem.decals.DecalSettings;
 	
-	public class Arena extends Core
+	public class Arena extends Entity
 	{
 		public static const TOP_LAYER:int = -1;
 		public static const BOTTOM_LAYER:int = 0;
