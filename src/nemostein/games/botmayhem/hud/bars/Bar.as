@@ -3,17 +3,22 @@ package nemostein.games.botmayhem.hud.bars
 	import flash.display.Bitmap;
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.framework.dragonfly.Entity;
-	import nemostein.games.botmayhem.Assets;
+	import nemostein.games.botmayhem.assets.hud.AssetBlueBarEnd;
+	import nemostein.games.botmayhem.assets.hud.AssetBlueBarMiddle;
+	import nemostein.games.botmayhem.assets.hud.AssetBlueBarStart;
+	import nemostein.games.botmayhem.assets.hud.AssetRedBarEnd;
+	import nemostein.games.botmayhem.assets.hud.AssetRedBarMiddle;
+	import nemostein.games.botmayhem.assets.hud.AssetRedBarStart;
+	import nemostein.games.botmayhem.bots.hero.Hero;
+	import nemostein.games.botmayhem.bots.hero.HeroService;
 	
 	public class Bar extends Entity
 	{
 		static public const BLUE:String = "blue";
 		static public const RED:String = "red";
 		
-		public var maxValue:Number;
-		public var value:Number;
-		
 		private var _type:String;
+		private var _hero:Hero;
 		
 		private var _height:int;
 		private var _start:Core;
@@ -31,21 +36,20 @@ package nemostein.games.botmayhem.hud.bars
 		{
 			super.initialize();
 			
-			maxValue = 1;
-			value = 1;
+			_hero = HeroService.hero;
 			
 			if (_type == BLUE)
 			{
-				_start = new Core(Bitmap(new Assets.ImageHudBlueBarStart).bitmapData);
-				_middle = new Core(Bitmap(new Assets.ImageHudBlueBarMiddle).bitmapData);
-				_end = new Core(Bitmap(new Assets.ImageHudBlueBarEnd).bitmapData);
+				_start = new Core(Bitmap(new AssetBlueBarStart).bitmapData);
+				_middle = new Core(Bitmap(new AssetBlueBarMiddle).bitmapData);
+				_end = new Core(Bitmap(new AssetBlueBarEnd).bitmapData);
 				_height = 381;
 			}
 			else
 			{
-				_start = new Core(Bitmap(new Assets.ImageHudRedBarStart).bitmapData);
-				_middle = new Core(Bitmap(new Assets.ImageHudRedBarMiddle).bitmapData);
-				_end = new Core(Bitmap(new Assets.ImageHudRedBarEnd).bitmapData);
+				_start = new Core(Bitmap(new AssetRedBarStart).bitmapData);
+				_middle = new Core(Bitmap(new AssetRedBarMiddle).bitmapData);
+				_end = new Core(Bitmap(new AssetRedBarEnd).bitmapData);
 				_height = 390;
 			}
 			
@@ -59,9 +63,18 @@ package nemostein.games.botmayhem.hud.bars
 		
 		override protected function update():void 
 		{
-			if (value < 0)
+			var value:Number;
+			var maxValue:Number;
+			
+			if (_type == BLUE)
 			{
-				value = 0;
+				value = _hero.shield;
+				maxValue = _hero.maxShield;
+			}
+			else
+			{
+				value = _hero.hull;
+				maxValue = _hero.maxHull;
 			}
 			
 			var barScale:int = int(value / maxValue * _height);

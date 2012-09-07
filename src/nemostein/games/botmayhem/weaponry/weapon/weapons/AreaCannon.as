@@ -2,6 +2,7 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 {
 	import nemostein.games.botmayhem.weaponry.AreaWeaponed;
 	import nemostein.games.botmayhem.weaponry.weapon.AreaWeapon;
+	import nemostein.games.botmayhem.weaponry.weapon.BaseWeapon;
 	
 	public class AreaCannon extends BaseWeapon implements AreaWeapon
 	{
@@ -14,7 +15,7 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		
 		public function shoot():void 
 		{
-			
+			ready = false;
 		}
 		
 		public function get holder():AreaWeaponed 

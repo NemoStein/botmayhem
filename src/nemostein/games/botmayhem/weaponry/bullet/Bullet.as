@@ -4,13 +4,8 @@ package nemostein.games.botmayhem.weaponry.bullet
 	import nemostein.framework.dragonfly.Entity;
 	
 	public class Bullet extends Entity
-	{	
+	{
 		protected var bulletSpeed:Number;
-		
-		public function Bullet()
-		{
-			super();
-		}
 		
 		override protected function initialize():void
 		{
@@ -25,6 +20,11 @@ package nemostein.games.botmayhem.weaponry.bullet
 			{
 				die();
 			}
+			
+			var moveSpeed:Number = bulletSpeed * time;
+			
+			x += Math.cos(angle) * moveSpeed;
+			y += Math.sin(angle) * moveSpeed;
 			
 			super.update();
 		}

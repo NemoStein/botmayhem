@@ -3,10 +3,14 @@ package nemostein.games.botmayhem.bots.enemies
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
 	import nemostein.framework.dragonfly.AnchorAlign;
-	import nemostein.utils.MathUtils;
+	import nemostein.games.botmayhem.bots.enemies.behaviors.ExecuteOnHeroCollision;
+	import nemostein.games.botmayhem.bots.enemies.behaviors.StraightFollow;
+	import nemostein.games.botmayhem.weaponry.DamageType;
 	
 	public class Suicider extends Enemy
 	{
+		private var _explosionStrenght:Number;
+		
 		override protected function initialize():void
 		{
 			super.initialize();
@@ -23,30 +27,20 @@ package nemostein.games.botmayhem.bots.enemies
 			
 			alignAnchor(AnchorAlign.CENTER, AnchorAlign.CENTER);
 			
-			maxMoveSpeed *= Math.random() * 0.25 + 0.875;
-			maxTurnSpeed *= Math.random() * 0.25 + 0.875;
+			maxMoveSpeed *= Math.random() * 0.5 + 0.75;
+			maxTurnSpeed *= Math.random() * 0.5 + 0.75;
+			
+			addBehavior(new StraightFollow());
+			addBehavior(new ExecuteOnHeroCollision(onHeroCollision));
+			
+			_explosionStrenght = 10;
 		}
 		
-		override protected function update():void
+		public function onHeroCollision():void 
 		{
-			var distanceX:Number = hero.x - x;
-			var distanceY:Number = hero.y - y;
-			
-			if (distanceX || distanceY)
-			{
-				var turnSpeed:Number = maxTurnSpeed * time;
-				var moveSpeed:Number = maxMoveSpeed * time;
-				
-				var desiredAngle:Number = Math.atan2(distanceY, distanceX);
-				var angleDifference:Number = MathUtils.piWrap(desiredAngle - angle);
-				
-				angle += angleDifference * turnSpeed;
-				
-				x += Math.cos(angle) * moveSpeed;
-				y += Math.sin(angle) * moveSpeed;
-			}
-			
-			super.update();
+			hero.hit(_explosionStrenght * 0.8, DamageType.FIRE);
+			hero.hit(_explosionStrenght * 0.2, DamageType.IMPACT);
+			die();
 		}
 	}
 }

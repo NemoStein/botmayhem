@@ -14,17 +14,11 @@ package
 		
 		public function Preloader()
 		{
-			if (stage)
-			{
-				stage.scaleMode = StageScaleMode.NO_SCALE;
-				stage.align = StageAlign.TOP_LEFT;
-			}
-			
 			addEventListener(Event.ENTER_FRAME, checkFrame);
 			
 			loaderInfo.addEventListener(ProgressEvent.PROGRESS, progress);
 			loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
-		
+			
 			// TODO show loader
 		}
 		

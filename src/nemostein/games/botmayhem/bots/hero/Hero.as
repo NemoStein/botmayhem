@@ -6,6 +6,7 @@ package nemostein.games.botmayhem.bots.hero
 	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.games.botmayhem.bots.Bot;
 	import nemostein.games.botmayhem.weaponry.AreaWeaponed;
+	import nemostein.games.botmayhem.weaponry.DamageType;
 	import nemostein.games.botmayhem.weaponry.DirectionWeaponed;
 	import nemostein.games.botmayhem.weaponry.TargetWeaponed;
 	import nemostein.games.botmayhem.weaponry.weapon.AreaWeapon;
@@ -44,6 +45,14 @@ package nemostein.games.botmayhem.bots.hero
 			alignAnchor(AnchorAlign.CUSTOM, AnchorAlign.CUSTOM, new Point(15, 15));
 			
 			maxMoveSpeed *= 2;
+			
+			maxShield = shield = 100;
+			shieldRegeneration = 25;
+			shieldRegenerationDisableDelay = 1;
+			
+			maxHull = hull = 100;
+			hullRegeneration = 1;
+			hullRegenerationDisableDelay = 1;
 		}
 		
 		override protected function update():void
@@ -122,7 +131,37 @@ package nemostein.games.botmayhem.bots.hero
 					
 					x += moveX;
 					y += moveY;
-				}
+				}	
+			}
+			
+			if(_areaWeapon)
+			{
+				_areaWeapon.update();
+			}
+			
+			if(_directionWeapon)
+			{
+				_directionWeapon.update();
+			}
+			
+			if(_targetWeapon)
+			{
+				_targetWeapon.update();
+			}
+			
+			if (input.pressed(Keys.LEFT_MOUSE))
+			{
+				shootDirectionWeapon();
+			}
+			
+			if (input.pressed(Keys.RIGHT_MOUSE))
+			{
+				shootTargetWeapon(input.mouse);
+			}
+			
+			if (input.pressed(Keys.SPACE))
+			{
+				shootAreaWeapon();
 			}
 			
 			super.update();
@@ -136,7 +175,7 @@ package nemostein.games.botmayhem.bots.hero
 		
 		public function shootAreaWeapon():void
 		{
-			if (_areaWeapon)
+			if (_areaWeapon && _areaWeapon.ready)
 			{
 				_areaWeapon.shoot();
 			}
@@ -144,15 +183,15 @@ package nemostein.games.botmayhem.bots.hero
 		
 		public function shootDirectionWeapon():void
 		{
-			if (_directionWeapon)
+			if (_directionWeapon && _directionWeapon.ready)
 			{
-				_directionWeapon.shoot(angle);
+				_directionWeapon.shoot();
 			}
 		}
 		
 		public function shootTargetWeapon(target:Point):void
 		{
-			if (_targetWeapon)
+			if (_targetWeapon && _targetWeapon.ready)
 			{
 				_targetWeapon.shoot(target);
 			}

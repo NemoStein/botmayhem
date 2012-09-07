@@ -1,7 +1,7 @@
 package nemostein.games.botmayhem.arenas
 {
 	import flash.display.Bitmap;
-	import nemostein.games.botmayhem.Assets;
+	import nemostein.games.botmayhem.assets.arenas.AssetRedTiled;
 	
 	public class RedTiledArena extends Arena
 	{
@@ -9,7 +9,7 @@ package nemostein.games.botmayhem.arenas
 		{
 			super.initialize();
 			
-			addLayer(new ArenaLayer(Bitmap(new Assets.ImageArenasRedTiled()).bitmapData));
+			addLayer(new ArenaLayer(Bitmap(new AssetRedTiled()).bitmapData));
 		}
 	}
 }

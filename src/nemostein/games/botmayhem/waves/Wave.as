@@ -3,6 +3,7 @@ package nemostein.games.botmayhem.waves
 	import flash.geom.Point;
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
 	import nemostein.games.botmayhem.levels.Level;
+	import nemostein.games.botmayhem.waves.locations.SpawnLocation;
 	
 	public class Wave
 	{
@@ -13,18 +14,20 @@ package nemostein.games.botmayhem.waves
 		protected var params:Array;
 		protected var EnemyClass:Class;
 		protected var count:int;
+		protected var LocationClass:Class;
 		
 		protected var level:Level;
 		protected var dispatched:Boolean;
 		
 		public var alive:int;
 		
-		public final function construct(id:String, params:Array, EnemyClass:Class, count:int):void
+		public final function construct(id:String, params:Array, EnemyClass:Class, count:int, LocationClass:Class):void
 		{
 			this.id = id;
 			this.params = params;
 			this.EnemyClass = EnemyClass;
 			this.count = count;
+			this.LocationClass = LocationClass;
 			
 			_enemyDestructionCallbacks = new Vector.<Function>();
 			_enemyDispatchCallbacks = new Vector.<Function>();
@@ -70,20 +73,16 @@ package nemostein.games.botmayhem.waves
 			{
 				alive = count;
 				
+				var spawnLocation:SpawnLocation = new LocationClass();
+				
 				for (var i:int = 0; i < count; ++i)
 				{
 					var enemy:Enemy = new EnemyClass();
 					
-					if (Math.random() < 0.666)
-					{
-						enemy.x = Math.random() * 900;
-						enemy.y = Math.random() < 0.5 ? -25 - Math.random() * 75 : 625 + Math.random() * 75;
-					}
-					else
-					{
-						enemy.x = Math.random() < 0.5 ? -25 - Math.random() * 75 : 925 + Math.random() * 75;
-						enemy.y = Math.random() * 600;
-					}
+					var point:Point = spawnLocation.getLocation();
+					
+					enemy.x = point.x;
+					enemy.y = point.y;
 					
 					level.add(enemy);
 				}

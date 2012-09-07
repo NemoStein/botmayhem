@@ -69,7 +69,7 @@ package nemostein.games.botmayhem.waves
 				
 				if (line.length > 0 && line.substr(0, 1) != "#")
 				{
-					var regex:RegExp = /^ ((\w+) \s+)? \s* (\w+) \( ( [^)]* ) \) \s+ (\w+) \s+ (\d+) .*$/gix;
+					var regex:RegExp = /^ ((\w+) \s+)? \s* (\w+) \( ( [^)]* ) \) \s+ (\w+) \s+ (\d+) \s+ (\w+) .*$/gix;
 					var data:Array = regex.exec(line);
 					
 					if (data)
@@ -81,6 +81,7 @@ package nemostein.games.botmayhem.waves
 							var params:Array = data[4].split(/,\s*/);
 							var EnemyClass:Class = Class(getDefinitionByName("nemostein.games.botmayhem.bots.enemies." + data[5]));
 							var count:int = int(data[6]);
+							var LocationClass:Class = Class(getDefinitionByName("nemostein.games.botmayhem.waves.locations." + data[7]));
 						}
 						catch (error:Error)
 						{
@@ -104,7 +105,7 @@ package nemostein.games.botmayhem.waves
 						}
 						
 						var wave:Wave = new WaveClass();
-						wave.construct(id, params, EnemyClass, count);
+						wave.construct(id, params, EnemyClass, count, LocationClass);
 						waves.addWave(id, wave);
 					}
 					else

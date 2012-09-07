@@ -13,6 +13,7 @@ package nemostein.games.botmayhem
 	import nemostein.framework.dragonfly.plugins.particles.helpers.numerics.NumericVariance;
 	import nemostein.framework.dragonfly.plugins.particles.helpers.tests.AgeTest;
 	import nemostein.framework.dragonfly.plugins.particles.Particle;
+	import nemostein.games.botmayhem.assets.particles.AssetRoundDegradeGray;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
 	
 	public class Particles
@@ -37,7 +38,7 @@ package nemostein.games.botmayhem
 			emitter.emissionCount = new NumericValue(100);
 			emitter.emissionDuration = new NumericValue(1);
 			
-			emitter.particleGraphic = new SpriteGraphic(Bitmap(new Assets.ImageParticlesRoundDegradeGray()).bitmapData);
+			emitter.particleGraphic = new SpriteGraphic(Bitmap(new AssetRoundDegradeGray()).bitmapData);
 			//emitter.particleGraphic = new SquareGraphic(5, 0xff000000);
 			
 			emitter.particleLife = new NumericVariance(5, 1);

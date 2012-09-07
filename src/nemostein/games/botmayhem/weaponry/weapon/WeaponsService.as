@@ -1,5 +1,8 @@
 package nemostein.games.botmayhem.weaponry.weapon
 {
+	import nemostein.framework.dragonfly.plugins.particles.helpers.tests.DirectionTest;
+	import nemostein.games.botmayhem.weaponry.weapon.weapons.BulletCannon;
+	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.weaponry.AreaWeaponed;
 	import nemostein.games.botmayhem.weaponry.DirectionWeaponed;
 	import nemostein.games.botmayhem.weaponry.TargetWeaponed;
@@ -10,25 +13,25 @@ package nemostein.games.botmayhem.weaponry.weapon
 	
 	public class WeaponsService
 	{
-		static public function putAreaWeapon(target:AreaWeaponed):void
+		static public function putAreaWeapon(target:AreaWeaponed, weaponClass:Class):void
 		{
-			var areaCannon:AreaCannon = new AreaCannon();
-			target.areaWeapon = areaCannon;
-			areaCannon.holder = target;
+			var weapon:AreaWeapon = new weaponClass();
+			weapon.holder = target;
+			target.areaWeapon = weapon;
 		}
 		
-		static public function putDirectionWeapon(target:DirectionWeaponed):void
+		static public function putDirectionWeapon(target:DirectionWeaponed, weaponClass:Class):void
 		{
-			var directionCannon:DirectionCannon = new DirectionCannon();
-			target.directionWeapon = directionCannon;
-			directionCannon.holder = target;
+			var weapon:DirectionWeapon = new weaponClass();
+			weapon.holder = target;
+			target.directionWeapon = weapon;
 		}
 		
-		static public function putTargetWeapon(target:TargetWeaponed):void
+		static public function putTargetWeapon(target:TargetWeaponed, weaponClass:Class):void
 		{
-			var targetCannon:TargetCannon = new TargetCannon();
-			target.targetWeapon = targetCannon;
-			targetCannon.holder = target;
+			var weapon:TargetWeapon = new weaponClass();
+			weapon.holder = target;
+			target.targetWeapon = weapon;
 		}
 		
 		static public function putMenuCinematicCannon(target:TargetWeaponed):void

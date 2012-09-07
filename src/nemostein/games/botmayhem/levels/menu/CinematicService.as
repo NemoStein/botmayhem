@@ -25,7 +25,6 @@ package nemostein.games.botmayhem.levels.menu
 			if(!_ready)
 			{
 				_menuButton.hit();
-				_ready = true;
 			}
 		}
 		

@@ -1,16 +1,14 @@
 package nemostein.games.botmayhem.levels.red
 {
-	import flash.geom.Point;
-	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.arenas.ArenaService;
 	import nemostein.games.botmayhem.arenas.RedTiledArena;
-	import nemostein.games.botmayhem.Assets;
-	import nemostein.games.botmayhem.bots.Bot;
+	import nemostein.games.botmayhem.assets.waves.AssetTestLevel;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
 	import nemostein.games.botmayhem.levels.Level;
-	import nemostein.games.botmayhem.waves.Wave;
 	import nemostein.games.botmayhem.waves.Waves;
+	import nemostein.games.botmayhem.weaponry.weapon.weapons.BulletCannon;
+	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;
 	
 	public class LevelRedA extends Level
 	{
@@ -32,8 +30,14 @@ package nemostein.games.botmayhem.levels.red
 			
 			add(_arena);
 			
-			_waves = Waves.parse(new Assets.TextWavesTestLevel());
+			_waves = Waves.parse(new AssetTestLevel().toString());
 			_waves.startWaves(this);
+			
+			WeaponsService.removeAreaWeapon(_hero);
+			WeaponsService.removeDirectionWeapon(_hero);
+			WeaponsService.removeTargetWeaponed(_hero);
+			
+			WeaponsService.putDirectionWeapon(_hero, BulletCannon);
 		}
 		
 		override protected function update():void 

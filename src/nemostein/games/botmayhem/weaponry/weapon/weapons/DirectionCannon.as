@@ -1,6 +1,7 @@
 package nemostein.games.botmayhem.weaponry.weapon.weapons
 {
 	import nemostein.games.botmayhem.weaponry.DirectionWeaponed;
+	import nemostein.games.botmayhem.weaponry.weapon.BaseWeapon;
 	import nemostein.games.botmayhem.weaponry.weapon.DirectionWeapon;
 	
 	public class DirectionCannon extends BaseWeapon implements DirectionWeapon
@@ -9,12 +10,12 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		
 		public function DirectionCannon()
 		{
-			cooldown = 150;
+			cooldown = 0.5;
 		}
 		
-		public function shoot(angle:Number):void 
+		public function shoot():void 
 		{
-			
+			ready = false;
 		}
 		
 		public function get holder():DirectionWeaponed 

@@ -50,29 +50,32 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 			var distanceX:Number = _target.x - x;
 			var distanceY:Number = _target.y - y;
 			
-			if (distanceX || distanceY)
+			var distanceSquare:Number = distanceX * distanceX + distanceY * distanceY;
+			
+			if (distanceSquare)
 			{
 				var moveSpeed:Number = bulletSpeed * time;
 				var turnSpeed:Number = _maxTurnSpeed * time + moveSpeed * time;
 				
-				angle = MathUtils.piWrap(angle);
+				//angle = MathUtils.piWrap(angle);
 				
 				var targetAngle:Number = Math.atan2(distanceY, distanceX);
 				var angleDifference:Number = MathUtils.piWrap(targetAngle - angle);
 				
 				angle += angleDifference * turnSpeed;
 				
-				var moveX:Number = distanceX;
-				var moveY:Number = distanceY;
-				
-				if (distanceX > moveSpeed || distanceX < -moveSpeed || distanceY > moveSpeed || distanceY < -moveSpeed)
+				if(moveSpeed * moveSpeed < distanceSquare)
 				{
-					moveX = Math.cos(angle) * moveSpeed;
-					moveY = Math.sin(angle) * moveSpeed;
+					x += Math.cos(angle) * moveSpeed;
+					y += Math.sin(angle) * moveSpeed;
 				}
-				
-				x += moveX;
-				y += moveY;
+				else
+				{
+					x = _target.x;
+					y = _target.y;
+					
+					die();
+				}
 				
 				bulletSpeed *= 1.0333;
 			}

@@ -2,11 +2,16 @@ package nemostein.games.botmayhem.decals
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
-	import flash.display.Sprite;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import nemostein.games.botmayhem.Assets;
-	import nemostein.utils.MathUtils;
+	import nemostein.games.botmayhem.assets.decals.AssetScorchA;
+	import nemostein.games.botmayhem.assets.decals.AssetScorchB;
+	import nemostein.games.botmayhem.assets.decals.AssetScorchC;
+	import nemostein.games.botmayhem.assets.decals.AssetScorchD;
+	import nemostein.games.botmayhem.assets.decals.AssetScorchE;
+	import nemostein.games.botmayhem.assets.decals.AssetScorchF;
+	import nemostein.games.botmayhem.assets.decals.AssetScorchG;
+	import nemostein.games.botmayhem.assets.decals.AssetScorchH;
 	
 	public class Decals
 	{
@@ -78,42 +83,42 @@ package nemostein.games.botmayhem.decals
 			{
 				case SCORCH_A:
 				{
-					return _data[type] = Bitmap(new Assets.ImageDecalsScorchA).bitmapData;
+					return _data[type] = Bitmap(new AssetScorchA).bitmapData;
 				}
 				
 				case SCORCH_B:
 				{
-					return _data[type] = Bitmap(new Assets.ImageDecalsScorchB).bitmapData;
+					return _data[type] = Bitmap(new AssetScorchB).bitmapData;
 				}
 				
 				case SCORCH_C:
 				{
-					return _data[type] = Bitmap(new Assets.ImageDecalsScorchC).bitmapData;
+					return _data[type] = Bitmap(new AssetScorchC).bitmapData;
 				}
 				
 				case SCORCH_D:
 				{
-					return _data[type] = Bitmap(new Assets.ImageDecalsScorchD).bitmapData;
+					return _data[type] = Bitmap(new AssetScorchD).bitmapData;
 				}
 				
 				case SCORCH_E:
 				{
-					return _data[type] = Bitmap(new Assets.ImageDecalsScorchE).bitmapData;
+					return _data[type] = Bitmap(new AssetScorchE).bitmapData;
 				}
 				
 				case SCORCH_F:
 				{
-					return _data[type] = Bitmap(new Assets.ImageDecalsScorchF).bitmapData;
+					return _data[type] = Bitmap(new AssetScorchF).bitmapData;
 				}
 				
 				case SCORCH_G:
 				{
-					return _data[type] = Bitmap(new Assets.ImageDecalsScorchG).bitmapData;
+					return _data[type] = Bitmap(new AssetScorchG).bitmapData;
 				}
 				
 				case SCORCH_H:
 				{
-					return _data[type] = Bitmap(new Assets.ImageDecalsScorchH).bitmapData;
+					return _data[type] = Bitmap(new AssetScorchH).bitmapData;
 				}
 				
 				default:

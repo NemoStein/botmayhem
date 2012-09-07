@@ -1,11 +1,10 @@
 package
 {
 	import flash.display.Sprite;
+	import flash.display.StageScaleMode;
 	import flash.events.Event;
-	import nemostein.framework.dragonfly.Game;
 	import nemostein.games.botmayhem.BotMayhem;
 	import nemostein.games.botmayhem.ClassRegistry;
-	import nemostein.games.botmayhem.waves.Wave;
 	import nemostein.intro.IntroSequence;
 	
 	[SWF(width=900,height=600,backgroundColor="#000000",frameRate="60")]
@@ -29,6 +28,8 @@ package
 		
 		private function onAddedToStage(event:Event = null):void
 		{
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
 			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
 			_introSequence = new IntroSequence(onIntroSequenceComplete);

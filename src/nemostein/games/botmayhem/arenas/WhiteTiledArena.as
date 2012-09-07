@@ -1,7 +1,8 @@
 package nemostein.games.botmayhem.arenas
 {
 	import flash.display.Bitmap;
-	import nemostein.games.botmayhem.Assets;
+	import nemostein.games.botmayhem.assets.arenas.AssetWhiteTiled;
+	import nemostein.games.botmayhem.assets.arenas.AssetWhiteTiledDirt;
 	
 	public class WhiteTiledArena extends Arena
 	{
@@ -9,8 +10,8 @@ package nemostein.games.botmayhem.arenas
 		{
 			super.initialize();
 			
-			addLayer(new ArenaLayer(Bitmap(new Assets.ImageArenasWhiteTiled()).bitmapData));
-			addLayer(new ArenaLayer(Bitmap(new Assets.ImageArenasWhiteTiledDirt()).bitmapData));
+			addLayer(new ArenaLayer(Bitmap(new AssetWhiteTiled()).bitmapData));
+			addLayer(new ArenaLayer(Bitmap(new AssetWhiteTiledDirt()).bitmapData));
 		}
 	}
 }
