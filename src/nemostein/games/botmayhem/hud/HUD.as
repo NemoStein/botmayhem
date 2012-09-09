@@ -56,5 +56,11 @@ package nemostein.games.botmayhem.hud
 			
 			setCurrentDescendentsAsRelative();
 		}
+		
+		override protected function update():void 
+		{
+			
+			super.update();
+		}
 	}
 }

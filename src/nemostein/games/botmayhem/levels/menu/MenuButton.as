@@ -1,9 +1,9 @@
 package nemostein.games.botmayhem.levels.menu
 {
 	import flash.geom.Point;
+	import nemostein.framework.dragonfly.Button;
 	import nemostein.games.botmayhem.arenas.Arena;
 	import nemostein.games.botmayhem.arenas.ArenaService;
-	import nemostein.games.botmayhem.core.Button;
 	import nemostein.games.botmayhem.decals.Decals;
 	import nemostein.games.botmayhem.decals.DecalSettings;
 	
@@ -11,7 +11,7 @@ package nemostein.games.botmayhem.levels.menu
 	{
 		protected var scorchRadius:Number;
 		
-		override public function onPress(point:Point = null):void
+		override public function pressed(point:Point = null):void
 		{
 			// User has clicked
 			if (point)
@@ -65,7 +65,7 @@ package nemostein.games.botmayhem.levels.menu
 				
 				action();
 				
-				super.onPress(point);
+				super.pressed(point);
 			}
 		}
 		
