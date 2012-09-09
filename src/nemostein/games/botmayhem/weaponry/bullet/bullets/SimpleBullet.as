@@ -7,6 +7,8 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 	
 	public class SimpleBullet extends Bullet
 	{
+		public var onDeath:Function;
+		
 		override protected function initialize():void
 		{
 			super.initialize();
@@ -15,5 +17,17 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 			
 			alignAnchor(AnchorAlign.CENTER, AnchorAlign.RIGHT);
 		}
+		
+		override public function die():void 
+		{
+			onDeath(this);
+			parent.remove(this);
+			super.die();
+		}
+		
+		//override public function revive():void 
+		//{
+			//super.revive();
+		//}
 	}
 }

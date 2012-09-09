@@ -11,6 +11,7 @@ package nemostein.games.botmayhem.core
 		private var _hitArea:Vector.<Point>;
 		private var _relativeHitArea:Vector.<Point>;
 		
+		public var pressed:Boolean;
 		public var hovered:Boolean;
 		
 		/**
@@ -26,7 +27,6 @@ package nemostein.games.botmayhem.core
 		{
 			super.initialize();
 			
-			_hitArea = new Vector.<Point>();
 			_relativeHitArea = new Vector.<Point>();
 			
 			setCurrentDescendentsAsRelative();
@@ -34,6 +34,8 @@ package nemostein.games.botmayhem.core
 		
 		protected function drawHitArea(... vertices:Array):void
 		{
+			_hitArea = new Vector.<Point>();
+			
 			var count:int = vertices.length;
 			
 			var areaTop:Number = Infinity;
@@ -72,54 +74,91 @@ package nemostein.games.botmayhem.core
 			hitAreaRect = new Rectangle(areaLeft, areaTop, areaRight - areaLeft, areaBottom - areaTop);
 		}
 		
-		public function hit(point:Point = null):void
+		public function onPress(point:Point = null):void
 		{
-		
+			pressed = true;
 		}
 		
-		public function enter(point:Point = null):void
+		public function onRelease(point:Point = null):void
+		{
+			pressed = false;
+		}
+		
+		public function onEnter(point:Point = null):void
 		{
 			hovered = true;
 		}
 		
-		public function leave(point:Point = null):void
+		public function onLeave(point:Point = null):void
 		{
 			hovered = false;
+			pressed = false;
 		}
 		
 		override protected function update():void
 		{
-			var count:int = _hitArea.length;
-			for (var i:int = 0; i < count; i++)
-			{
-				var areaVertex:Point = _hitArea[i];
-				var relativeVertex:Point = _relativeHitArea[i];
-				
-				if (relativeVertex)
-				{
-					relativeVertex.x = areaVertex.x + x;
-					relativeVertex.y = areaVertex.y + y;
-				}
-				else
-				{
-					relativeVertex.x = areaVertex.x;
-					relativeVertex.y = areaVertex.y;
-				}
-			}
+			var mousePosition:Point = input.mouse;
 			
-			if (!hovered && MathUtils.isInsidePolygon(_relativeHitArea, input.mouse))
+			if (_hitArea)
 			{
-				enter(input.mouse.clone());
-			}
-			else if (hovered)
-			{
-				if (!MathUtils.isInsidePolygon(_relativeHitArea, input.mouse))
+				var count:int = _hitArea.length;
+				for (var i:int = 0; i < count; i++)
 				{
-					leave(input.mouse.clone());
+					var areaVertex:Point = _hitArea[i];
+					var relativeVertex:Point = _relativeHitArea[i];
+					
+					if (relativeVertex)
+					{
+						relativeVertex.x = areaVertex.x + x;
+						relativeVertex.y = areaVertex.y + y;
+					}
+					else
+					{
+						relativeVertex.x = areaVertex.x;
+						relativeVertex.y = areaVertex.y;
+					}
 				}
-				else if (input.justPressed(Keys.LEFT_MOUSE))
+				
+				if (!hovered && MathUtils.isInsidePolygon(_relativeHitArea, mousePosition))
 				{
-					hit(input.mouse.clone());
+					onEnter(mousePosition);
+				}
+				else if (hovered)
+				{
+					if (!MathUtils.isInsidePolygon(_relativeHitArea, mousePosition))
+					{
+						onLeave(mousePosition);
+					}
+					else if (!pressed && input.justPressed(Keys.LEFT_MOUSE))
+					{
+						onPress(mousePosition);
+					}
+					else if (pressed && input.justReleased(Keys.LEFT_MOUSE))
+					{
+						onRelease(mousePosition);
+					}
+				}
+			}
+			else
+			{
+				if (!hovered && isInside(mousePosition))
+				{
+					onEnter(mousePosition);
+				}
+				else if (hovered)
+				{
+					if (!isInside(mousePosition))
+					{
+						onLeave(mousePosition);
+					}
+					else if (!pressed && input.justPressed(Keys.LEFT_MOUSE))
+					{
+						onPress(mousePosition);
+					}
+					else if (pressed && input.justReleased(Keys.LEFT_MOUSE))
+					{
+						onRelease(mousePosition);
+					}
 				}
 			}
 			

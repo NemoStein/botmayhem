@@ -11,7 +11,7 @@ package nemostein.games.botmayhem.levels.menu
 	{
 		protected var scorchRadius:Number;
 		
-		override public function hit(point:Point = null):void
+		override public function onPress(point:Point = null):void
 		{
 			// User has clicked
 			if (point)
@@ -65,7 +65,7 @@ package nemostein.games.botmayhem.levels.menu
 				
 				action();
 				
-				super.hit(point);
+				super.onPress(point);
 			}
 		}
 		

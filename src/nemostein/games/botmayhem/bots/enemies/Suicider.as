@@ -1,15 +1,19 @@
 package nemostein.games.botmayhem.bots.enemies
 {
 	import flash.display.BitmapData;
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.games.botmayhem.bots.enemies.behaviors.ExecuteOnHeroCollision;
+	import nemostein.games.botmayhem.bots.enemies.behaviors.RandomRoam;
 	import nemostein.games.botmayhem.bots.enemies.behaviors.StraightFollow;
 	import nemostein.games.botmayhem.weaponry.DamageType;
+	import nemostein.io.Keys;
 	
 	public class Suicider extends Enemy
 	{
 		private var _explosionStrenght:Number;
+		private var _atackRange:Number;
 		
 		override protected function initialize():void
 		{
@@ -30,17 +34,42 @@ package nemostein.games.botmayhem.bots.enemies
 			maxMoveSpeed *= Math.random() * 0.5 + 0.75;
 			maxTurnSpeed *= Math.random() * 0.5 + 0.75;
 			
-			addBehavior(new StraightFollow());
-			addBehavior(new ExecuteOnHeroCollision(onHeroCollision));
+			_atackRange = 200;
+			
+			addBehavior(ROAMING, new RandomRoam());
+			
+			addBehavior(ATACKING, new StraightFollow());
+			addBehavior(ATACKING, new ExecuteOnHeroCollision(die));
+			
+			state = ROAMING;
 			
 			_explosionStrenght = 10;
 		}
 		
-		public function onHeroCollision():void 
+		override protected function update():void 
+		{
+			var distanceX:Number = hero.x - x;
+			var distanceY:Number = hero.y - y;
+			var distanceSquare:Number = distanceX * distanceX + distanceY * distanceY;
+			
+			if (state != ATACKING && distanceSquare < _atackRange * _atackRange)
+			{
+				state = ATACKING;
+			}
+			else if (state == ATACKING)
+			{
+				state = ROAMING;
+			}
+			
+			super.update();
+		}
+		
+		override public function die():void 
 		{
 			hero.hit(_explosionStrenght * 0.8, DamageType.FIRE);
 			hero.hit(_explosionStrenght * 0.2, DamageType.IMPACT);
-			die();
+			
+			super.die();
 		}
 	}
 }

@@ -7,9 +7,9 @@ package nemostein.games.botmayhem.assets.hud
 {
 	import flash.display.Bitmap;
 	
-	[Embed(source="options.png")]
+	[Embed(source="buttonShopPressed.png")]
 	
-	public class AssetOptions extends Bitmap
+	public class AssetButtonShopPressed extends Bitmap
 	{
 	
 	}

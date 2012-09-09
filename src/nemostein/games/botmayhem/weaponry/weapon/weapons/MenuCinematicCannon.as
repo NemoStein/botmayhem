@@ -1,44 +1,24 @@
 package nemostein.games.botmayhem.weaponry.weapon.weapons
 {
 	import flash.geom.Point;
+	import nemostein.framework.dragonfly.Core;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.levels.menu.CinematicService;
 	import nemostein.games.botmayhem.weaponry.bullet.bullets.MenuMissile;
 	import nemostein.games.botmayhem.weaponry.TargetWeaponed;
-	import nemostein.games.botmayhem.weaponry.weapon.BaseWeapon;
 	import nemostein.games.botmayhem.weaponry.weapon.TargetWeapon;
 	
-	public class MenuCinematicCannon extends BaseWeapon implements TargetWeapon
+	public class MenuCinematicCannon extends TargetWeapon
 	{
-		private var _hero:Hero;
-		
-		public function shoot(location:Point):void 
+		override public function shoot():void 
 		{
 			if(CinematicService.nextShotReady())
 			{
-				var missile:MenuMissile = getMenuMissile(new Point(_hero.x, _hero.y), location, _hero.angle);
+				var core:Core = Core(holder);
 				
-				_hero.add(missile);
-			}
-		}
-		
-		public function get holder():TargetWeaponed 
-		{
-			return _hero;
-		}
-		
-		public function set holder(value:TargetWeaponed):void 
-		{
-			if (value)
-			{
-				if (value is Hero)
-				{
-					_hero = Hero(value);
-				}
-				else
-				{
-					throw new ArgumentError("MenuCinematicCannon only accepts a Hero as a holder");
-				}
+				var missile:MenuMissile = getMenuMissile(new Point(core.x, core.y), target, core.angle);
+				
+				core.add(missile);
 			}
 		}
 	}

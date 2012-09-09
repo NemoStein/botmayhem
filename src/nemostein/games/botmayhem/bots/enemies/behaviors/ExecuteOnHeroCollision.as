@@ -3,7 +3,6 @@ package nemostein.games.botmayhem.bots.enemies.behaviors
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
-	
 	public class ExecuteOnHeroCollision implements Behavior
 	{
 		private var _callback:Function;

@@ -4,6 +4,7 @@ package nemostein.games.botmayhem.waves
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
 	import nemostein.games.botmayhem.levels.Level;
 	import nemostein.games.botmayhem.waves.locations.SpawnLocation;
+	import nemostein.utils.MathUtils;
 	
 	public class Wave
 	{
@@ -81,8 +82,10 @@ package nemostein.games.botmayhem.waves
 					
 					var point:Point = spawnLocation.getLocation();
 					
+					enemy.wave = this;
 					enemy.x = point.x;
 					enemy.y = point.y;
+					enemy.angle = Math.random() * MathUtils.PI2;
 					
 					level.add(enemy);
 				}

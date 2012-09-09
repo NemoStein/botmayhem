@@ -1,15 +1,9 @@
 package nemostein.games.botmayhem.weaponry.weapon
 {
-	import nemostein.framework.dragonfly.plugins.particles.helpers.tests.DirectionTest;
-	import nemostein.games.botmayhem.weaponry.weapon.weapons.BulletCannon;
-	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.weaponry.AreaWeaponed;
 	import nemostein.games.botmayhem.weaponry.DirectionWeaponed;
 	import nemostein.games.botmayhem.weaponry.TargetWeaponed;
-	import nemostein.games.botmayhem.weaponry.weapon.weapons.AreaCannon;
-	import nemostein.games.botmayhem.weaponry.weapon.weapons.DirectionCannon;
 	import nemostein.games.botmayhem.weaponry.weapon.weapons.MenuCinematicCannon;
-	import nemostein.games.botmayhem.weaponry.weapon.weapons.TargetCannon;
 	
 	public class WeaponsService
 	{

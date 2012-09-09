@@ -19,6 +19,9 @@ package nemostein.games.botmayhem.waves.locations
 				point.y = Math.random() * 600;
 			}
 			
+			point.x = Math.random() * 900;
+			point.y = Math.random() * 600;
+			
 			return point;
 		}
 	}

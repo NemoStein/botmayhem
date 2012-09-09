@@ -193,7 +193,8 @@ package nemostein.games.botmayhem.bots.hero
 		{
 			if (_targetWeapon && _targetWeapon.ready)
 			{
-				_targetWeapon.shoot(target);
+				_targetWeapon.target = target;
+				_targetWeapon.shoot();
 			}
 		}
 		

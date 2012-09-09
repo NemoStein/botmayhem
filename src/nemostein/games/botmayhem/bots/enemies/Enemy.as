@@ -1,35 +1,78 @@
 package nemostein.games.botmayhem.bots.enemies
 {
+	import flash.utils.Dictionary;
 	import nemostein.games.botmayhem.bots.Bot;
 	import nemostein.games.botmayhem.bots.enemies.behaviors.Behavior;
 	import nemostein.games.botmayhem.bots.hero.Hero;
+	import nemostein.games.botmayhem.waves.Wave;
 	
 	public class Enemy extends Bot
 	{
+		static public const ATACKING:String = "atacking";
+		static public const ROAMING:String = "roaming";
+		
 		static public var hero:Hero;
 		
-		private var _behaviors:Vector.<Behavior>;
+		public var state:String;
+		public var wave:Wave;
+		
+		private var _behaviors:Dictionary;
 		
 		override protected function initialize():void
 		{
 			super.initialize();
 			
-			_behaviors = new Vector.<Behavior>();
+			_behaviors = new Dictionary();
 		}
 		
-		protected function addBehavior(behavior:Behavior):void
+		protected function addBehavior(state:String, behavior:Behavior):void
 		{
-			_behaviors.push(behavior);
+			var behaviors:Vector.<Behavior> = _behaviors[state];
+			if (!behaviors)
+			{
+				_behaviors[state] = behaviors = new Vector.<Behavior>();
+			}
+			
+			behaviors.push(behavior);
 		}
 		
 		override protected function update():void
 		{
-			for each (var behavior:Behavior in _behaviors) 
+			var behaviors:Vector.<Behavior> = _behaviors[state];
+			if (behaviors)
 			{
-				behavior.apply(this);
+				for each (var behavior:Behavior in behaviors)
+				{
+					behavior.apply(this);
+				}
+			}
+			
+			if (x > 900 + width)
+			{
+				x = -width;
+			}
+			else if (x < -width)
+			{
+				x = 900 + width;
+			}
+			
+			if (y > 600 + height)
+			{
+				y = -height;
+			}
+			else if (y < -height)
+			{
+				y = 600 + height;
 			}
 			
 			super.update();
+		}
+		
+		override public function die():void 
+		{
+			wave.destroyEnemy(this);
+			
+			super.die();
 		}
 	}
 }

@@ -1,13 +1,13 @@
 #ID		Type				Enemy		Count	SpawnLocation
 
 # WaveA
-WaveA1	Time(1)				Suicider	10		RandomOutside
-		Alive(WaveA1, 3)	Suicider	5		RandomOutside
+WaveA1	Time(1)				Suicider	2		RandomOutside
+		Alive(WaveA1, 1)	Suicider	10		RandomOutside
 #		HeroLife(0.1)		Suicider	3		RandomOutside
 #		Delay(WaveA1, 5)	Suicider	3		RandomOutside
 
 # WaveB
-WaveB1	Time(8)				Suicider	5		RandomOutside
-WaveB2	Alive(WaveB1, 2)	Suicider	1		RandomOutside
-WaveB3	Alive(WaveB2, 0)	Suicider	1		RandomOutside
-		Alive(WaveB3, 0)	Suicider	1		RandomOutside
+#WaveB1	Time(8)				Suicider	50		RandomOutside
+#WaveB2	Alive(WaveB1, 20)	Suicider	20		RandomOutside
+#WaveB3	Alive(WaveB2, 0)	Suicider	15		RandomOutside
+#		Alive(WaveB3, 0)	Suicider	10		RandomOutside

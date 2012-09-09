@@ -101,6 +101,7 @@ package nemostein.games.botmayhem.bots
 			
 			if (hull < 0)
 			{
+				hull = 0;
 				die();
 			}
 		}

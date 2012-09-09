@@ -1,9 +1,12 @@
 package nemostein.games.botmayhem
 {
+	import flash.display.BitmapData;
+	import nemostein.framework.dragonfly.Core;
 	import nemostein.framework.dragonfly.Game;
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
+	import nemostein.games.botmayhem.core.Button;
 	import nemostein.games.botmayhem.core.SystemService;
 	import nemostein.games.botmayhem.levels.Level;
 	import nemostein.io.Keys;

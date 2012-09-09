@@ -1,11 +1,10 @@
 package nemostein.games.botmayhem.weaponry.weapon
 {
 	import nemostein.games.botmayhem.weaponry.DirectionWeaponed;
+	import nemostein.games.botmayhem.weaponry.weapon.DirectionWeapon;
 	
-	public interface DirectionWeapon extends Weapon
+	public class DirectionWeapon extends Weapon
 	{
-		function shoot():void
-		function get holder():DirectionWeaponed
-		function set holder(value:DirectionWeaponed):void
+		public var holder:DirectionWeaponed;
 	}
 }

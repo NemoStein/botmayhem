@@ -1,7 +1,6 @@
 package nemostein.games.botmayhem.weaponry.weapon
 {
 	import flash.geom.Point;
-	import nemostein.games.botmayhem.weaponry.bullet.Bullet;
 	import nemostein.games.botmayhem.weaponry.bullet.bullets.MenuMissile;
 	import nemostein.games.botmayhem.weaponry.bullet.bullets.SimpleBullet;
 	
@@ -27,16 +26,18 @@ package nemostein.games.botmayhem.weaponry.weapon
 			if (simpleBulletPooled)
 			{
 				bullet = simpleBulletPool.pop();
+				bullet.revive();
 				--simpleBulletPooled;
 			}
 			else
 			{
 				bullet = new SimpleBullet();
-				
-				bullet.x = source.x;
-				bullet.y = source.y;
-				bullet.angle = angle;
+				bullet.onDeath = keepSimpleBullet;
 			}
+			
+			bullet.x = source.x;
+			bullet.y = source.y;
+			bullet.angle = angle;
 			
 			return bullet;
 		}

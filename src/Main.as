@@ -1,6 +1,7 @@
 package
 {
 	import flash.display.Sprite;
+	import flash.geom.Point;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import nemostein.games.botmayhem.BotMayhem;

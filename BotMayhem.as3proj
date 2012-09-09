@@ -41,7 +41,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="-advanced-telemetry=true&#xA;-inline=true&#xA;-remove-dead-code=true" />
+    <option additional="-advanced-telemetry&#xA;-inline=true&#xA;-remove-dead-code=true" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>

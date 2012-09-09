@@ -2,9 +2,12 @@ package nemostein.games.botmayhem.weaponry.bullet
 {
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.framework.dragonfly.Entity;
+	import nemostein.games.botmayhem.weaponry.weapon.Weapon;
 	
 	public class Bullet extends Entity
 	{
+		public var weapon:Weapon;
+		
 		protected var bulletSpeed:Number;
 		
 		override protected function initialize():void
