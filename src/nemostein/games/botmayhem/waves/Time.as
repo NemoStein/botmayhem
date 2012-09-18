@@ -5,17 +5,15 @@ package nemostein.games.botmayhem.waves
 	
 	public class Time extends Wave
 	{
+		private var _dispatchTime:Number;
+		private var _dispatchDelay:Number;
+		
 		override protected function initialize(params:Array):void
 		{
-			var time:Number = Number(params[0]) * 1000;
+			_dispatchTime = Number(params[0]);
+			_dispatchDelay = 0;
 			
-			if (!isNaN(time))
-			{
-				var timer:Timer = new Timer(time, 1);
-				timer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerTimerComplete);
-				timer.start();
-			}
-			else
+			if (isNaN(_dispatchTime))
 			{
 				trace("\"" + params[0] + "\" isn't a valid number.");
 			}
@@ -23,9 +21,19 @@ package nemostein.games.botmayhem.waves
 			super.initialize(params);
 		}
 		
-		private function onTimerTimerComplete(e:TimerEvent):void
+		override public function update(time:Number):Boolean
 		{
-			dispatchEnemies();
+			if (!dispatched)
+			{
+				_dispatchDelay += time;
+				
+				if (_dispatchDelay >= _dispatchTime)
+				{
+					dispatchEnemies();
+				}
+			}
+			
+			return super.update(time);
 		}
 	}
 }

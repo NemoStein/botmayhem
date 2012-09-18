@@ -8,12 +8,21 @@ package nemostein.games.botmayhem.hud
 	import nemostein.games.botmayhem.assets.hud.AssetBars;
 	import nemostein.games.botmayhem.assets.hud.AssetCash;
 	import nemostein.games.botmayhem.assets.hud.AssetPanel;
+	import nemostein.games.botmayhem.core.SystemService;
 	import nemostein.games.botmayhem.hud.bars.Bar;
 	import nemostein.games.botmayhem.hud.buttons.OptionsButton;
 	import nemostein.games.botmayhem.hud.buttons.ShopButton;
+	import nemostein.games.botmayhem.hud.contents.options.Options;
+	import nemostein.games.botmayhem.hud.contents.shop.Shop;
 	
 	public class HUD extends Entity
 	{
+		private var _deckOpened:Boolean;
+		private var _openingDeck:Boolean;
+		
+		private var _shopContent:Core;
+		private var _optionsContent:Core;
+		
 		override protected function initialize():void
 		{
 			super.initialize();
@@ -28,6 +37,9 @@ package nemostein.games.botmayhem.hud
 			var bars:Core = new Core(Bitmap(new AssetBars).bitmapData);
 			var blueBar:Core = new Bar(Bar.BLUE);
 			var redBar:Core = new Bar(Bar.RED);
+			
+			_shopContent = new Shop();
+			_optionsContent = new Options();
 			
 			cash.x = 19;
 			cash.y = 75;
@@ -54,11 +66,53 @@ package nemostein.games.botmayhem.hud
 			add(blueBar);
 			add(redBar);
 			
-			setCurrentDescendentsAsRelative();
+			add(_shopContent);
+			add(_optionsContent);
+			
+			shopButton.onPress = openDeckAsShop;
+			optionsButton.onPress = openDeckAsOptions;
 		}
 		
-		override protected function update():void 
+		private function openDeckAsShop(point:Point = null):void
 		{
+			_shopContent.revive();
+			_optionsContent.die();
+			
+			openDeck();
+		}
+		
+		private function openDeckAsOptions(point:Point = null):void
+		{
+			_shopContent.die();
+			_optionsContent.revive();
+			
+			openDeck()
+		}
+		
+		private function openDeck():void
+		{
+			if (!_deckOpened)
+			{
+				SystemService.pauseGame();
+				
+				_openingDeck = true;
+			}
+		}
+		
+		override protected function update():void
+		{
+			if (_openingDeck && x > 150)
+			{
+				x -= 25;
+				
+				if (x <= 150)
+				{
+					x = 150;
+					
+					_openingDeck = false;
+					_deckOpened = true;
+				}
+			}
 			
 			super.update();
 		}

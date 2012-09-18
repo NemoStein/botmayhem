@@ -2,6 +2,7 @@ package nemostein.games.botmayhem.levels
 {
 	import flash.geom.Point;
 	import nemostein.framework.dragonfly.Entity;
+	import nemostein.games.botmayhem.bots.enemies.Enemy;
 	import nemostein.games.botmayhem.core.SystemService;
 	
 	public class Level extends Entity
@@ -21,14 +22,15 @@ package nemostein.games.botmayhem.levels
 		private var _swipeMoveDistance:Number;
 		private var _swipeOrigin:Point;
 		
+		public var enemies:Vector.<Enemy>;
+		
 		override protected function initialize():void
 		{
 			super.initialize();
 			
 			_swipeSpeed = 100;
 			_swipe = SWIPE_READY;
-			
-			//setCurrentDescendentsAsRelative();
+			enemies = new Vector.<Enemy>();
 		}
 		
 		public function swipeTo(direction:int):void
@@ -49,6 +51,12 @@ package nemostein.games.botmayhem.levels
 					_swipeMoveDistance = 900;
 				}
 			}
+		}
+		
+		public function addEnemy(enemy:Enemy):void 
+		{
+			enemies.push(enemy);
+			add(enemy);
 		}
 		
 		override protected function update():void

@@ -7,6 +7,7 @@ package
 	import nemostein.games.botmayhem.BotMayhem;
 	import nemostein.games.botmayhem.ClassRegistry;
 	import nemostein.intro.IntroSequence;
+	import nemostein.utils.MathUtils;
 	
 	[SWF(width=900,height=600,backgroundColor="#000000",frameRate="60")]
 	[Frame(factoryClass="Preloader")]

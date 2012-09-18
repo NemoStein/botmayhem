@@ -2,17 +2,15 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 {
 	import flash.geom.Point;
 	import nemostein.framework.dragonfly.Core;
-	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.levels.menu.CinematicService;
 	import nemostein.games.botmayhem.weaponry.bullet.bullets.MenuMissile;
-	import nemostein.games.botmayhem.weaponry.TargetWeaponed;
 	import nemostein.games.botmayhem.weaponry.weapon.TargetWeapon;
 	
 	public class MenuCinematicCannon extends TargetWeapon
 	{
-		override public function shoot():void 
+		override public function shoot():void
 		{
-			if(CinematicService.nextShotReady())
+			if (CinematicService.nextShotReady())
 			{
 				var core:Core = Core(holder);
 				

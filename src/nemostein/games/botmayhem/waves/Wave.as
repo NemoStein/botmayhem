@@ -2,6 +2,7 @@ package nemostein.games.botmayhem.waves
 {
 	import flash.geom.Point;
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
+	import nemostein.games.botmayhem.core.SystemService;
 	import nemostein.games.botmayhem.levels.Level;
 	import nemostein.games.botmayhem.waves.locations.SpawnLocation;
 	import nemostein.utils.MathUtils;
@@ -87,7 +88,7 @@ package nemostein.games.botmayhem.waves
 					enemy.y = point.y;
 					enemy.angle = Math.random() * MathUtils.PI2;
 					
-					level.add(enemy);
+					level.addEnemy(enemy);
 				}
 				
 				for (var j:int = 0; j < _enemyDispatchCallbacks.length; ++j)

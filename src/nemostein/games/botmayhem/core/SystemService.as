@@ -3,6 +3,7 @@ package nemostein.games.botmayhem.core
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.framework.dragonfly.Game;
 	import nemostein.games.botmayhem.BotMayhem;
+	import nemostein.games.botmayhem.bots.enemies.Enemy;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
 	import nemostein.games.botmayhem.hud.HUD;
 	import nemostein.games.botmayhem.levels.Level;
@@ -22,6 +23,8 @@ package nemostein.games.botmayhem.core
 		
 		static private var _hud:HUD;
 		
+		static public var gamePaused:Boolean;
+		
 		static public function registerGame(game:Game):void
 		{
 			if (!_game)
@@ -38,8 +41,8 @@ package nemostein.games.botmayhem.core
 				game.add(HeroService.hero);
 				game.add(_hud);
 				
-				//_nextLevelSwipeFinished = true;
-				//_currentLevelSwipeFinished = true;
+				_nextLevelSwipeFinished = true;
+				_currentLevelSwipeFinished = true;
 			}
 		}
 		
@@ -126,6 +129,45 @@ package nemostein.games.botmayhem.core
 		static public function hideHud():void 
 		{
 			_hud.die();
+		}
+		
+		static public function pauseGame():void 
+		{
+			if(_currentLevel)
+			{
+				_currentLevel.deactivate();
+			}
+			
+			if (_nextLevel)
+			{
+				_nextLevel.deactivate();
+			}
+			
+			HeroService.hero.deactivate();
+			
+			gamePaused = true;
+		}
+		
+		static public function unpauseGame():void 
+		{
+			if(_currentLevel)
+			{
+				_currentLevel.activate();
+			}
+			
+			if (_nextLevel)
+			{
+				_nextLevel.activate();
+			}
+			
+			HeroService.hero.activate();
+			
+			gamePaused = false;
+		}
+		
+		static public function currentEnemies():Vector.<Enemy> 
+		{
+			return _currentLevel.enemies;
 		}
 		
 		static private function getLevel(level:String):Level

@@ -32,19 +32,19 @@ package nemostein.games.botmayhem.bots.hero
 			
 			super.initialize();
 			
-			frame.width = 35;
-			frame.height = 30;
+			var bitmapData:BitmapData = new BitmapData(35, 30, true, 0);
+			bitmapData.fillRect(new Rectangle(0, 0, 30, 30), 0xff3b3f4f);
+			bitmapData.fillRect(new Rectangle(2, 2, 26, 26), 0xffbbbfdf);
+			bitmapData.fillRect(new Rectangle(30, 8, 15, 14), 0xff3b3f4f);
+			bitmapData.fillRect(new Rectangle(22, 10, 11, 10), 0xff9b9fbf);
+			bitmapData.fillRect(new Rectangle(14, 14, 2, 2), 0xffef4b4f);
 			
-			sprite = new BitmapData(frame.width, frame.height, true, 0);
-			sprite.fillRect(new Rectangle(0, 0, 30, 30), 0xff3b3f4f);
-			sprite.fillRect(new Rectangle(2, 2, 26, 26), 0xffbbbfdf);
-			sprite.fillRect(new Rectangle(30, 8, 15, 14), 0xff3b3f4f);
-			sprite.fillRect(new Rectangle(22, 10, 11, 10), 0xff9b9fbf);
-			sprite.fillRect(new Rectangle(14, 14, 2, 2), 0xffef4b4f);
+			draw(bitmapData);
 			
 			alignAnchor(AnchorAlign.CUSTOM, AnchorAlign.CUSTOM, new Point(15, 15));
 			
 			maxMoveSpeed *= 2;
+			maxTurnSpeed *= 2;
 			
 			maxShield = shield = 100;
 			shieldRegeneration = 25;

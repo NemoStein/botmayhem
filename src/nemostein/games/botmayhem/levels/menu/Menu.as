@@ -2,15 +2,13 @@ package nemostein.games.botmayhem.levels.menu
 {
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
-	import nemostein.framework.dragonfly.Core;
+	import nemostein.framework.dragonfly.Button;
 	import nemostein.games.botmayhem.arenas.ArenaService;
 	import nemostein.games.botmayhem.arenas.WhiteTiledArena;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
-	import nemostein.games.botmayhem.core.Button;
 	import nemostein.games.botmayhem.levels.Level;
 	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;
-	import nemostein.io.Keys;
 	
 	public class Menu extends Level
 	{

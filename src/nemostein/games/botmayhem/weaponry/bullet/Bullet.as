@@ -2,11 +2,15 @@ package nemostein.games.botmayhem.weaponry.bullet
 {
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.framework.dragonfly.Entity;
+	import nemostein.games.botmayhem.bots.enemies.Enemy;
+	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.weaponry.weapon.Weapon;
 	
 	public class Bullet extends Entity
 	{
+		public var hero:Hero;
 		public var weapon:Weapon;
+		public var enemies:Vector.<Enemy>;
 		
 		protected var bulletSpeed:Number;
 		
@@ -14,6 +18,7 @@ package nemostein.games.botmayhem.weaponry.bullet
 		{
 			super.initialize();
 			
+			relative = false;
 			bulletSpeed = 200;
 		}
 		
