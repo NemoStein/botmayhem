@@ -4,10 +4,10 @@ package nemostein.games.botmayhem.hud.buttons
 	import flash.geom.Point;
 	import nemostein.framework.dragonfly.Button;
 	import nemostein.framework.dragonfly.Core;
-	import nemostein.games.botmayhem.assets.hud.AssetButtonShopPressed;
-	import nemostein.games.botmayhem.assets.hud.AssetButtonShopReleased;
+	import nemostein.games.botmayhem.assets.hud.AssetButtonResumePressed;
+	import nemostein.games.botmayhem.assets.hud.AssetButtonResumeReleased;
 	
-	public class ShopButton extends Button
+	public class ResumeButton extends Button
 	{
 		private var _releasedAsset:Core;
 		private var _pressedAsset:Core;
@@ -16,8 +16,8 @@ package nemostein.games.botmayhem.hud.buttons
 		{
 			super.initialize();
 			
-			_releasedAsset = new Core(Bitmap(new AssetButtonShopReleased).bitmapData);
-			_pressedAsset = new Core(Bitmap(new AssetButtonShopPressed).bitmapData);
+			_releasedAsset = new Core(Bitmap(new AssetButtonResumeReleased).bitmapData);
+			_pressedAsset = new Core(Bitmap(new AssetButtonResumePressed).bitmapData);
 			
 			_pressedAsset.die();
 			

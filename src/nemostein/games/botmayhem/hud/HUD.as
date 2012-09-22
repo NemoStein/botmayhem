@@ -11,6 +11,7 @@ package nemostein.games.botmayhem.hud
 	import nemostein.games.botmayhem.core.SystemService;
 	import nemostein.games.botmayhem.hud.bars.Bar;
 	import nemostein.games.botmayhem.hud.buttons.OptionsButton;
+	import nemostein.games.botmayhem.hud.buttons.ResumeButton;
 	import nemostein.games.botmayhem.hud.buttons.ShopButton;
 	import nemostein.games.botmayhem.hud.contents.options.Options;
 	import nemostein.games.botmayhem.hud.contents.shop.Shop;
@@ -19,6 +20,7 @@ package nemostein.games.botmayhem.hud
 	{
 		private var _deckOpened:Boolean;
 		private var _openingDeck:Boolean;
+		private var _closingDeck:Boolean;
 		
 		private var _shopContent:Core;
 		private var _optionsContent:Core;
@@ -34,6 +36,7 @@ package nemostein.games.botmayhem.hud
 			var cash:Core = new Core(Bitmap(new AssetCash).bitmapData);
 			var shopButton:ShopButton = new ShopButton();
 			var optionsButton:OptionsButton = new OptionsButton();
+			var resumeButton:ResumeButton = new ResumeButton();
 			var bars:Core = new Core(Bitmap(new AssetBars).bitmapData);
 			var blueBar:Core = new Bar(Bar.BLUE);
 			var redBar:Core = new Bar(Bar.RED);
@@ -50,6 +53,9 @@ package nemostein.games.botmayhem.hud
 			optionsButton.x = 19;
 			optionsButton.y = 145;
 			
+			resumeButton.x = 839;
+			resumeButton.y = 10;
+			
 			bars.x = 109;
 			bars.y = 10;
 			
@@ -62,6 +68,7 @@ package nemostein.games.botmayhem.hud
 			add(cash);
 			add(shopButton);
 			add(optionsButton);
+			add(resumeButton);
 			add(bars);
 			add(blueBar);
 			add(redBar);
@@ -69,11 +76,12 @@ package nemostein.games.botmayhem.hud
 			add(_shopContent);
 			add(_optionsContent);
 			
-			shopButton.onPress = openDeckAsShop;
-			optionsButton.onPress = openDeckAsOptions;
+			shopButton.onExecute = onShopButtonExecute;
+			optionsButton.onExecute = onOptionsButtonExecute;
+			resumeButton.onExecute = onResumeButtonExecute;
 		}
 		
-		private function openDeckAsShop(point:Point = null):void
+		private function onShopButtonExecute(point:Point = null):void
 		{
 			_shopContent.revive();
 			_optionsContent.die();
@@ -81,12 +89,20 @@ package nemostein.games.botmayhem.hud
 			openDeck();
 		}
 		
-		private function openDeckAsOptions(point:Point = null):void
+		private function onOptionsButtonExecute(point:Point = null):void
 		{
 			_shopContent.die();
 			_optionsContent.revive();
 			
-			openDeck()
+			openDeck();
+		}
+		
+		private function onResumeButtonExecute(point:Point = null):void
+		{
+			_shopContent.die();
+			_optionsContent.die();
+			
+			closeDeck();
 		}
 		
 		private function openDeck():void
@@ -99,9 +115,19 @@ package nemostein.games.botmayhem.hud
 			}
 		}
 		
+		private function closeDeck():void
+		{
+			if (_deckOpened)
+			{
+				SystemService.unpauseGame();
+				
+				_closingDeck = true;
+			}
+		}
+		
 		override protected function update():void
 		{
-			if (_openingDeck && x > 150)
+			if (!_deckOpened && _openingDeck && x > 150)
 			{
 				x -= 25;
 				
@@ -111,6 +137,18 @@ package nemostein.games.botmayhem.hud
 					
 					_openingDeck = false;
 					_deckOpened = true;
+				}
+			}
+			else if (_deckOpened && _closingDeck && x < 900)
+			{
+				x += 25;
+				
+				if (x >= 900)
+				{
+					x = 900;
+					
+					_closingDeck = false;
+					_deckOpened = false;
 				}
 			}
 			
