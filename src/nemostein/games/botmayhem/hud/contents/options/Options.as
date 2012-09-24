@@ -5,9 +5,5 @@ package nemostein.games.botmayhem.hud.contents.options
 	public class Options extends Entity
 	{
 		
-		public function Options()
-		{
-		
-		}
 	}
 }
