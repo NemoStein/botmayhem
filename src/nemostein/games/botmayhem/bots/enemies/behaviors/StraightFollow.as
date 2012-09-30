@@ -17,24 +17,27 @@ package nemostein.games.botmayhem.bots.enemies.behaviors
 		
 		public function apply(enemy:Enemy):void
 		{
-			var distanceX:Number = _hero.x - enemy.x;
-			var distanceY:Number = _hero.y - enemy.y;
-			
-			if (distanceX || distanceY)
+			if (enemy.active && _hero.active)
 			{
-				var time:Number = Core.time;
-				var turnSpeed:Number = enemy.maxTurnSpeed * time;
-				var moveSpeed:Number = enemy.maxMoveSpeed * time;
+				var distanceX:Number = _hero.x - enemy.x;
+				var distanceY:Number = _hero.y - enemy.y;
 				
-				var angle:Number = enemy.angle;
-				var desiredAngle:Number = Math.atan2(distanceY, distanceX);
-				var angleDifference:Number = MathUtils.piWrap(desiredAngle - angle);
-				
-				angle += angleDifference * turnSpeed;
-				
-				enemy.x += Math.cos(angle) * moveSpeed;
-				enemy.y += Math.sin(angle) * moveSpeed;
-				enemy.angle = angle;
+				if (distanceX || distanceY)
+				{
+					var time:Number = Core.time;
+					var turnSpeed:Number = enemy.maxTurnSpeed * time;
+					var moveSpeed:Number = enemy.maxMoveSpeed * time;
+					
+					var angle:Number = enemy.angle;
+					var desiredAngle:Number = Math.atan2(distanceY, distanceX);
+					var angleDifference:Number = MathUtils.piWrap(desiredAngle - angle);
+					
+					angle += angleDifference * turnSpeed;
+					
+					enemy.x += Math.cos(angle) * moveSpeed;
+					enemy.y += Math.sin(angle) * moveSpeed;
+					enemy.angle = angle;
+				}
 			}
 		}
 	}

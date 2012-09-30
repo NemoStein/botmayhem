@@ -19,7 +19,8 @@ package nemostein.games.botmayhem.weaponry.bullet
 			super.initialize();
 			
 			relative = false;
-			bulletSpeed = 200;
+			
+			reset();
 		}
 		
 		override protected function update():void
@@ -40,6 +41,12 @@ package nemostein.games.botmayhem.weaponry.bullet
 		public function collide(angle:Number, against:Core):void
 		{
 			die();
+		}
+		
+		public function reset():void 
+		{
+			bulletSpeed = 200;
+			revive();
 		}
 	}
 }

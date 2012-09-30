@@ -3,6 +3,7 @@ package nemostein.games.botmayhem.bots.enemies.behaviors
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
+	
 	public class ExecuteOnHeroCollision implements Behavior
 	{
 		private var _callback:Function;
@@ -16,17 +17,20 @@ package nemostein.games.botmayhem.bots.enemies.behaviors
 		
 		public function apply(enemy:Enemy):void
 		{
-			var eX:Number = enemy.x;
-			var eY:Number = enemy.y;
-			var hX:Number = _hero.x;
-			var hY:Number = _hero.y;
-			
-			if (eX + enemy.width < hX || eX > hX + _hero.width || eY + enemy.height < hY || eY > hY + _hero.height)
+			if (enemy.active && _hero.active)
 			{
-				return;
+				var eX:Number = enemy.x;
+				var eY:Number = enemy.y;
+				var hX:Number = _hero.x;
+				var hY:Number = _hero.y;
+				
+				if (eX + enemy.width < hX || eX > hX + _hero.width || eY + enemy.height < hY || eY > hY + _hero.height)
+				{
+					return;
+				}
+				
+				_callback();
 			}
-			
-			_callback();
 		}
 	}
 }

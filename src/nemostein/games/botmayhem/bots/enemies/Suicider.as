@@ -1,14 +1,12 @@
 package nemostein.games.botmayhem.bots.enemies
 {
 	import flash.display.BitmapData;
-	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.games.botmayhem.bots.enemies.behaviors.ExecuteOnHeroCollision;
 	import nemostein.games.botmayhem.bots.enemies.behaviors.RandomRoam;
 	import nemostein.games.botmayhem.bots.enemies.behaviors.StraightFollow;
 	import nemostein.games.botmayhem.weaponry.DamageType;
-	import nemostein.io.Keys;
 	
 	public class Suicider extends Enemy
 	{

@@ -33,7 +33,7 @@ package nemostein.games.botmayhem.weaponry.weapon
 			if (simpleBulletPooled)
 			{
 				bullet = simpleBulletPool.pop();
-				bullet.revive();
+				bullet.reset();
 				--simpleBulletPooled;
 			}
 			else

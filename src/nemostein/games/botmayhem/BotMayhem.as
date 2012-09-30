@@ -1,6 +1,8 @@
 package nemostein.games.botmayhem
 {
 	import flash.display.BitmapData;
+	import flash.display.DisplayObjectContainer;
+	import flash.display.Stage;
 	import flash.geom.Rectangle;
 	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.framework.dragonfly.Core;
@@ -20,9 +22,9 @@ package nemostein.games.botmayhem
 			super(900, 600);
 		}
 		
-		override protected function initialize():void
+		override public function start(stage:Stage, container:DisplayObjectContainer = null):void 
 		{
-			super.initialize();
+			super.start(stage, container);
 			
 			HeroService.buildHero(830, -25, -Math.PI / 2);
 			
