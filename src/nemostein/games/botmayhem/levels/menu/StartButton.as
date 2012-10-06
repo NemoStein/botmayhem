@@ -38,7 +38,7 @@ package nemostein.games.botmayhem.levels.menu
 			var timer:Timer = new Timer(500, 1);
 			timer.addEventListener(TimerEvent.TIMER_COMPLETE, function():void
 			{
-				SystemService.changeLevel(Level.RED_A);
+				SystemService.changeLevel(Level.GREEN_A);
 			});
 			timer.start();
 		}

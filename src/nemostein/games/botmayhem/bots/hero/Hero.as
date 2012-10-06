@@ -59,7 +59,7 @@ package nemostein.games.botmayhem.bots.hero
 		{
 			if (lookAtCursor)
 			{
-				var desiredTurn:Number = MathUtils.piWrap(Math.atan2(input.mouse.y - y, input.mouse.x - x) - angle);
+				var desiredTurn:Number = MathUtils.piWrap(Math.atan2(input.mouse.y - canvasPosition.y, input.mouse.x - canvasPosition.x) - angle);
 				var turn:Number = desiredTurn;
 				
 				var turnSpeed:Number = maxTurnSpeed * time;

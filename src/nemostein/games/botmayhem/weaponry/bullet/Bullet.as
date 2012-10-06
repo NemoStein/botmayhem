@@ -25,7 +25,7 @@ package nemostein.games.botmayhem.weaponry.bullet
 		
 		override protected function update():void
 		{
-			if (x < 0 || y < 0 || x > 900 || y > 600)
+			if (x < bounds.x || y < bounds.y || x > bounds.x + bounds.width || y > bounds.y + bounds.height)
 			{
 				die();
 			}

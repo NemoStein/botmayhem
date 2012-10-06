@@ -71,6 +71,13 @@ package nemostein.games.botmayhem.levels.menu
 			_moveFinished = true;
 		}
 		
+		override protected function addedToGame():void 
+		{
+			game.follow(_hero);
+			
+			super.addedToGame();
+		}
+		
 		private function onTimerTimerComplete(e:TimerEvent):void
 		{
 			_animate = true;

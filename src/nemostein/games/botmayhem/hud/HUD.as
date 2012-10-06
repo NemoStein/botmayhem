@@ -5,16 +5,13 @@ package nemostein.games.botmayhem.hud
 	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.framework.dragonfly.Entity;
-	import nemostein.games.botmayhem.assets.hud.AssetBars;
-	import nemostein.games.botmayhem.assets.hud.AssetCash;
-	import nemostein.games.botmayhem.assets.hud.AssetPanel;
+	import nemostein.games.botmayhem.assets.hud.AssetHudBase;
 	import nemostein.games.botmayhem.core.SystemService;
 	import nemostein.games.botmayhem.hud.bars.Bar;
-	import nemostein.games.botmayhem.hud.buttons.OptionsButton;
-	import nemostein.games.botmayhem.hud.buttons.ResumeButton;
-	import nemostein.games.botmayhem.hud.buttons.ShopButton;
-	import nemostein.games.botmayhem.hud.contents.options.Options;
-	import nemostein.games.botmayhem.hud.contents.shop.Shop;
+	import nemostein.games.botmayhem.hud.buttons.BGMButton;
+	import nemostein.games.botmayhem.hud.buttons.PlayButton;
+	import nemostein.games.botmayhem.hud.buttons.RecycleButton;
+	import nemostein.games.botmayhem.hud.buttons.SFXButton;
 	
 	public class HUD extends Entity
 	{
@@ -29,56 +26,44 @@ package nemostein.games.botmayhem.hud
 		{
 			super.initialize();
 			
-			draw(Bitmap(new AssetPanel).bitmapData);
-			alignAnchor(AnchorAlign.TOP, AnchorAlign.CUSTOM, new Point(141, 0));
-			x = 900;
+			draw(Bitmap(new AssetHudBase).bitmapData);
 			
-			var cash:Core = new Core(Bitmap(new AssetCash).bitmapData);
-			var shopButton:ShopButton = new ShopButton();
-			var optionsButton:OptionsButton = new OptionsButton();
-			var resumeButton:ResumeButton = new ResumeButton();
-			var bars:Core = new Core(Bitmap(new AssetBars).bitmapData);
-			var blueBar:Core = new Bar(Bar.BLUE);
-			var redBar:Core = new Bar(Bar.RED);
+			setParallax(0, 0);
 			
-			_shopContent = new Shop();
-			_optionsContent = new Options();
+			var recycleButton:RecycleButton = new RecycleButton();
+			var shieldBar:Core = new Bar(Bar.SHIELD);
+			var hullBar:Core = new Bar(Bar.HULL);
+			var playButton:PlayButton = new PlayButton();
+			var bgmButton:BGMButton = new BGMButton();
+			var sfxButton:SFXButton = new SFXButton();
 			
-			cash.x = 19;
-			cash.y = 75;
+			recycleButton.x = 223;
+			recycleButton.y = 10;
 			
-			shopButton.x = 19;
-			shopButton.y = 107;
+			shieldBar.x = 262;
+			shieldBar.y = 12;
 			
-			optionsButton.x = 19;
-			optionsButton.y = 145;
+			hullBar.x = 262;
+			hullBar.y = 28;
 			
-			resumeButton.x = 839;
-			resumeButton.y = 10;
+			playButton.x = 786;
+			playButton.y = 10;
 			
-			bars.x = 109;
-			bars.y = 10;
+			bgmButton.x = 823;
+			bgmButton.y = 10;
 			
-			blueBar.x = 112;
-			blueBar.y = 13;
+			sfxButton.x = 860;
+			sfxButton.y = 10;
 			
-			redBar.x = 125;
-			redBar.y = 13;
+			add(recycleButton);
+			add(shieldBar);
+			add(hullBar);
+			add(playButton);
+			add(bgmButton);
+			add(sfxButton);
 			
-			add(cash);
-			add(shopButton);
-			add(optionsButton);
-			add(resumeButton);
-			add(bars);
-			add(blueBar);
-			add(redBar);
-			
-			add(_shopContent);
-			add(_optionsContent);
-			
-			shopButton.onExecute = onShopButtonExecute;
-			optionsButton.onExecute = onOptionsButtonExecute;
-			resumeButton.onExecute = onResumeButtonExecute;
+			recycleButton.onExecute = onShopButtonExecute;
+			playButton.onExecute = onOptionsButtonExecute;
 		}
 		
 		private function onShopButtonExecute(point:Point = null):void
@@ -95,14 +80,6 @@ package nemostein.games.botmayhem.hud
 			_optionsContent.revive();
 			
 			openDeck();
-		}
-		
-		private function onResumeButtonExecute(point:Point = null):void
-		{
-			_shopContent.die();
-			_optionsContent.die();
-			
-			closeDeck();
 		}
 		
 		private function openDeck():void

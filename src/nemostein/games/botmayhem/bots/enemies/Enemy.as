@@ -47,22 +47,22 @@ package nemostein.games.botmayhem.bots.enemies
 				}
 			}
 			
-			if (x > 900 + width)
+			if (x > bounds.x + bounds.width + width)
 			{
-				x = -width;
+				x = bounds.x - width;
 			}
-			else if (x < -width)
+			else if (x < bounds.x - width)
 			{
-				x = 900 + width;
+				x = bounds.x + bounds.width + width;
 			}
 			
-			if (y > 600 + height)
+			if (y > bounds.y + bounds.height + height)
 			{
 				y = -height;
 			}
-			else if (y < -height)
+			else if (y < bounds.y - bounds.height)
 			{
-				y = 600 + height;
+				y = bounds.y + bounds.height + height;
 			}
 			
 			super.update();

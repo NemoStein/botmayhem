@@ -5,6 +5,7 @@ package nemostein.games.botmayhem.arenas
 	{
 		static private var _whiteTiledArena:WhiteTiledArena;
 		static private var _redTiledArena:RedTiledArena;
+		static private var _greenHeightedArena:GreenHeightedArena;
 		
 		static public var currentArena:Arena;
 		
@@ -26,6 +27,16 @@ package nemostein.games.botmayhem.arenas
 			}
 			
 			return _redTiledArena;
+		}
+		
+		static public function get greenHeightedArena():GreenHeightedArena
+		{
+			if (!_greenHeightedArena)
+			{
+				_greenHeightedArena = new GreenHeightedArena();
+			}
+			
+			return _greenHeightedArena;
 		}
 	}
 }

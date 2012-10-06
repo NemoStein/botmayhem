@@ -9,6 +9,7 @@ package nemostein.games.botmayhem.levels
 	{
 		static public const MENU:String = "menu";
 		static public const RED_A:String = "redA";
+		static public const GREEN_A:String = "greenA";
 		
 		static public const SWIPE_READY:int = -1;
 		static public const SWIPE_UP:int = 0;

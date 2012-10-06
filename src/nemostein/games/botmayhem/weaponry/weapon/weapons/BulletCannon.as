@@ -11,7 +11,7 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 		{
 			super();
 			
-			cooldown = 0.02;
+			cooldown = 0.01;
 		}
 		
 		override public function shoot():void 

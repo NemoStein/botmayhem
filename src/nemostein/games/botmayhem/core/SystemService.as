@@ -6,6 +6,7 @@ package nemostein.games.botmayhem.core
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
 	import nemostein.games.botmayhem.hud.HUD;
+	import nemostein.games.botmayhem.levels.greenish.LevelGreenA;
 	import nemostein.games.botmayhem.levels.Level;
 	import nemostein.games.botmayhem.levels.menu.Menu;
 	import nemostein.games.botmayhem.levels.red.LevelRedA;
@@ -181,6 +182,10 @@ package nemostein.games.botmayhem.core
 				else if (level == Level.RED_A)
 				{
 					_levels[level] = new LevelRedA();
+				}
+				else if (level == Level.GREEN_A)
+				{
+					_levels[level] = new LevelGreenA();
 				}
 				else
 				{
