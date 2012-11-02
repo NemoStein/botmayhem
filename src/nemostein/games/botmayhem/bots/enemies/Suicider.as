@@ -11,7 +11,7 @@ package nemostein.games.botmayhem.bots.enemies
 	public class Suicider extends Enemy
 	{
 		private var _explosionStrenght:Number;
-		private var _atackRangeSquare:Number;
+		private var _attackRangeSquare:Number;
 		private var _explosionRangeSquare:Number;
 		
 		private var _heroDistanceX:Number;
@@ -36,7 +36,7 @@ package nemostein.games.botmayhem.bots.enemies
 			maxMoveSpeed *= Math.random() * 0.5 + 0.75;
 			maxTurnSpeed *= Math.random() * 0.5 + 0.75;
 			
-			_atackRangeSquare = 250 * 250;
+			_attackRangeSquare = 400 * 400;
 			_explosionRangeSquare = 75 * 75;
 			
 			addBehavior(ROAMING, new RandomRoam());
@@ -55,7 +55,7 @@ package nemostein.games.botmayhem.bots.enemies
 			_heroDistanceY = hero.y - y;
 			_heroDistanceSquare = _heroDistanceX * _heroDistanceX + _heroDistanceY * _heroDistanceY;
 			
-			if (state != ATACKING && _heroDistanceSquare < _atackRangeSquare)
+			if (state != ATACKING && _heroDistanceSquare < _attackRangeSquare)
 			{
 				state = ATACKING;
 			}

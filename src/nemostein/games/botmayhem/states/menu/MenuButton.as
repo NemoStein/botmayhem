@@ -1,4 +1,4 @@
-package nemostein.games.botmayhem.levels.menu
+package nemostein.games.botmayhem.states.menu
 {
 	import flash.geom.Point;
 	import nemostein.framework.dragonfly.Button;

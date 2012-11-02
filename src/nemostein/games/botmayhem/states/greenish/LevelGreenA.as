@@ -1,12 +1,11 @@
-package nemostein.games.botmayhem.levels.greenish
+package nemostein.games.botmayhem.states.greenish
 {
 	import nemostein.games.botmayhem.arenas.ArenaService;
 	import nemostein.games.botmayhem.arenas.GreenHeightedArena;
-	import nemostein.games.botmayhem.arenas.RedTiledArena;
 	import nemostein.games.botmayhem.assets.waves.AssetTestLevel;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
-	import nemostein.games.botmayhem.levels.Level;
+	import nemostein.games.botmayhem.states.Level;
 	import nemostein.games.botmayhem.waves.Waves;
 	import nemostein.games.botmayhem.weaponry.weapon.weapons.BulletCannon;
 	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;
@@ -39,6 +38,17 @@ package nemostein.games.botmayhem.levels.greenish
 			WeaponsService.removeTargetWeaponed(_hero);
 			
 			WeaponsService.putDirectionWeapon(_hero, BulletCannon);
+		}
+		
+		override protected function addedToGame():void
+		{
+			var hero:Hero = HeroService.hero;
+			hero.x = bounds.x + bounds.width / 2;
+			hero.y = bounds.y + bounds.height / 2;
+			game.cameraLookAt(hero.x, hero.y);
+			game.follow(hero);
+			
+			super.addedToGame();
 		}
 		
 		override protected function update():void 

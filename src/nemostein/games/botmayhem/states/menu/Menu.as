@@ -1,4 +1,4 @@
-package nemostein.games.botmayhem.levels.menu
+package nemostein.games.botmayhem.states.menu
 {
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -7,10 +7,10 @@ package nemostein.games.botmayhem.levels.menu
 	import nemostein.games.botmayhem.arenas.WhiteTiledArena;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
-	import nemostein.games.botmayhem.levels.Level;
+	import nemostein.games.botmayhem.states.State;
 	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;
 	
-	public class Menu extends Level
+	public class Menu extends State
 	{
 		private var _arena:WhiteTiledArena;
 		private var _hero:Hero;
@@ -69,13 +69,6 @@ package nemostein.games.botmayhem.levels.menu
 			_animate = true;
 			
 			_moveFinished = true;
-		}
-		
-		override protected function addedToGame():void 
-		{
-			game.follow(_hero);
-			
-			super.addedToGame();
 		}
 		
 		private function onTimerTimerComplete(e:TimerEvent):void

@@ -2,7 +2,7 @@ package nemostein.games.botmayhem.weaponry.weapon.weapons
 {
 	import flash.geom.Point;
 	import nemostein.framework.dragonfly.Core;
-	import nemostein.games.botmayhem.levels.menu.CinematicService;
+	import nemostein.games.botmayhem.states.menu.CinematicService;
 	import nemostein.games.botmayhem.weaponry.bullet.bullets.MenuMissile;
 	import nemostein.games.botmayhem.weaponry.weapon.TargetWeapon;
 	

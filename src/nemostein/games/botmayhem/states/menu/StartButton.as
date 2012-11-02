@@ -1,4 +1,4 @@
-package nemostein.games.botmayhem.levels.menu
+package nemostein.games.botmayhem.states.menu
 {
 	import flash.display.Bitmap;
 	import flash.events.TimerEvent;
@@ -8,7 +8,7 @@ package nemostein.games.botmayhem.levels.menu
 	import nemostein.games.botmayhem.assets.menu.AssetStartButton;
 	import nemostein.games.botmayhem.assets.menu.AssetStartShadow;
 	import nemostein.games.botmayhem.core.SystemService;
-	import nemostein.games.botmayhem.levels.Level;
+	import nemostein.games.botmayhem.states.greenish.LevelGreenA;
 	
 	internal class StartButton extends MenuButton
 	{
@@ -38,7 +38,7 @@ package nemostein.games.botmayhem.levels.menu
 			var timer:Timer = new Timer(500, 1);
 			timer.addEventListener(TimerEvent.TIMER_COMPLETE, function():void
 			{
-				SystemService.changeLevel(Level.GREEN_A);
+				SystemService.changeState(LevelGreenA);
 			});
 			timer.start();
 		}

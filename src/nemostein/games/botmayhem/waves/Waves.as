@@ -1,7 +1,8 @@
 package nemostein.games.botmayhem.waves
 {
 	import flash.utils.getDefinitionByName;
-	import nemostein.games.botmayhem.levels.Level;
+	import nemostein.games.botmayhem.states.Level;
+	import nemostein.games.botmayhem.states.State;
 	
 	public class Waves
 	{

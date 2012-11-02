@@ -24,10 +24,8 @@ package nemostein.games.botmayhem.hud.buttons
 			add(_releasedAsset);
 			add(_pressedAsset);
 			
-			var hitAreaWidth:Number = _pressedAsset.width;
-			var hitAreaHeight:Number = _pressedAsset.height;
-			
-			drawHitArea(new Point(0, 0), new Point(hitAreaWidth, 0), new Point(hitAreaWidth, hitAreaHeight));
+			frame.width = _pressedAsset.width;
+			frame.height = _pressedAsset.height;
 		}
 		
 		override public function pressed(point:Point = null):void

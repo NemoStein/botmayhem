@@ -1,7 +1,7 @@
 package nemostein.games.botmayhem.waves 
 {
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
-	import nemostein.games.botmayhem.levels.Level;
+	import nemostein.games.botmayhem.states.Level;
 	public class Alive extends Wave
 	{
 		private var _waveReference:Wave;

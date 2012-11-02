@@ -3,10 +3,7 @@ package nemostein.games.botmayhem.weaponry.bullet.bullets
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	import nemostein.framework.dragonfly.AnchorAlign;
-	import nemostein.games.botmayhem.arenas.ArenaService;
-	import nemostein.games.botmayhem.decals.Decals;
-	import nemostein.games.botmayhem.decals.DecalSettings;
-	import nemostein.games.botmayhem.levels.menu.CinematicService;
+	import nemostein.games.botmayhem.states.menu.CinematicService;
 	import nemostein.games.botmayhem.weaponry.bullet.Bullet;
 	import nemostein.utils.MathUtils;
 	

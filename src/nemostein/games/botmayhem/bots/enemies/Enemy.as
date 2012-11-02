@@ -9,6 +9,7 @@ package nemostein.games.botmayhem.bots.enemies
 	public class Enemy extends Bot
 	{
 		static public const ATACKING:String = "atacking";
+		static public const FLEEING:String = "fleeing";
 		static public const ROAMING:String = "roaming";
 		
 		static public var hero:Hero;

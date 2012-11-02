@@ -2,8 +2,8 @@ package nemostein.games.botmayhem.waves
 {
 	import flash.geom.Point;
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
-	import nemostein.games.botmayhem.core.SystemService;
-	import nemostein.games.botmayhem.levels.Level;
+	import nemostein.games.botmayhem.states.Level;
+	import nemostein.games.botmayhem.states.State;
 	import nemostein.games.botmayhem.waves.locations.SpawnLocation;
 	import nemostein.utils.MathUtils;
 	

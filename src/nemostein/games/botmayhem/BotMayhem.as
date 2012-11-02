@@ -1,15 +1,12 @@
 package nemostein.games.botmayhem
 {
-	import flash.display.BitmapData;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
-	import flash.geom.Rectangle;
-	import nemostein.framework.dragonfly.AnchorAlign;
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.framework.dragonfly.Game;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
 	import nemostein.games.botmayhem.core.SystemService;
-	import nemostein.games.botmayhem.levels.Level;
+	import nemostein.games.botmayhem.states.menu.Menu;
 	
 	public class BotMayhem extends Game
 	{
@@ -26,10 +23,11 @@ package nemostein.games.botmayhem
 		{
 			super.start(stage, container);
 			
+			/**/
 			HeroService.buildHero(830, -25, -Math.PI / 2);
 			
 			SystemService.registerGame(this);
-			SystemService.changeLevel(Level.MENU);
+			SystemService.changeState(Menu, true);
 			
 			/**
 			

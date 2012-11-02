@@ -62,11 +62,11 @@ package nemostein.games.botmayhem.hud
 			add(bgmButton);
 			add(sfxButton);
 			
-			recycleButton.onExecute = onShopButtonExecute;
-			playButton.onExecute = onOptionsButtonExecute;
+			//recycleButton.onExecute = onRecycleButtonExecute;
+			//playButton.onExecute = onPlayButtonExecute;
 		}
 		
-		private function onShopButtonExecute(point:Point = null):void
+		private function onRecycleButtonExecute(point:Point = null):void
 		{
 			_shopContent.revive();
 			_optionsContent.die();
@@ -74,7 +74,7 @@ package nemostein.games.botmayhem.hud
 			openDeck();
 		}
 		
-		private function onOptionsButtonExecute(point:Point = null):void
+		private function onPlayButtonExecute(point:Point = null):void
 		{
 			_shopContent.die();
 			_optionsContent.revive();

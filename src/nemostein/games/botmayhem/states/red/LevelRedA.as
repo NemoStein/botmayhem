@@ -1,11 +1,11 @@
-package nemostein.games.botmayhem.levels.red
+package nemostein.games.botmayhem.states.red
 {
 	import nemostein.games.botmayhem.arenas.ArenaService;
 	import nemostein.games.botmayhem.arenas.RedTiledArena;
 	import nemostein.games.botmayhem.assets.waves.AssetTestLevel;
 	import nemostein.games.botmayhem.bots.hero.Hero;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
-	import nemostein.games.botmayhem.levels.Level;
+	import nemostein.games.botmayhem.states.Level;
 	import nemostein.games.botmayhem.waves.Waves;
 	import nemostein.games.botmayhem.weaponry.weapon.weapons.BulletCannon;
 	import nemostein.games.botmayhem.weaponry.weapon.WeaponsService;

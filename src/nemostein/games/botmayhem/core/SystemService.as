@@ -1,28 +1,28 @@
 package nemostein.games.botmayhem.core
 {
+	import flash.geom.Rectangle;
+	import flash.utils.Dictionary;
+	import flash.utils.setTimeout;
 	import nemostein.framework.dragonfly.Core;
 	import nemostein.framework.dragonfly.Game;
-	import nemostein.games.botmayhem.BotMayhem;
 	import nemostein.games.botmayhem.bots.enemies.Enemy;
 	import nemostein.games.botmayhem.bots.hero.HeroService;
 	import nemostein.games.botmayhem.hud.HUD;
-	import nemostein.games.botmayhem.levels.greenish.LevelGreenA;
-	import nemostein.games.botmayhem.levels.Level;
-	import nemostein.games.botmayhem.levels.menu.Menu;
-	import nemostein.games.botmayhem.levels.red.LevelRedA;
+	import nemostein.games.botmayhem.iris.Iris;
+	import nemostein.games.botmayhem.states.Level;
+	import nemostein.games.botmayhem.states.menu.Menu;
+	import nemostein.games.botmayhem.states.State;
 	
 	public class SystemService
 	{
 		static private var _game:Game;
-		static private var _levels:Object;
-		static private var _levelLayer:Core;
+		static private var _state:State;
+		static private var _states:Dictionary;
+		static private var _stateLayer:Core;
 		
-		static private var _nextLevel:Level;
-		static private var _currentLevel:Level;
-		static private var _nextLevelSwipeFinished:Boolean;
-		static private var _currentLevelSwipeFinished:Boolean;
-		
+		static private var _iris:Iris;
 		static private var _hud:HUD;
+		static private var _nextState:Class;
 		
 		static public var gamePaused:Boolean;
 		
@@ -32,168 +32,104 @@ package nemostein.games.botmayhem.core
 			{
 				_game = game;
 				
-				_levels = {};
-				_levelLayer = new Core();
+				_states = new Dictionary();
+				_stateLayer = new Core();
 				
 				_hud = new HUD();
 				_hud.die();
 				
-				game.add(_levelLayer);
-				game.add(HeroService.hero);
+				_iris = new Iris();
+				
+				game.add(_stateLayer);
 				game.add(_hud);
-				
-				_nextLevelSwipeFinished = true;
-				_currentLevelSwipeFinished = true;
+				game.add(_iris);
 			}
 		}
 		
-		static public function changeLevel(level:String):void
+		static public function changeState(stateClass:Class, suppressIris:Boolean = false):void
 		{
-			_nextLevel = getLevel(level);
-			_levelLayer.add(_nextLevel);
+			_nextState = stateClass;
 			
-			if (_currentLevel)
+			if(!suppressIris)
 			{
-				var direction:int;
-				
-				if (_currentLevel is Menu)
-				{
-					direction = Level.SWIPE_DOWN;
-				}
-				else
-				{
-					direction = int(Math.random() * 4);
-				}
-				
-				if (direction == Level.SWIPE_UP)
-				{
-					_nextLevel.y = 600;
-				}
-				else if (direction == Level.SWIPE_DOWN)
-				{
-					_nextLevel.y = -600;
-				}
-				else if (direction == Level.SWIPE_LEFT)
-				{
-					_nextLevel.x = 900;
-				}
-				else if (direction == Level.SWIPE_RIGHT)
-				{
-					_nextLevel.x = -900;
-				}
-				
-				_nextLevel.swipeTo(direction);
-				_currentLevel.swipeTo(direction);
+				_iris.closeIris(changeToNextState);
 			}
 			else
 			{
-				_currentLevel = _nextLevel;
-			}
-			
-			if (_nextLevel is Menu)
-			{
-				hideHud();
-			}
-			else
-			{
-				showHud();
+				changeToNextState();
 			}
 		}
 		
-		static public function swipeFinished(level:Level):void 
-		{	
-			if (level == _nextLevel)
+		static private function changeToNextState():void
+		{
+			if (_state)
 			{
-				_nextLevelSwipeFinished = true;
-			}
-			else if(level == _currentLevel)
-			{
-				_currentLevelSwipeFinished = true;
+				_state.die();
+				_stateLayer.remove(_state);
 			}
 			
-			if (_nextLevelSwipeFinished && _currentLevelSwipeFinished)
+			_state = getState(_nextState);
+			
+			if (_state is Level)
 			{
-				_nextLevelSwipeFinished = false;
-				_currentLevelSwipeFinished = false;
-				
-				_levelLayer.remove(_currentLevel);
-				_currentLevel = _nextLevel;
-				_nextLevel = null;
+				_hud.revive();
 			}
+			
+			_state.add(HeroService.hero);
+			_stateLayer.add(_state);
+			
+			_iris.openIris();
 		}
 		
-		static public function showHud():void 
+		static public function showHud():void
 		{
 			_hud.revive();
 		}
 		
-		static public function hideHud():void 
+		static public function hideHud():void
 		{
 			_hud.die();
 		}
 		
-		static public function pauseGame():void 
+		static public function pauseGame():void
 		{
-			if(_currentLevel)
-			{
-				_currentLevel.deactivate();
-			}
-			
-			if (_nextLevel)
-			{
-				_nextLevel.deactivate();
-			}
-			
+			_state.deactivate();
 			HeroService.hero.deactivate();
 			
 			gamePaused = true;
 		}
 		
-		static public function unpauseGame():void 
+		static public function unpauseGame():void
 		{
-			if(_currentLevel)
-			{
-				_currentLevel.activate();
-			}
-			
-			if (_nextLevel)
-			{
-				_nextLevel.activate();
-			}
-			
+			_state.activate();
 			HeroService.hero.activate();
 			
 			gamePaused = false;
 		}
 		
-		static public function currentEnemies():Vector.<Enemy> 
+		static public function currentEnemies():Vector.<Enemy>
 		{
-			return _currentLevel.enemies;
-		}
-		
-		static private function getLevel(level:String):Level
-		{
-			if (!_levels[level])
+			if (_state is Level)
 			{
-				if (level == Level.MENU)
-				{
-					_levels[level] = new Menu();
-				}
-				else if (level == Level.RED_A)
-				{
-					_levels[level] = new LevelRedA();
-				}
-				else if (level == Level.GREEN_A)
-				{
-					_levels[level] = new LevelGreenA();
-				}
-				else
-				{
-					throw new ArgumentError("Level '" + level + "' not known.");
-				}
+				return Level(_state).enemies;
 			}
 			
-			return _levels[level];
+			return null;
+		}
+		
+		static private function getState(stateClass:Class):State
+		{
+			if (!_states[stateClass])
+			{
+				_states[stateClass] = new stateClass();
+			}
+			
+			return _states[stateClass];
+		}
+		
+		static public function get gameBounds():Rectangle
+		{
+			return _game.gameBounds;
 		}
 	}
 }
